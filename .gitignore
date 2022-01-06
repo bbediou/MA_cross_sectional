@@ -1,0 +1,5 @@
+# ignore all R scripts and Rmd scripts
+
+*.R
+*.Rmd
+*.RData

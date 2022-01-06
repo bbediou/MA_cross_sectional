@@ -1,0 +1,4443 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 5 Meta-analysis | Meta Analysis of cross-sectional studies</title>
+  <meta name="description" content="Meta-analysis of cross-sectional studies of action video game studies on cognitive skills The output format for this example is bookdown::gitbook." />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 5 Meta-analysis | Meta Analysis of cross-sectional studies" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Meta-analysis of cross-sectional studies of action video game studies on cognitive skills The output format for this example is bookdown::gitbook." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 5 Meta-analysis | Meta Analysis of cross-sectional studies" />
+  
+  <meta name="twitter:description" content="Meta-analysis of cross-sectional studies of action video game studies on cognitive skills The output format for this example is bookdown::gitbook." />
+  
+
+<meta name="author" content="Benoit Bediou" />
+
+
+<meta name="date" content="2022-01-06" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="effectsizes.html"/>
+<link rel="next" href="final-words.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.18/datatables.js"></script>
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Cross-Sectional MA</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="preamble.html"><a href="preamble.html"><i class="fa fa-check"></i><b>1</b> Preamble</a></li>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#overview-of-our-first-meta-analysis-bediou-et-al.-2018"><i class="fa fa-check"></i><b>2.1</b> Overview of our first meta-analysis (Bediou et al., 2018)</a></li>
+<li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#the-present-dataset"><i class="fa fa-check"></i><b>2.2</b> The present dataset</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="datachecks.html"><a href="datachecks.html"><i class="fa fa-check"></i><b>3</b> Data preparation and cleaning</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="datachecks.html"><a href="datachecks.html#rawdata"><i class="fa fa-check"></i><b>3.1</b> Raw dataset</a></li>
+<li class="chapter" data-level="3.2" data-path="datachecks.html"><a href="datachecks.html#cleandata"><i class="fa fa-check"></i><b>3.2</b> Filtered dataset (i.e., matched gender)</a></li>
+<li class="chapter" data-level="3.3" data-path="datachecks.html"><a href="datachecks.html#moderators"><i class="fa fa-check"></i><b>3.3</b> Moderators</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="datachecks.html"><a href="datachecks.html#number-of-effect-sizes-and-studies-i.e.-manuscript-in-each-cognitive-domain"><i class="fa fa-check"></i><b>3.3.1</b> Number of effect sizes and studies (i.e. manuscript) in each cognitive domain</a></li>
+<li class="chapter" data-level="3.3.2" data-path="datachecks.html"><a href="datachecks.html#list-of-tasks-and-cognitive-domains"><i class="fa fa-check"></i><b>3.3.2</b> List of Tasks and Cognitive Domains</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="effectsizes.html"><a href="effectsizes.html"><i class="fa fa-check"></i><b>4</b> Effect Sizes</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="effectsizes.html"><a href="effectsizes.html#effect-sizes-by-sample-size"><i class="fa fa-check"></i><b>4.1</b> Effect sizes by Sample Size</a></li>
+<li class="chapter" data-level="4.2" data-path="effectsizes.html"><a href="effectsizes.html#effect-sizes-by-source"><i class="fa fa-check"></i><b>4.2</b> Effect sizes by Source</a></li>
+<li class="chapter" data-level="4.3" data-path="effectsizes.html"><a href="effectsizes.html#effect-sizes-by-cognitive-domain"><i class="fa fa-check"></i><b>4.3</b> Effect sizes by Cognitive Domain</a></li>
+<li class="chapter" data-level="4.4" data-path="effectsizes.html"><a href="effectsizes.html#examine-outliers-and-winsorize"><i class="fa fa-check"></i><b>4.4</b> Examine outliers and Winsorize</a></li>
+<li class="chapter" data-level="4.5" data-path="effectsizes.html"><a href="effectsizes.html#final-dataset"><i class="fa fa-check"></i><b>4.5</b> Final dataset</a></li>
+<li class="chapter" data-level="4.6" data-path="effectsizes.html"><a href="effectsizes.html#small-study-effect"><i class="fa fa-check"></i><b>4.6</b> Small study effect?</a></li>
+<li class="chapter" data-level="4.7" data-path="effectsizes.html"><a href="effectsizes.html#vs-2021"><i class="fa fa-check"></i><b>4.7</b> 2018 vs 2021</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="metaana.html"><a href="metaana.html"><i class="fa fa-check"></i><b>5</b> Meta-analysis</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="metaana.html"><a href="metaana.html#overall-estimate"><i class="fa fa-check"></i><b>5.1</b> Overall estimate</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="metaana.html"><a href="metaana.html#multilevel-model-without-rve"><i class="fa fa-check"></i><b>5.1.1</b> Multilevel model (without RVE)</a></li>
+<li class="chapter" data-level="5.1.2" data-path="metaana.html"><a href="metaana.html#che-model-multilevel-model-with-cluster-level-rve"><i class="fa fa-check"></i><b>5.1.2</b> CHE model: Multilevel model with cluster-level RVE</a></li>
+<li class="chapter" data-level="5.1.3" data-path="metaana.html"><a href="metaana.html#standard-rve-models-with-correlated-or-hierarchical-weights"><i class="fa fa-check"></i><b>5.1.3</b> Standard RVE models with correlated or hierarchical weights</a></li>
+<li class="chapter" data-level="5.1.4" data-path="metaana.html"><a href="metaana.html#univariate-meta-analysis-for-pub-bias"><i class="fa fa-check"></i><b>5.1.4</b> univariate meta-analysis (for pub bias)</a></li>
+<li class="chapter" data-level="5.1.5" data-path="metaana.html"><a href="metaana.html#summary-of-overall-effects"><i class="fa fa-check"></i><b>5.1.5</b> Summary of overall effects</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="metaana.html"><a href="metaana.html#moderator-analysis"><i class="fa fa-check"></i><b>5.2</b> Moderator analysis</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="metaana.html"><a href="metaana.html#compare-rve-che-and-sce-models"><i class="fa fa-check"></i><b>5.2.1</b> Compare RVE, CHE and SCE models</a></li>
+<li class="chapter" data-level="5.2.2" data-path="metaana.html"><a href="metaana.html#tests-of-moderator-effects-using-che-model"><i class="fa fa-check"></i><b>5.2.2</b> Tests of moderator effects (using CHE model)</a></li>
+<li class="chapter" data-level="5.2.3" data-path="metaana.html"><a href="metaana.html#estimates-for-each-moderator-level-different-from-zero"><i class="fa fa-check"></i><b>5.2.3</b> Estimates for each moderator level (different from zero?)</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="metaana.html"><a href="metaana.html#publication-bias"><i class="fa fa-check"></i><b>5.3</b> Publication bias</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="metaana.html"><a href="metaana.html#contour-enhanced-funnel-plots"><i class="fa fa-check"></i><b>5.3.1</b> (contour-enhanced) Funnel plots</a></li>
+<li class="chapter" data-level="5.3.2" data-path="metaana.html"><a href="metaana.html#significance-funnel-plot-mathur-vanderweele-2020"><i class="fa fa-check"></i><b>5.3.2</b> Significance funnel plot (Mathur &amp; VanderWeele, 2020)</a></li>
+<li class="chapter" data-level="5.3.3" data-path="metaana.html"><a href="metaana.html#eggers-regression-with-modified-precision-covariate"><i class="fa fa-check"></i><b>5.3.3</b> Egger’s regression with modified precision covariate</a></li>
+<li class="chapter" data-level="5.3.4" data-path="metaana.html"><a href="metaana.html#pet-peese"><i class="fa fa-check"></i><b>5.3.4</b> PET-PEESE</a></li>
+<li class="chapter" data-level="5.3.5" data-path="metaana.html"><a href="metaana.html#univariate-methods-boostrapped"><i class="fa fa-check"></i><b>5.3.5</b> Univariate methods (boostrapped)</a></li>
+<li class="chapter" data-level="5.3.6" data-path="metaana.html"><a href="metaana.html#summary-of-publication-bias-corrected-estimates"><i class="fa fa-check"></i><b>5.3.6</b> Summary of publication-bias-corrected estimates</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="final-words.html"><a href="final-words.html"><i class="fa fa-check"></i><b>6</b> Final Words</a></li>
+<li class="chapter" data-level="7" data-path="todos.html"><a href="todos.html"><i class="fa fa-check"></i><b>7</b> TO DO’s / exploratory analyses</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="todos.html"><a href="todos.html#including-studies-with-unmatched-gender-groups"><i class="fa fa-check"></i><b>7.1</b> Including studies with unmatched gender groups?</a></li>
+<li class="chapter" data-level="7.2" data-path="todos.html"><a href="todos.html#subgroup-analyses"><i class="fa fa-check"></i><b>7.2</b> Subgroup analyses</a></li>
+<li class="chapter" data-level="7.3" data-path="todos.html"><a href="todos.html#moderator-joint-publication-group"><i class="fa fa-check"></i><b>7.3</b> Moderator Joint Publication Group</a></li>
+<li class="chapter" data-level="7.4" data-path="todos.html"><a href="todos.html#analysis-on-full-dataset-i.e.-without-excluding-studies-based-on-gender-ratio"><i class="fa fa-check"></i><b>7.4</b> Analysis on full dataset (i.e., without excluding studies based on gender ratio)</a></li>
+<li class="chapter" data-level="7.5" data-path="todos.html"><a href="todos.html#task-difficulty"><i class="fa fa-check"></i><b>7.5</b> Task difficulty</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Meta Analysis of cross-sectional studies</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="metaana" class="section level1" number="5">
+<h1><span class="header-section-number">Chapter 5</span> Meta-analysis</h1>
+<div class="blue">
+<p><strong>Important Notes:</strong><br />
+- All analyses are done on the <em>winsorized</em> dataset (i.e., extreme values replaced distribution boundaries)<br />
+- All clustering is done at the <em>manuscript</em> level.
+=&gt; This can be changed! Let me know if we should chat about these points!</p>
+<p>This can be important given that:<br />
+- the same data has sometimes been published across several manuscripts
+- and some manuscripts contains different subject samples.</p>
+</div>
+<div id="overall-estimate" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> Overall estimate</h2>
+<p>We use a multilevel meta-analytic model with robust variance estimates (RVE)
+for correlated and hierarchical effects (CHE) with small sample correction.<br />
+The default correlation is set to 0.8 (default in RVE), and we use
+sensitivity analyses (see below) to test the impact of different values.
+The model includes a random factor for Papers and one for each effect sizes nested
+in papers.</p>
+<div id="multilevel-model-without-rve" class="section level3" number="5.1.1">
+<h3><span class="header-section-number">5.1.1</span> Multilevel model (without RVE)</h3>
+<pre><code>## 
+## Multivariate Meta-Analysis Model (k = 222; method: REML)
+## 
+## Variance Components:
+## 
+##             estim    sqrt  nlvls  fixed       factor 
+## sigma^2.1  0.0271  0.1645     73     no        Paper 
+## sigma^2.2  0.1119  0.3346    222     no  Paper/ES_ID 
+## 
+## Test for Heterogeneity:
+## Q(df = 221) = 959.6214, p-val &lt; .0001
+## 
+## Model Results:
+## 
+## estimate      se     tval   df    pval   ci.lb   ci.ub 
+##   0.6375  0.0521  12.2436  221  &lt;.0001  0.5349  0.7402  *** 
+## 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>Note that this model reports model-based (not robust) standard errors.</p>
+<div class="blue">
+<p>The MLMA model reveals significant effect of AVG experience on cognition, with
+AVGPs outperforming NVGPs on cognitive tasks.</p>
+<ul>
+<li><p>Overall estimate: <em>g</em> = 0.638, <em>p</em> = &lt;.001</p></li>
+<li><p>Residual heterogeneity is significant (<em>QE</em>(221) = 959.621,
+<em>p</em> = &lt;.001), suggesting possible moderating variables!</p></li>
+</ul>
+</div>
+</div>
+<div id="che-model-multilevel-model-with-cluster-level-rve" class="section level3" number="5.1.2">
+<h3><span class="header-section-number">5.1.2</span> CHE model: Multilevel model with cluster-level RVE</h3>
+<p>This new model for Correlated and Hierarchical Effects (CHE) is based on recent work
+from Pustejovsky &amp; Tipton (2021) as an extension of the range of RVE models.
+The CHE model was shown to better capture the types of data structure that
+occur in practice and –under some circumstances– to improve the efficiency of
+meta-regression estimates.</p>
+<pre><code>##    Coef. Estimate     SE t-stat d.f. (Satt) p-val (Satt) Sig.
+##  intrcpt    0.638 0.0521   12.2        60.9       &lt;0.001  ***</code></pre>
+<p>The cluster RVE is applied to adjust degrees of freedom and confidence intervals.<br />
+The CHE model usually gives smaller SE indicating improved precision.</p>
+</div>
+<div id="standard-rve-models-with-correlated-or-hierarchical-weights" class="section level3" number="5.1.3">
+<h3><span class="header-section-number">5.1.3</span> Standard RVE models with correlated or hierarchical weights</h3>
+<p>For comparison with Bediou et al. 2018, we ran standard RVE models with correlated
+and hierarchical weights.</p>
+<pre><code>## RVE: Correlated Effects Model with Small-Sample Corrections 
+## 
+## Model: es_win ~ 1 
+## 
+## Number of studies = 73 
+## Number of outcomes = 222 (min = 1 , mean = 3.04 , median = 2 , max = 18 )
+## Rho = 0.8 
+## I.sq = 53.7 
+## Tau.sq = 0.13 
+## 
+##                Estimate StdErr t-value dfs P(|t|&gt;) 95% CI.L 95% CI.U Sig
+## 1 X.Intercept.    0.679 0.0525    12.9  68       0    0.575    0.784 ***
+## ---
+## Signif. codes: &lt; .01 *** &lt; .05 ** &lt; .10 *
+## ---
+## Note: If df &lt; 4, do not trust the results</code></pre>
+<pre><code>## RVE: Hierarchical Effects Model with Small-Sample Corrections 
+## 
+## Model: es_win ~ 1 
+## 
+## Number of clusters = 73 
+## Number of outcomes = 222 (min = 1 , mean = 3.04 , median = 2 , max = 18 )
+## Omega.sq = 0 
+## Tau.sq = 0.11 
+## 
+##                Estimate StdErr t-value  dfs       P(|t|&gt;) 95% CI.L 95% CI.U Sig
+## 1 X.Intercept.    0.533 0.0626    8.51 26.9 0.00000000414    0.404    0.661 ***
+## ---
+## Signif. codes: &lt; .01 *** &lt; .05 ** &lt; .10 *
+## ---
+## Note: If df &lt; 4, do not trust the results</code></pre>
+<p><strong>Sensitivity analysis</strong><br />
+We test impact of different values of rho (correlation among dependent ES’s) on the
+overall estimates using a standard RVE model with correlated weights.</p>
+<pre><code>## RVE: Correlated Effects Model with Small-Sample Corrections 
+## Model: es_win ~ 1 
+## 
+## Sensitivity Analysis 
+## 
+##                           Rho = 0 Rho = 0.2 Rho = 0.4 Rho = 0.6 Rho = 0.8
+##  X.Intercept. Coefficient 0.6793  0.6794    0.6794    0.6794    0.6794   
+##               Std. Error  0.0525  0.0525    0.0525    0.0525    0.0525   
+##  Tau.sq       Estimate    0.1299  0.1300    0.1301    0.1303    0.1304   
+##  Rho = 1
+##  0.6795 
+##  0.0525 
+##  0.1305</code></pre>
+<div class="blue">
+<ul>
+<li><p>Overall estimate: <em>g</em> = 0.679, <em>p</em> = &lt;.001</p></li>
+<li><p>Residual heterogeneity is significant (<em>QE</em> (221) = 959.621,
+<em>p</em> = &lt;.001), suggesting possible moderating variables!</p></li>
+</ul>
+</div>
+</div>
+<div id="univariate-meta-analysis-for-pub-bias" class="section level3" number="5.1.4">
+<h3><span class="header-section-number">5.1.4</span> univariate meta-analysis (for pub bias)</h3>
+<p>We also ran univariate models to apply the more classical methods for
+detection and correction of publication bias. Because univariate models assume
+independent effect sizes, we first randomly selected one effect size per study (paper).</p>
+<pre><code>## 
+## Random-Effects Model (k = 73; tau^2 estimator: REML)
+## 
+## tau^2 (estimated amount of total heterogeneity): 0.1278 (SE = 0.0421)
+## tau (square root of estimated tau^2 value):      0.3574
+## I^2 (total heterogeneity / total variability):   53.62%
+## H^2 (total variability / sampling variability):  2.16
+## 
+## Test for Heterogeneity:
+## Q(df = 72) = 155.0750, p-val &lt; .0001
+## 
+## Model Results:
+## 
+## estimate      se     zval    pval   ci.lb   ci.ub 
+##   0.6802  0.0598  11.3752  &lt;.0001  0.5630  0.7974  *** 
+## 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+</div>
+<div id="summary-of-overall-effects" class="section level3" number="5.1.5">
+<h3><span class="header-section-number">5.1.5</span> Summary of overall effects</h3>
+<table class=" lightable-paper lightable-hover" style="font-family: helvetica; width: auto !important; ">
+<thead>
+<tr>
+<th style="text-align:left;">
+Model
+</th>
+<th style="text-align:right;">
+beta
+</th>
+<th style="text-align:right;">
+SE
+</th>
+<th style="text-align:right;">
+CI_L
+</th>
+<th style="text-align:right;">
+CI_U
+</th>
+<th style="text-align:right;">
+tstat
+</th>
+<th style="text-align:right;">
+df
+</th>
+<th style="text-align:left;">
+pSignif
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+RVE correlated
+</td>
+<td style="text-align:right;">
+0.679
+</td>
+<td style="text-align:right;">
+0.052
+</td>
+<td style="text-align:right;">
+0.575
+</td>
+<td style="text-align:right;">
+0.784
+</td>
+<td style="text-align:right;">
+12.94
+</td>
+<td style="text-align:right;">
+68.0
+</td>
+<td style="text-align:left;">
+&lt;.001
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+RVE hierarchical
+</td>
+<td style="text-align:right;">
+0.533
+</td>
+<td style="text-align:right;">
+0.063
+</td>
+<td style="text-align:right;">
+0.404
+</td>
+<td style="text-align:right;">
+0.661
+</td>
+<td style="text-align:right;">
+8.51
+</td>
+<td style="text-align:right;">
+26.9
+</td>
+<td style="text-align:left;">
+&lt;.001
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+CHE
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.638
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.052
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.533
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.742
+</td>
+<td style="text-align:right;font-weight: bold;">
+12.23
+</td>
+<td style="text-align:right;font-weight: bold;">
+60.9
+</td>
+<td style="text-align:left;font-weight: bold;">
+&lt;.001
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+univariate
+</td>
+<td style="text-align:right;">
+0.680
+</td>
+<td style="text-align:right;">
+0.060
+</td>
+<td style="text-align:right;">
+0.563
+</td>
+<td style="text-align:right;">
+0.797
+</td>
+<td style="text-align:right;">
+11.38
+</td>
+<td style="text-align:right;">
+73.0
+</td>
+<td style="text-align:left;">
+&lt;.001
+</td>
+</tr>
+</tbody>
+</table>
+<p>Note. We pre-registered the CHE model as our primary model; other models are presented
+to show sensitivity of our results to various meta-analytic models.</p>
+</div>
+</div>
+<div id="moderator-analysis" class="section level2" number="5.2">
+<h2><span class="header-section-number">5.2</span> Moderator analysis</h2>
+<p>Moderator analysis is based on the multilevel model (i.e. mlma <strong>WITHOUT RVE</strong>) because the
+Wald_test is not compatible with the CHE model (i.e., mlma with RVE)…</p>
+<p>Our model includes moderators:<br />
+- Cognitive domain (9 levels)<br />
+- DV type: speed, accuracy (<strong>should we relabel as</strong> <em>performance</em> <strong>measure_ ?</strong>)<br />
+- Effect: main (e.g., overall performance), interaction (e.g., difference score)<br />
+- Recruitment: overt, covert</p>
+<div id="compare-rve-che-and-sce-models" class="section level3" number="5.2.1">
+<h3><span class="header-section-number">5.2.1</span> Compare RVE, CHE and SCE models</h3>
+<blockquote>
+<p>Notes:<br />
+- RVE = Robust Variance Estimate (effect sizes clustered by paper, correlated weights)<br />
+- CHE = Correlated Hierarchical Weights (random effects multilevel model with RVE)<br />
+- SCE = Subgroup Correlated Effects (alternative to running meta-analyses for each subgroup)<br />
+=&gt; SCE RANDOM EFFECTS TO BE CHECKED BY MELISSA !</p>
+</blockquote>
+<p>This analysis focuses on cognitive domain (primary moderator) and controls for other (secondary) moderators. The magnitude of the obtained estimates depends on the choice of reference levels for secondary moderators.<br />
+The Wald Test of moderator effects test the relative differences between levels and is thus not sensitive to reference levels. However, to test if individual estimate differs from zero, we need to correct each estimate using the relative frequency of each moderator level in the dataset.</p>
+<table class=" lightable-paper lightable-hover" style="font-family: helvetica; width: auto !important; ">
+<thead>
+<tr>
+<th style="empty-cells: hide;" colspan="3">
+</th>
+<th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
+<div style="TRUE">
+Correlated effects
+</div>
+</th>
+<th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
+<div style="TRUE">
+Correlated hierarchical effects
+</div>
+</th>
+<th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="TRUE">
+Sub-group correlated effects
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:left;">
+Coef
+</th>
+<th style="text-align:right;">
+Studies
+</th>
+<th style="text-align:right;">
+Effect sizes
+</th>
+<th style="text-align:left;">
+Est. [SE]
+</th>
+<th style="text-align:left;">
+Est. [SE]
+</th>
+<th style="text-align:left;">
+Est. [SE]
+</th>
+<th style="text-align:right;">
+tau
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+perception
+</td>
+<td style="text-align:right;">
+23
+</td>
+<td style="text-align:right;">
+38
+</td>
+<td style="text-align:left;">
+0.770
+[0.135]
+</td>
+<td style="text-align:left;">
+0.531
+[0.141]
+</td>
+<td style="text-align:left;">
+0.608
+[0.158]
+</td>
+<td style="text-align:right;">
+0.220
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+motor control
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+0.930
+[0.467]
+</td>
+<td style="text-align:left;">
+0.890
+[0.472]
+</td>
+<td style="text-align:left;">
+0.972
+[0.472]
+</td>
+<td style="text-align:right;">
+0.509
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+bottom up attention
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:left;">
+-0.069
+[0.183]
+</td>
+<td style="text-align:left;">
+0.026
+[0.172]
+</td>
+<td style="text-align:left;">
+-0.005
+[0.192]
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+top down attention
+</td>
+<td style="text-align:right;">
+44
+</td>
+<td style="text-align:right;">
+74
+</td>
+<td style="text-align:left;">
+0.669
+[0.138]
+</td>
+<td style="text-align:left;">
+0.462
+[0.134]
+</td>
+<td style="text-align:left;">
+0.591
+[0.127]
+</td>
+<td style="text-align:right;">
+0.327
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+inhibition
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:left;">
+0.242
+[0.149]
+</td>
+<td style="text-align:left;">
+0.354
+[0.148]
+</td>
+<td style="text-align:left;">
+0.320
+[0.155]
+</td>
+<td style="text-align:right;">
+0.266
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+spatial cognition
+</td>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:right;">
+27
+</td>
+<td style="text-align:left;">
+0.561
+[0.202]
+</td>
+<td style="text-align:left;">
+0.476
+[0.169]
+</td>
+<td style="text-align:left;">
+0.471
+[0.159]
+</td>
+<td style="text-align:right;">
+0.255
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+multi tasking
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+24
+</td>
+<td style="text-align:left;">
+0.498
+[0.204]
+</td>
+<td style="text-align:left;">
+0.643
+[0.259]
+</td>
+<td style="text-align:left;">
+0.595
+[0.241]
+</td>
+<td style="text-align:right;">
+0.505
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+verbal cognition
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+31
+</td>
+<td style="text-align:left;">
+0.283
+[0.178]
+</td>
+<td style="text-align:left;">
+0.297
+[0.151]
+</td>
+<td style="text-align:left;">
+0.250
+[0.143]
+</td>
+<td style="text-align:right;">
+0.107
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+problem solving
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:left;">
+0.134
+[0.151]
+</td>
+<td style="text-align:left;">
+0.142
+[0.136]
+</td>
+<td style="text-align:left;">
+0.120
+[0.106]
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+tau
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:left;">
+0.342
+</td>
+<td style="text-align:left;">
+0.135
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+omega
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+0.324
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Wald test p-value
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:left;">
+0.028
+</td>
+<td style="text-align:left;">
+0.282
+</td>
+<td style="text-align:left;">
+0.069
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+</tbody>
+</table>
+<p>All models include the following moderators and reference levels:<br />
+- Cognitive domain: reference = perception<br />
+- DV type: reference = accuracy<br />
+- Effect type: reference = interaction<br />
+- Recruitment: reference = covert</p>
+<p>Analyses of moderator effects are based on CHE model.<br />
+Exploratory analyses using Subgroup Correlated Effects are also presented.</p>
+</div>
+<div id="tests-of-moderator-effects-using-che-model" class="section level3" number="5.2.2">
+<h3><span class="header-section-number">5.2.2</span> Tests of moderator effects (using CHE model)</h3>
+<table class=" lightable-paper lightable-hover" style="font-family: helvetica; width: auto !important; ">
+<thead>
+<tr>
+<th style="text-align:left;">
+moderator
+</th>
+<th style="text-align:left;">
+test
+</th>
+<th style="text-align:right;">
+Fstat
+</th>
+<th style="text-align:right;">
+delta
+</th>
+<th style="text-align:right;">
+df_num
+</th>
+<th style="text-align:right;">
+df_denom
+</th>
+<th style="text-align:right;">
+p_val
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="2">
+Cognitive domain
+</td>
+<td style="text-align:left;">
+HTZ
+</td>
+<td style="text-align:right;">
+1.725
+</td>
+<td style="text-align:right;">
+0.420
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+5.08
+</td>
+<td style="text-align:right;">
+0.282
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+HTZ
+</td>
+<td style="text-align:right;">
+1.725
+</td>
+<td style="text-align:right;">
+0.420
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+5.08
+</td>
+<td style="text-align:right;">
+0.282
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+DV type
+</td>
+<td style="text-align:left;">
+HTZ
+</td>
+<td style="text-align:right;">
+0.556
+</td>
+<td style="text-align:right;">
+1.000
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+24.79
+</td>
+<td style="text-align:right;">
+0.463
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Effect
+</td>
+<td style="text-align:left;">
+HTZ
+</td>
+<td style="text-align:right;">
+0.070
+</td>
+<td style="text-align:right;">
+1.000
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+21.06
+</td>
+<td style="text-align:right;">
+0.793
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Recruitment
+</td>
+<td style="text-align:left;">
+HTZ
+</td>
+<td style="text-align:right;">
+1.942
+</td>
+<td style="text-align:right;">
+0.784
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+3.62
+</td>
+<td style="text-align:right;">
+0.267
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Cognitive domain
+</td>
+<td style="text-align:left;">
+HTZ
+</td>
+<td style="text-align:right;">
+1.725
+</td>
+<td style="text-align:right;">
+0.420
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+5.08
+</td>
+<td style="text-align:right;">
+0.282
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+DV type
+</td>
+<td style="text-align:left;">
+HTZ
+</td>
+<td style="text-align:right;">
+0.556
+</td>
+<td style="text-align:right;">
+1.000
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+24.79
+</td>
+<td style="text-align:right;">
+0.463
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Effect
+</td>
+<td style="text-align:left;">
+HTZ
+</td>
+<td style="text-align:right;">
+0.070
+</td>
+<td style="text-align:right;">
+1.000
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+21.06
+</td>
+<td style="text-align:right;">
+0.793
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: white !important;background-color: gray !important;">
+Recruitment
+</td>
+<td style="text-align:left;font-weight: bold;color: white !important;background-color: gray !important;">
+HTZ
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: gray !important;">
+4.725
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: gray !important;">
+1.000
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: gray !important;">
+1
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: gray !important;">
+7.99
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: gray !important;">
+0.061
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="estimates-for-each-moderator-level-different-from-zero" class="section level3" number="5.2.3">
+<h3><span class="header-section-number">5.2.3</span> Estimates for each moderator level (different from zero?)</h3>
+<table class=" lightable-paper lightable-hover" style="font-family: helvetica; width: auto !important; ">
+<thead>
+<tr>
+<th style="text-align:left;">
+moderator
+</th>
+<th style="text-align:left;">
+level
+</th>
+<th style="text-align:right;">
+k
+</th>
+<th style="text-align:right;">
+m
+</th>
+<th style="text-align:right;">
+g
+</th>
+<th style="text-align:left;">
+CI
+</th>
+<th style="text-align:right;">
+df
+</th>
+<th style="text-align:right;">
+pval
+</th>
+<th style="text-align:right;">
+LB
+</th>
+<th style="text-align:right;">
+UB
+</th>
+<th style="text-align:left;">
+pSignif
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;vertical-align: top !important;" rowspan="18">
+Cognitive domain
+</td>
+<td style="text-align:left;">
+perception
+</td>
+<td style="text-align:right;">
+38
+</td>
+<td style="text-align:right;">
+23
+</td>
+<td style="text-align:right;">
+0.700
+</td>
+<td style="text-align:left;">
+0.517,0.884
+</td>
+<td style="text-align:right;">
+23.51
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.517
+</td>
+<td style="text-align:right;">
+0.884
+</td>
+<td style="text-align:left;">
+&lt;.001
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: white !important;background-color: orange !important;">
+motor control
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: orange !important;">
+3
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: orange !important;">
+2
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: orange !important;">
+1.060
+</td>
+<td style="text-align:left;font-weight: bold;color: white !important;background-color: orange !important;">
+-4.3,6.42
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: orange !important;">
+1.03
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: orange !important;">
+0.251
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: orange !important;">
+-4.300
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: orange !important;">
+6.420
+</td>
+<td style="text-align:left;font-weight: bold;color: white !important;background-color: orange !important;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: white !important;background-color: orange !important;">
+bottom-up attention
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: orange !important;">
+7
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: orange !important;">
+4
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: orange !important;">
+0.196
+</td>
+<td style="text-align:left;font-weight: bold;color: white !important;background-color: orange !important;">
+-0.177,0.569
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: orange !important;">
+3.22
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: orange !important;">
+0.200
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: orange !important;">
+-0.177
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: orange !important;">
+0.569
+</td>
+<td style="text-align:left;font-weight: bold;color: white !important;background-color: orange !important;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+top-down attention
+</td>
+<td style="text-align:right;">
+74
+</td>
+<td style="text-align:right;">
+44
+</td>
+<td style="text-align:right;">
+0.631
+</td>
+<td style="text-align:left;">
+0.487,0.776
+</td>
+<td style="text-align:right;">
+41.54
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.487
+</td>
+<td style="text-align:right;">
+0.776
+</td>
+<td style="text-align:left;">
+&lt;.001
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+inhibition
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+0.523
+</td>
+<td style="text-align:left;">
+0.209,0.837
+</td>
+<td style="text-align:right;">
+8.09
+</td>
+<td style="text-align:right;">
+0.005
+</td>
+<td style="text-align:right;">
+0.209
+</td>
+<td style="text-align:right;">
+0.837
+</td>
+<td style="text-align:left;">
+&lt;.01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+spatial cognition
+</td>
+<td style="text-align:right;">
+27
+</td>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:right;">
+0.646
+</td>
+<td style="text-align:left;">
+0.44,0.852
+</td>
+<td style="text-align:right;">
+14.79
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.440
+</td>
+<td style="text-align:right;">
+0.852
+</td>
+<td style="text-align:left;">
+&lt;.001
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+multi-tasking
+</td>
+<td style="text-align:right;">
+24
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+0.812
+</td>
+<td style="text-align:left;">
+0.27,1.355
+</td>
+<td style="text-align:right;">
+8.73
+</td>
+<td style="text-align:right;">
+0.008
+</td>
+<td style="text-align:right;">
+0.270
+</td>
+<td style="text-align:right;">
+1.355
+</td>
+<td style="text-align:left;">
+&lt;.01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+verbal cognition
+</td>
+<td style="text-align:right;">
+31
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+0.467
+</td>
+<td style="text-align:left;">
+0.277,0.657
+</td>
+<td style="text-align:right;">
+13.10
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.277
+</td>
+<td style="text-align:right;">
+0.657
+</td>
+<td style="text-align:left;">
+&lt;.001
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+problem solving
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+0.311
+</td>
+<td style="text-align:left;">
+0.002,0.62
+</td>
+<td style="text-align:right;">
+4.48
+</td>
+<td style="text-align:right;">
+0.049
+</td>
+<td style="text-align:right;">
+0.002
+</td>
+<td style="text-align:right;">
+0.620
+</td>
+<td style="text-align:left;">
+&lt;.05
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+perception
+</td>
+<td style="text-align:right;">
+38
+</td>
+<td style="text-align:right;">
+23
+</td>
+<td style="text-align:right;">
+0.700
+</td>
+<td style="text-align:left;">
+0.517,0.884
+</td>
+<td style="text-align:right;">
+23.51
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.517
+</td>
+<td style="text-align:right;">
+0.884
+</td>
+<td style="text-align:left;">
+&lt;.001
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: white !important;background-color: orange !important;">
+motor control
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: orange !important;">
+3
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: orange !important;">
+2
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: orange !important;">
+1.060
+</td>
+<td style="text-align:left;font-weight: bold;color: white !important;background-color: orange !important;">
+-4.3,6.42
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: orange !important;">
+1.03
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: orange !important;">
+0.251
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: orange !important;">
+-4.300
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: orange !important;">
+6.420
+</td>
+<td style="text-align:left;font-weight: bold;color: white !important;background-color: orange !important;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: white !important;background-color: orange !important;">
+bottom-up attention
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: orange !important;">
+7
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: orange !important;">
+4
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: orange !important;">
+0.196
+</td>
+<td style="text-align:left;font-weight: bold;color: white !important;background-color: orange !important;">
+-0.177,0.569
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: orange !important;">
+3.22
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: orange !important;">
+0.200
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: orange !important;">
+-0.177
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: orange !important;">
+0.569
+</td>
+<td style="text-align:left;font-weight: bold;color: white !important;background-color: orange !important;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+top-down attention
+</td>
+<td style="text-align:right;">
+74
+</td>
+<td style="text-align:right;">
+44
+</td>
+<td style="text-align:right;">
+0.631
+</td>
+<td style="text-align:left;">
+0.487,0.776
+</td>
+<td style="text-align:right;">
+41.54
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.487
+</td>
+<td style="text-align:right;">
+0.776
+</td>
+<td style="text-align:left;">
+&lt;.001
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+inhibition
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+0.523
+</td>
+<td style="text-align:left;">
+0.209,0.837
+</td>
+<td style="text-align:right;">
+8.09
+</td>
+<td style="text-align:right;">
+0.005
+</td>
+<td style="text-align:right;">
+0.209
+</td>
+<td style="text-align:right;">
+0.837
+</td>
+<td style="text-align:left;">
+&lt;.01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+spatial cognition
+</td>
+<td style="text-align:right;">
+27
+</td>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:right;">
+0.646
+</td>
+<td style="text-align:left;">
+0.44,0.852
+</td>
+<td style="text-align:right;">
+14.79
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.440
+</td>
+<td style="text-align:right;">
+0.852
+</td>
+<td style="text-align:left;">
+&lt;.001
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+multi-tasking
+</td>
+<td style="text-align:right;">
+24
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+0.812
+</td>
+<td style="text-align:left;">
+0.27,1.355
+</td>
+<td style="text-align:right;">
+8.73
+</td>
+<td style="text-align:right;">
+0.008
+</td>
+<td style="text-align:right;">
+0.270
+</td>
+<td style="text-align:right;">
+1.355
+</td>
+<td style="text-align:left;">
+&lt;.01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+verbal cognition
+</td>
+<td style="text-align:right;">
+31
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+0.467
+</td>
+<td style="text-align:left;">
+0.277,0.657
+</td>
+<td style="text-align:right;">
+13.10
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.277
+</td>
+<td style="text-align:right;">
+0.657
+</td>
+<td style="text-align:left;">
+&lt;.001
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+problem solving
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+0.311
+</td>
+<td style="text-align:left;">
+0.002,0.62
+</td>
+<td style="text-align:right;">
+4.48
+</td>
+<td style="text-align:right;">
+0.049
+</td>
+<td style="text-align:right;">
+0.002
+</td>
+<td style="text-align:right;">
+0.620
+</td>
+<td style="text-align:left;">
+&lt;.05
+</td>
+</tr>
+<tr>
+<td style="text-align:left;vertical-align: top !important;" rowspan="2">
+DV type
+</td>
+<td style="text-align:left;">
+accuracy
+</td>
+<td style="text-align:right;">
+121
+</td>
+<td style="text-align:right;">
+51
+</td>
+<td style="text-align:right;">
+0.640
+</td>
+<td style="text-align:left;">
+0.517,0.763
+</td>
+<td style="text-align:right;">
+44.42
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.517
+</td>
+<td style="text-align:right;">
+0.763
+</td>
+<td style="text-align:left;">
+&lt;.001
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+speed
+</td>
+<td style="text-align:right;">
+101
+</td>
+<td style="text-align:right;">
+45
+</td>
+<td style="text-align:right;">
+0.590
+</td>
+<td style="text-align:left;">
+0.467,0.713
+</td>
+<td style="text-align:right;">
+37.20
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.467
+</td>
+<td style="text-align:right;">
+0.713
+</td>
+<td style="text-align:left;">
+&lt;.001
+</td>
+</tr>
+<tr>
+<td style="text-align:left;vertical-align: top !important;" rowspan="2">
+Effect
+</td>
+<td style="text-align:left;">
+interaction
+</td>
+<td style="text-align:right;">
+63
+</td>
+<td style="text-align:right;">
+26
+</td>
+<td style="text-align:right;">
+0.597
+</td>
+<td style="text-align:left;">
+0.395,0.799
+</td>
+<td style="text-align:right;">
+24.64
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.395
+</td>
+<td style="text-align:right;">
+0.799
+</td>
+<td style="text-align:left;">
+&lt;.001
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+main
+</td>
+<td style="text-align:right;">
+159
+</td>
+<td style="text-align:right;">
+63
+</td>
+<td style="text-align:right;">
+0.625
+</td>
+<td style="text-align:left;">
+0.518,0.732
+</td>
+<td style="text-align:right;">
+48.34
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.518
+</td>
+<td style="text-align:right;">
+0.732
+</td>
+<td style="text-align:left;">
+&lt;.001
+</td>
+</tr>
+<tr>
+<td style="text-align:left;vertical-align: top !important;" rowspan="9">
+Cognitive domain
+</td>
+<td style="text-align:left;">
+perception
+</td>
+<td style="text-align:right;">
+38
+</td>
+<td style="text-align:right;">
+23
+</td>
+<td style="text-align:right;">
+0.700
+</td>
+<td style="text-align:left;">
+0.517,0.884
+</td>
+<td style="text-align:right;">
+23.51
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.517
+</td>
+<td style="text-align:right;">
+0.884
+</td>
+<td style="text-align:left;">
+&lt;.001
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: white !important;background-color: orange !important;">
+motor control
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: orange !important;">
+3
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: orange !important;">
+2
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: orange !important;">
+1.060
+</td>
+<td style="text-align:left;font-weight: bold;color: white !important;background-color: orange !important;">
+-4.3,6.42
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: orange !important;">
+1.03
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: orange !important;">
+0.251
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: orange !important;">
+-4.300
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: orange !important;">
+6.420
+</td>
+<td style="text-align:left;font-weight: bold;color: white !important;background-color: orange !important;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: white !important;background-color: orange !important;">
+bottom-up attention
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: orange !important;">
+7
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: orange !important;">
+4
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: orange !important;">
+0.196
+</td>
+<td style="text-align:left;font-weight: bold;color: white !important;background-color: orange !important;">
+-0.177,0.569
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: orange !important;">
+3.22
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: orange !important;">
+0.200
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: orange !important;">
+-0.177
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: orange !important;">
+0.569
+</td>
+<td style="text-align:left;font-weight: bold;color: white !important;background-color: orange !important;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+top-down attention
+</td>
+<td style="text-align:right;">
+74
+</td>
+<td style="text-align:right;">
+44
+</td>
+<td style="text-align:right;">
+0.631
+</td>
+<td style="text-align:left;">
+0.487,0.776
+</td>
+<td style="text-align:right;">
+41.54
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.487
+</td>
+<td style="text-align:right;">
+0.776
+</td>
+<td style="text-align:left;">
+&lt;.001
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+inhibition
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+0.523
+</td>
+<td style="text-align:left;">
+0.209,0.837
+</td>
+<td style="text-align:right;">
+8.09
+</td>
+<td style="text-align:right;">
+0.005
+</td>
+<td style="text-align:right;">
+0.209
+</td>
+<td style="text-align:right;">
+0.837
+</td>
+<td style="text-align:left;">
+&lt;.01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+spatial cognition
+</td>
+<td style="text-align:right;">
+27
+</td>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:right;">
+0.646
+</td>
+<td style="text-align:left;">
+0.44,0.852
+</td>
+<td style="text-align:right;">
+14.79
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.440
+</td>
+<td style="text-align:right;">
+0.852
+</td>
+<td style="text-align:left;">
+&lt;.001
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+multi-tasking
+</td>
+<td style="text-align:right;">
+24
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+0.812
+</td>
+<td style="text-align:left;">
+0.27,1.355
+</td>
+<td style="text-align:right;">
+8.73
+</td>
+<td style="text-align:right;">
+0.008
+</td>
+<td style="text-align:right;">
+0.270
+</td>
+<td style="text-align:right;">
+1.355
+</td>
+<td style="text-align:left;">
+&lt;.01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+verbal cognition
+</td>
+<td style="text-align:right;">
+31
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+0.467
+</td>
+<td style="text-align:left;">
+0.277,0.657
+</td>
+<td style="text-align:right;">
+13.10
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.277
+</td>
+<td style="text-align:right;">
+0.657
+</td>
+<td style="text-align:left;">
+&lt;.001
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+problem solving
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+0.311
+</td>
+<td style="text-align:left;">
+0.002,0.62
+</td>
+<td style="text-align:right;">
+4.48
+</td>
+<td style="text-align:right;">
+0.049
+</td>
+<td style="text-align:right;">
+0.002
+</td>
+<td style="text-align:right;">
+0.620
+</td>
+<td style="text-align:left;">
+&lt;.05
+</td>
+</tr>
+<tr>
+<td style="text-align:left;vertical-align: top !important;" rowspan="2">
+DV type
+</td>
+<td style="text-align:left;">
+accuracy
+</td>
+<td style="text-align:right;">
+121
+</td>
+<td style="text-align:right;">
+51
+</td>
+<td style="text-align:right;">
+0.640
+</td>
+<td style="text-align:left;">
+0.517,0.763
+</td>
+<td style="text-align:right;">
+44.42
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.517
+</td>
+<td style="text-align:right;">
+0.763
+</td>
+<td style="text-align:left;">
+&lt;.001
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+speed
+</td>
+<td style="text-align:right;">
+101
+</td>
+<td style="text-align:right;">
+45
+</td>
+<td style="text-align:right;">
+0.590
+</td>
+<td style="text-align:left;">
+0.467,0.713
+</td>
+<td style="text-align:right;">
+37.20
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.467
+</td>
+<td style="text-align:right;">
+0.713
+</td>
+<td style="text-align:left;">
+&lt;.001
+</td>
+</tr>
+<tr>
+<td style="text-align:left;vertical-align: top !important;" rowspan="2">
+Effect
+</td>
+<td style="text-align:left;">
+interaction
+</td>
+<td style="text-align:right;">
+63
+</td>
+<td style="text-align:right;">
+26
+</td>
+<td style="text-align:right;">
+0.597
+</td>
+<td style="text-align:left;">
+0.395,0.799
+</td>
+<td style="text-align:right;">
+24.64
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.395
+</td>
+<td style="text-align:right;">
+0.799
+</td>
+<td style="text-align:left;">
+&lt;.001
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+main
+</td>
+<td style="text-align:right;">
+159
+</td>
+<td style="text-align:right;">
+63
+</td>
+<td style="text-align:right;">
+0.625
+</td>
+<td style="text-align:left;">
+0.518,0.732
+</td>
+<td style="text-align:right;">
+48.34
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.518
+</td>
+<td style="text-align:right;">
+0.732
+</td>
+<td style="text-align:left;">
+&lt;.001
+</td>
+</tr>
+<tr>
+<td style="text-align:left;vertical-align: top !important;" rowspan="2">
+Recruitment
+</td>
+<td style="text-align:left;">
+Covert
+</td>
+<td style="text-align:right;">
+32
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+0.444
+</td>
+<td style="text-align:left;">
+0.24,0.649
+</td>
+<td style="text-align:right;">
+6.26
+</td>
+<td style="text-align:right;">
+0.002
+</td>
+<td style="text-align:right;">
+0.240
+</td>
+<td style="text-align:right;">
+0.649
+</td>
+<td style="text-align:left;">
+&lt;.01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Overt
+</td>
+<td style="text-align:right;">
+190
+</td>
+<td style="text-align:right;">
+67
+</td>
+<td style="text-align:right;">
+0.646
+</td>
+<td style="text-align:left;">
+0.535,0.757
+</td>
+<td style="text-align:right;">
+56.05
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.535
+</td>
+<td style="text-align:right;">
+0.757
+</td>
+<td style="text-align:left;">
+&lt;.001
+</td>
+</tr>
+</tbody>
+</table>
+<p>Notes: Estimates with degrees of freedom under 4 should not be interpreted and are thus highlighted.</p>
+<div class="blue">
+<ul>
+<li><p>None of the moderators showed significant moderating influence according to AHT-F test
+(using <em>clubSandwich::Wald_test</em>) on the multilevel model (i.e., <strong>without RVE</strong>)
+except a marginal effect of recruitment.</p></li>
+<li><p>AVGPs outperformed NVGPs in irrespective of cognitive domain, DV type, effect or recruitment method:</p>
+<ul>
+<li>Cognitive domain: stronger effects for perception and multitasking, followed by top-down attention,
+spatial cognition and inhibition, and then verbal cognition. Marginal effect for problem solving and
+unreliable estimates (low df) for motor control and bottom-up attention.<br />
+</li>
+<li>DV type: significant effects on speed and accuracy.<br />
+</li>
+<li>Effect: significant group differences for both overall (main effect) performance measures and
+difference scores (interactions).<br />
+</li>
+<li>Significant effect in both overtly and covertly recruited participants, with numerically larger effect
+for overt vs. covert.</li>
+</ul></li>
+<li><p>Residual heterogeneity is still significant (<em>QE</em>(210) = 870.1,
+<em>p</em> = ), suggesting additional moderating variables may be involved !
+=&gt; Additional analyses are needed to understand where this comes from:</p>
+<ul>
+<li>publication bias / small study effect (adding variance or sda to moderator models?)<br />
+</li>
+<li>lab / joint publication group<br />
+</li>
+<li>single moderator models</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="publication-bias" class="section level2" number="5.3">
+<h2><span class="header-section-number">5.3</span> Publication bias</h2>
+<p>Numerous techniques exist for detecting and correcting publication bias.
+While methods for detecting publication bias (or small study effects) have
+improved largely over the past decades, it is not the case of correction methods
+such that estimating a unbiased (or publication-bias-corrected) estimate remains a challenge.
+The numerous methods available to date provide very heterogeneous estimates and will thus
+be reported in the form of sensitivity analysis as as recently recommended by
+Mathur &amp; VanderWeele (2020).</p>
+<p>Detection of publication bias was done for both:<br />
+- The overall effect (intercept only model) and<br />
+- The full model including all moderators</p>
+<p>Our main publication bias detection approach is based on Egger’s regression test
+with a modified precision covariate (Pustejovsky &amp; Rodgers, 2019).</p>
+<p>In addition, we use a number of additional methods to estimate the adjusted effect,
+because the estimates obtained from Eggers’s test (and PET-PEESE) are known to be
+unreliable.<br />
+The best method for estimating the publication bias (or small-study) adjusted effect
+is based on the 3-parameter model selection (see below).</p>
+<div id="contour-enhanced-funnel-plots" class="section level3" number="5.3.1">
+<h3><span class="header-section-number">5.3.1</span> (contour-enhanced) Funnel plots</h3>
+<p>Funnel plots are based on multilevel models <em>without RVE</em>, first for overall effect (i.e., intercept only)
+and then for the full model (i.e., with all moderators).<br />
+In order to use trim and fill, we also conducted a univariate model using one randomly sampled estimate
+from each cluster.<br />
+<img src="MetaAnalysis_CrossSectional_files/figure-html/unnamed-chunk-5-1.png" width="768" /></p>
+</div>
+<div id="significance-funnel-plot-mathur-vanderweele-2020" class="section level3" number="5.3.2">
+<h3><span class="header-section-number">5.3.2</span> Significance funnel plot (Mathur &amp; VanderWeele, 2020)</h3>
+<p>This new type of graphical illustration was introduced recently as an alternative to funnel plots.<br />
+<img src="MetaAnalysis_CrossSectional_files/figure-html/pb_estimates-1.png" width="768" />
+Note: the line was drawn manually (i.e., no classification applied) with<br />
+intercept = 0 and slope = 0.52.</p>
+<p>Non-affirmative studies have smaller point estimates than affirmative studies,
+suggesting that results may be sensitive to publication bias.</p>
+</div>
+<div id="eggers-regression-with-modified-precision-covariate" class="section level3" number="5.3.3">
+<h3><span class="header-section-number">5.3.3</span> Egger’s regression with modified precision covariate</h3>
+<p>This method is based on work from Pustejovsky and Rodgers (2018), and Rodgers &amp; Pustejovsky (2020).<br />
+The new (Egger’s sandwich) test has been shown to maintain type I error (unlike the inflated type I errors
+commonly reported with other methods).</p>
+<blockquote>
+<p>Quote from Pustejovsky &amp; Rodgers 2020, page 36:<br />
+<em>“the Egger Sandwich is an acceptable, valid test for meta-analysis, but it must be interpreted
+with caution both because it has limited power to detect funnel plot asymmetry
+and because, in practice, such asymmetry may have other causes besides selective reporting.”</em><br />
+<em>“The Funnel Plot Test with MLMA maintains Type I error across nearly all conditions,
+and like the Egger Sandwich, it lacks power to detect funnel plot asymmetry.”</em></p>
+</blockquote>
+<p>We ran both Egger’s Sandwich and Egger’s MLMA models on both overall effect (intercept only)
+and full model with all moderators.</p>
+<table class=" lightable-paper lightable-hover" style="font-family: helvetica; width: auto !important; ">
+<thead>
+<tr>
+<th style="text-align:left;">
+method
+</th>
+<th style="text-align:left;">
+model
+</th>
+<th style="text-align:left;">
+term
+</th>
+<th style="text-align:right;">
+b
+</th>
+<th style="text-align:right;">
+se
+</th>
+<th style="text-align:right;">
+t
+</th>
+<th style="text-align:right;">
+dfs
+</th>
+<th style="text-align:right;">
+p
+</th>
+<th style="text-align:right;">
+ci.lb
+</th>
+<th style="text-align:right;">
+ci.ub
+</th>
+<th style="text-align:left;">
+Coef
+</th>
+<th style="text-align:right;">
+df_Satt
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;background-color: yellow !important;vertical-align: top !important;" rowspan="4">
+Egger CHE (MLMA + RVE)
+</td>
+<td style="text-align:left;background-color: yellow !important;vertical-align: top !important;" rowspan="2">
+NULL
+</td>
+<td style="text-align:left;background-color: yellow !important;">
+intrcpt
+</td>
+<td style="text-align:right;background-color: yellow !important;">
+-0.039
+</td>
+<td style="text-align:right;background-color: yellow !important;">
+0.183
+</td>
+<td style="text-align:right;background-color: yellow !important;">
+-0.212
+</td>
+<td style="text-align:right;background-color: yellow !important;">
+13.4
+</td>
+<td style="text-align:right;background-color: yellow !important;">
+0.835
+</td>
+<td style="text-align:right;background-color: yellow !important;">
+-0.434
+</td>
+<td style="text-align:right;background-color: yellow !important;">
+0.356
+</td>
+<td style="text-align:left;background-color: yellow !important;">
+intrcpt
+</td>
+<td style="text-align:right;background-color: yellow !important;">
+13.4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;background-color: yellow !important;">
+sda
+</td>
+<td style="text-align:right;font-weight: bold;background-color: yellow !important;">
+1.917
+</td>
+<td style="text-align:right;font-weight: bold;background-color: yellow !important;">
+0.538
+</td>
+<td style="text-align:right;font-weight: bold;background-color: yellow !important;">
+3.567
+</td>
+<td style="text-align:right;font-weight: bold;background-color: yellow !important;">
+18.4
+</td>
+<td style="text-align:right;font-weight: bold;background-color: yellow !important;">
+0.002
+</td>
+<td style="text-align:right;font-weight: bold;background-color: yellow !important;">
+0.790
+</td>
+<td style="text-align:right;font-weight: bold;background-color: yellow !important;">
+3.045
+</td>
+<td style="text-align:left;font-weight: bold;background-color: yellow !important;">
+sda
+</td>
+<td style="text-align:right;font-weight: bold;background-color: yellow !important;">
+18.4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: yellow !important;vertical-align: top !important;" rowspan="2">
+FULL
+</td>
+<td style="text-align:left;background-color: yellow !important;">
+intrcpt
+</td>
+<td style="text-align:right;background-color: yellow !important;">
+-0.008
+</td>
+<td style="text-align:right;background-color: yellow !important;">
+0.199
+</td>
+<td style="text-align:right;background-color: yellow !important;">
+-0.042
+</td>
+<td style="text-align:right;background-color: yellow !important;">
+19.4
+</td>
+<td style="text-align:right;background-color: yellow !important;">
+0.967
+</td>
+<td style="text-align:right;background-color: yellow !important;">
+-0.424
+</td>
+<td style="text-align:right;background-color: yellow !important;">
+0.407
+</td>
+<td style="text-align:left;background-color: yellow !important;">
+intrcpt
+</td>
+<td style="text-align:right;background-color: yellow !important;">
+19.4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;background-color: yellow !important;">
+sda
+</td>
+<td style="text-align:right;font-weight: bold;background-color: yellow !important;">
+1.804
+</td>
+<td style="text-align:right;font-weight: bold;background-color: yellow !important;">
+0.639
+</td>
+<td style="text-align:right;font-weight: bold;background-color: yellow !important;">
+2.824
+</td>
+<td style="text-align:right;font-weight: bold;background-color: yellow !important;">
+22.1
+</td>
+<td style="text-align:right;font-weight: bold;background-color: yellow !important;">
+0.010
+</td>
+<td style="text-align:right;font-weight: bold;background-color: yellow !important;">
+0.480
+</td>
+<td style="text-align:right;font-weight: bold;background-color: yellow !important;">
+3.128
+</td>
+<td style="text-align:left;font-weight: bold;background-color: yellow !important;">
+sda
+</td>
+<td style="text-align:right;font-weight: bold;background-color: yellow !important;">
+22.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;vertical-align: top !important;" rowspan="4">
+Egger Sandwich (RVE)
+</td>
+<td style="text-align:left;vertical-align: top !important;" rowspan="2">
+NULL
+</td>
+<td style="text-align:left;">
+intrcpt
+</td>
+<td style="text-align:right;">
+-0.032
+</td>
+<td style="text-align:right;">
+0.258
+</td>
+<td style="text-align:right;">
+-0.124
+</td>
+<td style="text-align:right;">
+12.0
+</td>
+<td style="text-align:right;">
+0.903
+</td>
+<td style="text-align:right;">
+-0.595
+</td>
+<td style="text-align:right;">
+0.531
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+sda
+</td>
+<td style="text-align:right;font-weight: bold;">
+2.088
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.729
+</td>
+<td style="text-align:right;font-weight: bold;">
+2.865
+</td>
+<td style="text-align:right;font-weight: bold;">
+14.9
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.012
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.533
+</td>
+<td style="text-align:right;font-weight: bold;">
+3.643
+</td>
+<td style="text-align:left;font-weight: bold;">
+</td>
+<td style="text-align:right;font-weight: bold;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;vertical-align: top !important;" rowspan="2">
+FULL
+</td>
+<td style="text-align:left;">
+intrcpt
+</td>
+<td style="text-align:right;">
+0.106
+</td>
+<td style="text-align:right;">
+0.240
+</td>
+<td style="text-align:right;">
+0.442
+</td>
+<td style="text-align:right;">
+23.6
+</td>
+<td style="text-align:right;">
+0.662
+</td>
+<td style="text-align:right;">
+-0.389
+</td>
+<td style="text-align:right;">
+0.601
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+sda
+</td>
+<td style="text-align:right;font-weight: bold;">
+1.965
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.715
+</td>
+<td style="text-align:right;font-weight: bold;">
+2.751
+</td>
+<td style="text-align:right;font-weight: bold;">
+15.0
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.015
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.442
+</td>
+<td style="text-align:right;font-weight: bold;">
+3.489
+</td>
+<td style="text-align:left;font-weight: bold;">
+</td>
+<td style="text-align:right;font-weight: bold;">
+</td>
+</tr>
+</tbody>
+</table>
+<p><em>notes: </em><br />
+<em>- Terms: sda is the test of small-study effect; intercept is the corrected estimate</em><br />
+<em>- Models: NULL is the intercept-only model; FULL is the full moderator model</em></p>
+<p><strong>Summary:</strong></p>
+<div class="blue">
+<ul>
+<li>The slope (sda) is significant indicating significant publication bias.<br />
+</li>
+<li>The Intercept is not a reliable estimate of the bias-corrected effect (but shows how adding
+publication bias / small study affects the estimate).<br />
+</li>
+<li>The other estimates can be ignored too as they are sensitive to choice of reference levels!<br />
+</li>
+<li>Surprisingly, heterogeneity is still highly significant, even when including all moderators!<br />
+=&gt; subgroup analyses?<br />
+=&gt; moderators lab / joint publication group?<br />
+=&gt; other suggestions…?<br />
+</li>
+</ul>
+</div>
+</div>
+<div id="pet-peese" class="section level3" number="5.3.4">
+<h3><span class="header-section-number">5.3.4</span> PET-PEESE</h3>
+<p>Here, we applied PET and PEESE to our multilevel model with cluster robust variance (CHE model).<br />
+For PEESE, we used the modified precision estimate because it increases precision.</p>
+<p>For comparison with Bediou et al., 2018, we also applied PET and PEESE to standard RVE models
+hierarchical weights and obtained similar results. In addition to the hierarchical weights
+used in Bediou et al. 2018, we also use correlated weights because they have been shown to
+perform significantly better in most situations.</p>
+<p>Again, we ran the analysis both on the overall effect (i.e., intercept only) model and on the full model
+with all moderators.</p>
+<p>Following Stanley &amp; Doucouliagos 2013, we use the conditional PET-PEESE estimate as follows:<br />
+- If PET estimate is significant, we use PEESE estimate.<br />
+- If PET is NS, then we use PET estimate.</p>
+<blockquote>
+<p>Note that this approach has been extensively criticized for its limitations,
+including by the authors themselves.<br />
+Melissa recommended to drop PET-PEESE entirely because it is known to inflate
+type I error and has been consistently outperformed by the new precision estimate
+used by Egger Sandwich.
+I left them for comparison with Bediou et al. 2018.</p>
+</blockquote>
+<p><img src="MetaAnalysis_CrossSectional_files/figure-html/PET-PEESE_funnel-1.png" width="768" /></p>
+<details>
+<summary>
+Click to see detailed results table!
+</summary>
+<table class=" lightable-paper lightable-hover" style="font-family: helvetica; width: auto !important; ">
+<thead>
+<tr>
+<th style="text-align:left;">
+method
+</th>
+<th style="text-align:left;">
+model
+</th>
+<th style="text-align:left;">
+term
+</th>
+<th style="text-align:right;">
+b
+</th>
+<th style="text-align:right;">
+se
+</th>
+<th style="text-align:right;">
+t
+</th>
+<th style="text-align:right;">
+dfs
+</th>
+<th style="text-align:right;">
+p
+</th>
+<th style="text-align:right;">
+ci.lb
+</th>
+<th style="text-align:right;">
+ci.ub
+</th>
+<th style="text-align:left;">
+Coef
+</th>
+<th style="text-align:right;">
+df_Satt
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;vertical-align: top !important;" rowspan="4">
+PET (RVE hier)
+</td>
+<td style="text-align:left;">
+NULL
+</td>
+<td style="text-align:left;">
+intrcpt
+</td>
+<td style="text-align:right;">
+-0.387
+</td>
+<td style="text-align:right;">
+0.169
+</td>
+<td style="text-align:right;">
+-2.289
+</td>
+<td style="text-align:right;">
+6.22
+</td>
+<td style="text-align:right;">
+0.061
+</td>
+<td style="text-align:right;">
+-0.798
+</td>
+<td style="text-align:right;">
+0.023
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FULL
+</td>
+<td style="text-align:left;">
+intrcpt
+</td>
+<td style="text-align:right;">
+-0.321
+</td>
+<td style="text-align:right;">
+0.162
+</td>
+<td style="text-align:right;">
+-1.980
+</td>
+<td style="text-align:right;">
+24.12
+</td>
+<td style="text-align:right;">
+0.059
+</td>
+<td style="text-align:right;">
+-0.655
+</td>
+<td style="text-align:right;">
+0.013
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+NULL
+</td>
+<td style="text-align:left;font-weight: bold;">
+slope
+</td>
+<td style="text-align:right;font-weight: bold;">
+2.766
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.476
+</td>
+<td style="text-align:right;font-weight: bold;">
+5.815
+</td>
+<td style="text-align:right;font-weight: bold;">
+9.85
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.000
+</td>
+<td style="text-align:right;font-weight: bold;">
+1.704
+</td>
+<td style="text-align:right;font-weight: bold;">
+3.828
+</td>
+<td style="text-align:left;font-weight: bold;">
+</td>
+<td style="text-align:right;font-weight: bold;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+FULL
+</td>
+<td style="text-align:left;font-weight: bold;">
+slope
+</td>
+<td style="text-align:right;font-weight: bold;">
+3.023
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.541
+</td>
+<td style="text-align:right;font-weight: bold;">
+5.584
+</td>
+<td style="text-align:right;font-weight: bold;">
+18.71
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.000
+</td>
+<td style="text-align:right;font-weight: bold;">
+1.889
+</td>
+<td style="text-align:right;font-weight: bold;">
+4.157
+</td>
+<td style="text-align:left;font-weight: bold;">
+</td>
+<td style="text-align:right;font-weight: bold;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;vertical-align: top !important;" rowspan="4">
+PET (RVE corr)
+</td>
+<td style="text-align:left;">
+NULL
+</td>
+<td style="text-align:left;">
+intrcpt
+</td>
+<td style="text-align:right;">
+-0.278
+</td>
+<td style="text-align:right;">
+0.220
+</td>
+<td style="text-align:right;">
+-1.267
+</td>
+<td style="text-align:right;">
+14.61
+</td>
+<td style="text-align:right;">
+0.225
+</td>
+<td style="text-align:right;">
+-0.748
+</td>
+<td style="text-align:right;">
+0.191
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FULL
+</td>
+<td style="text-align:left;">
+intrcpt
+</td>
+<td style="text-align:right;">
+-0.131
+</td>
+<td style="text-align:right;">
+0.184
+</td>
+<td style="text-align:right;">
+-0.714
+</td>
+<td style="text-align:right;">
+23.84
+</td>
+<td style="text-align:right;">
+0.482
+</td>
+<td style="text-align:right;">
+-0.511
+</td>
+<td style="text-align:right;">
+0.248
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+NULL
+</td>
+<td style="text-align:left;font-weight: bold;">
+slope
+</td>
+<td style="text-align:right;font-weight: bold;">
+2.728
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.586
+</td>
+<td style="text-align:right;font-weight: bold;">
+4.652
+</td>
+<td style="text-align:right;font-weight: bold;">
+17.10
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.000
+</td>
+<td style="text-align:right;font-weight: bold;">
+1.492
+</td>
+<td style="text-align:right;font-weight: bold;">
+3.965
+</td>
+<td style="text-align:left;font-weight: bold;">
+</td>
+<td style="text-align:right;font-weight: bold;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+FULL
+</td>
+<td style="text-align:left;font-weight: bold;">
+slope
+</td>
+<td style="text-align:right;font-weight: bold;">
+2.572
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.581
+</td>
+<td style="text-align:right;font-weight: bold;">
+4.425
+</td>
+<td style="text-align:right;font-weight: bold;">
+17.59
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.000
+</td>
+<td style="text-align:right;font-weight: bold;">
+1.349
+</td>
+<td style="text-align:right;font-weight: bold;">
+3.795
+</td>
+<td style="text-align:left;font-weight: bold;">
+</td>
+<td style="text-align:right;font-weight: bold;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;vertical-align: top !important;" rowspan="4">
+PET (CHE)
+</td>
+<td style="text-align:left;font-weight: bold;">
+NULL
+</td>
+<td style="text-align:left;font-weight: bold;">
+intrcpt
+</td>
+<td style="text-align:right;font-weight: bold;">
+-0.485
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.203
+</td>
+<td style="text-align:right;font-weight: bold;">
+-2.393
+</td>
+<td style="text-align:right;font-weight: bold;">
+15.85
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.029
+</td>
+<td style="text-align:right;font-weight: bold;">
+-0.916
+</td>
+<td style="text-align:right;font-weight: bold;">
+-0.055
+</td>
+<td style="text-align:left;font-weight: bold;">
+intrcpt
+</td>
+<td style="text-align:right;font-weight: bold;">
+15.85
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+FULL
+</td>
+<td style="text-align:left;font-weight: bold;">
+intrcpt
+</td>
+<td style="text-align:right;font-weight: bold;">
+-0.436
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.194
+</td>
+<td style="text-align:right;font-weight: bold;">
+-2.246
+</td>
+<td style="text-align:right;font-weight: bold;">
+20.48
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.036
+</td>
+<td style="text-align:right;font-weight: bold;">
+-0.840
+</td>
+<td style="text-align:right;font-weight: bold;">
+-0.032
+</td>
+<td style="text-align:left;font-weight: bold;">
+intrcpt
+</td>
+<td style="text-align:right;font-weight: bold;">
+20.48
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+NULL
+</td>
+<td style="text-align:left;font-weight: bold;">
+slope
+</td>
+<td style="text-align:right;font-weight: bold;">
+3.226
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.550
+</td>
+<td style="text-align:right;font-weight: bold;">
+5.863
+</td>
+<td style="text-align:right;font-weight: bold;">
+19.99
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.000
+</td>
+<td style="text-align:right;font-weight: bold;">
+2.078
+</td>
+<td style="text-align:right;font-weight: bold;">
+4.374
+</td>
+<td style="text-align:left;font-weight: bold;">
+sqrt(g_var)
+</td>
+<td style="text-align:right;font-weight: bold;">
+19.99
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+FULL
+</td>
+<td style="text-align:left;font-weight: bold;">
+slope
+</td>
+<td style="text-align:right;font-weight: bold;">
+3.216
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.634
+</td>
+<td style="text-align:right;font-weight: bold;">
+5.070
+</td>
+<td style="text-align:right;font-weight: bold;">
+22.89
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.000
+</td>
+<td style="text-align:right;font-weight: bold;">
+1.903
+</td>
+<td style="text-align:right;font-weight: bold;">
+4.528
+</td>
+<td style="text-align:left;font-weight: bold;">
+sqrt(g_var)
+</td>
+<td style="text-align:right;font-weight: bold;">
+22.89
+</td>
+</tr>
+<tr>
+<td style="text-align:left;vertical-align: top !important;" rowspan="4">
+PEESE (RVE hier)
+</td>
+<td style="text-align:left;">
+NULL
+</td>
+<td style="text-align:left;">
+intrcpt
+</td>
+<td style="text-align:right;">
+0.088
+</td>
+<td style="text-align:right;">
+0.097
+</td>
+<td style="text-align:right;">
+0.908
+</td>
+<td style="text-align:right;">
+6.60
+</td>
+<td style="text-align:right;">
+0.396
+</td>
+<td style="text-align:right;">
+-0.144
+</td>
+<td style="text-align:right;">
+0.320
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FULL
+</td>
+<td style="text-align:left;">
+intrcpt
+</td>
+<td style="text-align:right;">
+0.189
+</td>
+<td style="text-align:right;">
+0.133
+</td>
+<td style="text-align:right;">
+1.418
+</td>
+<td style="text-align:right;">
+22.18
+</td>
+<td style="text-align:right;">
+0.170
+</td>
+<td style="text-align:right;">
+-0.087
+</td>
+<td style="text-align:right;">
+0.466
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+NULL
+</td>
+<td style="text-align:left;font-weight: bold;">
+slope
+</td>
+<td style="text-align:right;font-weight: bold;">
+3.703
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.793
+</td>
+<td style="text-align:right;font-weight: bold;">
+4.668
+</td>
+<td style="text-align:right;font-weight: bold;">
+7.37
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.002
+</td>
+<td style="text-align:right;font-weight: bold;">
+1.846
+</td>
+<td style="text-align:right;font-weight: bold;">
+5.560
+</td>
+<td style="text-align:left;font-weight: bold;">
+</td>
+<td style="text-align:right;font-weight: bold;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+FULL
+</td>
+<td style="text-align:left;font-weight: bold;">
+slope
+</td>
+<td style="text-align:right;font-weight: bold;">
+3.699
+</td>
+<td style="text-align:right;font-weight: bold;">
+1.025
+</td>
+<td style="text-align:right;font-weight: bold;">
+3.608
+</td>
+<td style="text-align:right;font-weight: bold;">
+6.97
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.009
+</td>
+<td style="text-align:right;font-weight: bold;">
+1.272
+</td>
+<td style="text-align:right;font-weight: bold;">
+6.126
+</td>
+<td style="text-align:left;font-weight: bold;">
+</td>
+<td style="text-align:right;font-weight: bold;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;vertical-align: top !important;" rowspan="4">
+PEESE (RVE corr)
+</td>
+<td style="text-align:left;">
+NULL
+</td>
+<td style="text-align:left;">
+intrcpt
+</td>
+<td style="text-align:right;">
+0.224
+</td>
+<td style="text-align:right;">
+0.130
+</td>
+<td style="text-align:right;">
+1.721
+</td>
+<td style="text-align:right;">
+12.61
+</td>
+<td style="text-align:right;">
+0.110
+</td>
+<td style="text-align:right;">
+-0.058
+</td>
+<td style="text-align:right;">
+0.506
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+FULL
+</td>
+<td style="text-align:left;font-weight: bold;">
+intrcpt
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.333
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.149
+</td>
+<td style="text-align:right;font-weight: bold;">
+2.230
+</td>
+<td style="text-align:right;font-weight: bold;">
+18.35
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.038
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.020
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.647
+</td>
+<td style="text-align:left;font-weight: bold;">
+</td>
+<td style="text-align:right;font-weight: bold;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+NULL
+</td>
+<td style="text-align:left;font-weight: bold;">
+slope
+</td>
+<td style="text-align:right;font-weight: bold;">
+3.441
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.951
+</td>
+<td style="text-align:right;font-weight: bold;">
+3.617
+</td>
+<td style="text-align:right;font-weight: bold;">
+7.82
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.007
+</td>
+<td style="text-align:right;font-weight: bold;">
+1.239
+</td>
+<td style="text-align:right;font-weight: bold;">
+5.643
+</td>
+<td style="text-align:left;font-weight: bold;">
+</td>
+<td style="text-align:right;font-weight: bold;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+FULL
+</td>
+<td style="text-align:left;font-weight: bold;">
+slope
+</td>
+<td style="text-align:right;font-weight: bold;">
+3.208
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.918
+</td>
+<td style="text-align:right;font-weight: bold;">
+3.495
+</td>
+<td style="text-align:right;font-weight: bold;">
+7.76
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.009
+</td>
+<td style="text-align:right;font-weight: bold;">
+1.080
+</td>
+<td style="text-align:right;font-weight: bold;">
+5.336
+</td>
+<td style="text-align:left;font-weight: bold;">
+</td>
+<td style="text-align:right;font-weight: bold;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;vertical-align: top !important;" rowspan="4">
+PEESE (CHE)
+</td>
+<td style="text-align:left;">
+NULL
+</td>
+<td style="text-align:left;">
+intrcpt
+</td>
+<td style="text-align:right;">
+0.188
+</td>
+<td style="text-align:right;">
+0.192
+</td>
+<td style="text-align:right;">
+0.980
+</td>
+<td style="text-align:right;">
+10.40
+</td>
+<td style="text-align:right;">
+0.349
+</td>
+<td style="text-align:right;">
+-0.237
+</td>
+<td style="text-align:right;">
+0.614
+</td>
+<td style="text-align:left;">
+intrcpt
+</td>
+<td style="text-align:right;">
+10.40
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FULL
+</td>
+<td style="text-align:left;">
+intrcpt
+</td>
+<td style="text-align:right;">
+0.182
+</td>
+<td style="text-align:right;">
+0.164
+</td>
+<td style="text-align:right;">
+1.111
+</td>
+<td style="text-align:right;">
+18.38
+</td>
+<td style="text-align:right;">
+0.281
+</td>
+<td style="text-align:right;">
+-0.162
+</td>
+<td style="text-align:right;">
+0.526
+</td>
+<td style="text-align:left;">
+intrcpt
+</td>
+<td style="text-align:right;">
+18.38
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NULL
+</td>
+<td style="text-align:left;">
+slope
+</td>
+<td style="text-align:right;">
+3.400
+</td>
+<td style="text-align:right;">
+1.507
+</td>
+<td style="text-align:right;">
+2.256
+</td>
+<td style="text-align:right;">
+5.75
+</td>
+<td style="text-align:right;">
+0.067
+</td>
+<td style="text-align:right;">
+-0.327
+</td>
+<td style="text-align:right;">
+7.128
+</td>
+<td style="text-align:left;">
+g_var
+</td>
+<td style="text-align:right;">
+5.75
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FULL
+</td>
+<td style="text-align:left;">
+slope
+</td>
+<td style="text-align:right;">
+3.308
+</td>
+<td style="text-align:right;">
+1.544
+</td>
+<td style="text-align:right;">
+2.142
+</td>
+<td style="text-align:right;">
+5.63
+</td>
+<td style="text-align:right;">
+0.079
+</td>
+<td style="text-align:right;">
+-0.531
+</td>
+<td style="text-align:right;">
+7.146
+</td>
+<td style="text-align:left;">
+g_var
+</td>
+<td style="text-align:right;">
+5.63
+</td>
+</tr>
+</tbody>
+</table>
+</details>
+</div>
+<div id="univariate-methods-boostrapped" class="section level3" number="5.3.5">
+<h3><span class="header-section-number">5.3.5</span> Univariate methods (boostrapped)</h3>
+<div id="bootstrapped-trim-and-fill-duval-tweedie-2001" class="section level4" number="5.3.5.1">
+<h4><span class="header-section-number">5.3.5.1</span> Bootstrapped trim and fill (Duval &amp; Tweedie, 2001)</h4>
+<p>Trim and fill, p-uniform and 3-PSM work only with independent effect sizes.<br />
+In order to run these analyses, we thus randomly picked one effect size per study (i.e. paper).<br />
+To verify that this random sampling does not introduce bias, we first checked the distribution of
+the overall effect obtained from 1000 bootstrapped samples of one effect size per paper.</p>
+<p>The univariate meta-analysis of 73 randomly selected independent effect sizes revealed
+an average overall effect of <em>mean g</em> = 0.673
+(<em>SD</em> = 0.027)</p>
+<pre><code>##      term     b     se ci.lb ci.ub
+## 1 intrcpt 0.501 0.0276 0.449 0.557</code></pre>
+<p><img src="MetaAnalysis_CrossSectional_files/figure-html/bootstrap_tf-1.png" width="768" /></p>
+<p>Across the 1000 bootstrapped samples, trim and fill analysis imputed between
+12 and 21 additional effects
+on the left side of the funnel plot (median = 17), in order
+to correct for its asymmetry.</p>
+<p>These additional studies decreased the overall estimate to a mean of <em>g</em> = 0.501
+(<em>SD</em> = 0.028), but did not alter significance <em>all p’s</em> &lt; .001).</p>
+</div>
+<div id="p-uniform-van-assen-van-aert-wicherts-2015" class="section level4" number="5.3.5.2">
+<h4><span class="header-section-number">5.3.5.2</span> P-Uniform (van Assen, van Aert &amp; Wicherts, 2015)</h4>
+<p>p-uniform is fundamentally similar to a p-curve that estimates the true effect
+using only significant effects. This method is not without limitations; it tends
+to overestimate effect sizes when heterogeneity is moderate to large, and is
+insensitive to p-values that are close to significance, or in the presence of
+p-hacking (Van Aerts, Wicherts &amp; van Assen, 2016).</p>
+<pre><code>##      term     b     se ci.lb ci.ub
+## 1 intrcpt 0.713 0.0344 0.644 0.778</code></pre>
+<p><img src="MetaAnalysis_CrossSectional_files/figure-html/punif-1.png" width="768" />
+Studies with lower p values are observed less often than expected, whereas studies with high p values
+are more frequent than expected. Yet, the test of publication bias is not significant (pval = 1).</p>
+</div>
+<div id="parameter-selection-model-3psm-hedges-vevea-1996." class="section level4" number="5.3.5.3">
+<h4><span class="header-section-number">5.3.5.3</span> 3-Parameter Selection Model (3PSM, Hedges &amp; Vevea 1996).</h4>
+<p>Selection models are a general class of models that attempt to model the process by which the studies included in a meta-analysis may have been influenced by some form of publication bias. If a particular selection model is an adequate approximation for the underlying selection process, then the model provides estimates of the parameters of interest (e.g., the average true outcome and the amount of heterogeneity in the true outcomes) that are ‘corrected’ for this selection process (i.e., they are estimates of the parameters in the population of studies before any selection has taken place).</p>
+<p><strong>PSM Using selmodel function from metafor </strong><br />
+This function allows to test different models.<br />
+<img src="MetaAnalysis_CrossSectional_files/figure-html/4-PSM-1.png" width="768" />
+Colours show different (model-based) selective reporting biases:<br />
+- Negexpm and logistic selection give identical results.<br />
+- Step, halfnorm and Power give different results.</p>
+<p><strong>3-PSM Using weightfunc from weightr </strong><br />
+Here we focus on the 3-PSM approach, which models publication bias with 3-parameters.
+The first one represents how much less likely a non-significant result is to be published
+than a significant result. The other two parameters represent the estimated bias-adjusted
+mean effect and the estimated heterogeneity of the effects.</p>
+<p>Below we plot the distribution of estimates corrected for publication bias that are
+obtained from 100 bootstrapped samples with different thresholds for selective reporting
+ranging from 0.1 to 0.001.<br />
+<img src="MetaAnalysis_CrossSectional_files/figure-html/3-PSM-1.png" width="768" /><img src="MetaAnalysis_CrossSectional_files/figure-html/3-PSM-2.png" width="768" /></p>
+</div>
+</div>
+<div id="summary-of-publication-bias-corrected-estimates" class="section level3" number="5.3.6">
+<h3><span class="header-section-number">5.3.6</span> Summary of publication-bias-corrected estimates</h3>
+<table class=" lightable-paper lightable-hover" style="font-family: helvetica; width: auto !important; ">
+<thead>
+<tr>
+<th style="text-align:left;">
+method
+</th>
+<th style="text-align:left;">
+model
+</th>
+<th style="text-align:left;">
+term
+</th>
+<th style="text-align:right;">
+b
+</th>
+<th style="text-align:right;">
+se
+</th>
+<th style="text-align:right;">
+ci.lb
+</th>
+<th style="text-align:right;">
+ci.ub
+</th>
+<th style="text-align:right;">
+t
+</th>
+<th style="text-align:right;">
+dfs
+</th>
+<th style="text-align:right;">
+p
+</th>
+<th style="text-align:left;">
+pSignif
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;vertical-align: top !important;" rowspan="2">
+PET (CHE)
+</td>
+<td style="text-align:left;">
+NULL
+</td>
+<td style="text-align:left;">
+intrcpt
+</td>
+<td style="text-align:right;">
+-0.485
+</td>
+<td style="text-align:right;">
+0.203
+</td>
+<td style="text-align:right;">
+-0.916
+</td>
+<td style="text-align:right;">
+-0.055
+</td>
+<td style="text-align:right;">
+-2.393
+</td>
+<td style="text-align:right;">
+15.85
+</td>
+<td style="text-align:right;">
+0.029
+</td>
+<td style="text-align:left;">
+&lt;.05
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FULL
+</td>
+<td style="text-align:left;">
+intrcpt
+</td>
+<td style="text-align:right;">
+-0.436
+</td>
+<td style="text-align:right;">
+0.194
+</td>
+<td style="text-align:right;">
+-0.840
+</td>
+<td style="text-align:right;">
+-0.032
+</td>
+<td style="text-align:right;">
+-2.246
+</td>
+<td style="text-align:right;">
+20.48
+</td>
+<td style="text-align:right;">
+0.036
+</td>
+<td style="text-align:left;">
+&lt;.05
+</td>
+</tr>
+<tr>
+<td style="text-align:left;vertical-align: top !important;" rowspan="2">
+PET (RVE hier)
+</td>
+<td style="text-align:left;">
+NULL
+</td>
+<td style="text-align:left;">
+intrcpt
+</td>
+<td style="text-align:right;">
+-0.387
+</td>
+<td style="text-align:right;">
+0.169
+</td>
+<td style="text-align:right;">
+-0.798
+</td>
+<td style="text-align:right;">
+0.023
+</td>
+<td style="text-align:right;">
+-2.289
+</td>
+<td style="text-align:right;">
+6.22
+</td>
+<td style="text-align:right;">
+0.061
+</td>
+<td style="text-align:left;">
+.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FULL
+</td>
+<td style="text-align:left;">
+intrcpt
+</td>
+<td style="text-align:right;">
+-0.321
+</td>
+<td style="text-align:right;">
+0.162
+</td>
+<td style="text-align:right;">
+-0.655
+</td>
+<td style="text-align:right;">
+0.013
+</td>
+<td style="text-align:right;">
+-1.980
+</td>
+<td style="text-align:right;">
+24.12
+</td>
+<td style="text-align:right;">
+0.059
+</td>
+<td style="text-align:left;">
+.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;vertical-align: top !important;" rowspan="2">
+PET (RVE corr)
+</td>
+<td style="text-align:left;">
+NULL
+</td>
+<td style="text-align:left;">
+intrcpt
+</td>
+<td style="text-align:right;">
+-0.278
+</td>
+<td style="text-align:right;">
+0.220
+</td>
+<td style="text-align:right;">
+-0.748
+</td>
+<td style="text-align:right;">
+0.191
+</td>
+<td style="text-align:right;">
+-1.267
+</td>
+<td style="text-align:right;">
+14.61
+</td>
+<td style="text-align:right;">
+0.225
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FULL
+</td>
+<td style="text-align:left;">
+intrcpt
+</td>
+<td style="text-align:right;">
+-0.131
+</td>
+<td style="text-align:right;">
+0.184
+</td>
+<td style="text-align:right;">
+-0.511
+</td>
+<td style="text-align:right;">
+0.248
+</td>
+<td style="text-align:right;">
+-0.714
+</td>
+<td style="text-align:right;">
+23.84
+</td>
+<td style="text-align:right;">
+0.482
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Egger CHE (MLMA + RVE)
+</td>
+<td style="text-align:left;vertical-align: top !important;" rowspan="2">
+NULL
+</td>
+<td style="text-align:left;">
+intrcpt
+</td>
+<td style="text-align:right;">
+-0.039
+</td>
+<td style="text-align:right;">
+0.183
+</td>
+<td style="text-align:right;">
+-0.434
+</td>
+<td style="text-align:right;">
+0.356
+</td>
+<td style="text-align:right;">
+-0.212
+</td>
+<td style="text-align:right;">
+13.38
+</td>
+<td style="text-align:right;">
+0.835
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Egger Sandwich (RVE)
+</td>
+<td style="text-align:left;">
+intrcpt
+</td>
+<td style="text-align:right;">
+-0.032
+</td>
+<td style="text-align:right;">
+0.258
+</td>
+<td style="text-align:right;">
+-0.595
+</td>
+<td style="text-align:right;">
+0.531
+</td>
+<td style="text-align:right;">
+-0.124
+</td>
+<td style="text-align:right;">
+11.98
+</td>
+<td style="text-align:right;">
+0.903
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Egger CHE (MLMA + RVE)
+</td>
+<td style="text-align:left;vertical-align: top !important;" rowspan="2">
+FULL
+</td>
+<td style="text-align:left;">
+intrcpt
+</td>
+<td style="text-align:right;">
+-0.008
+</td>
+<td style="text-align:right;">
+0.199
+</td>
+<td style="text-align:right;">
+-0.424
+</td>
+<td style="text-align:right;">
+0.407
+</td>
+<td style="text-align:right;">
+-0.042
+</td>
+<td style="text-align:right;">
+19.44
+</td>
+<td style="text-align:right;">
+0.967
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3-PSM
+</td>
+<td style="text-align:left;">
+intrcpt
+</td>
+<td style="text-align:right;">
+0.084
+</td>
+<td style="text-align:right;">
+0.023
+</td>
+<td style="text-align:right;">
+0.047
+</td>
+<td style="text-align:right;">
+0.136
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+PEESE (RVE hier)
+</td>
+<td style="text-align:left;">
+NULL
+</td>
+<td style="text-align:left;">
+intrcpt
+</td>
+<td style="text-align:right;">
+0.088
+</td>
+<td style="text-align:right;">
+0.097
+</td>
+<td style="text-align:right;">
+-0.144
+</td>
+<td style="text-align:right;">
+0.320
+</td>
+<td style="text-align:right;">
+0.908
+</td>
+<td style="text-align:right;">
+6.60
+</td>
+<td style="text-align:right;">
+0.396
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Egger Sandwich (RVE)
+</td>
+<td style="text-align:left;">
+FULL
+</td>
+<td style="text-align:left;">
+intrcpt
+</td>
+<td style="text-align:right;">
+0.106
+</td>
+<td style="text-align:right;">
+0.240
+</td>
+<td style="text-align:right;">
+-0.389
+</td>
+<td style="text-align:right;">
+0.601
+</td>
+<td style="text-align:right;">
+0.442
+</td>
+<td style="text-align:right;">
+23.56
+</td>
+<td style="text-align:right;">
+0.662
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3-PSM
+</td>
+<td style="text-align:left;">
+NULL
+</td>
+<td style="text-align:left;">
+intrcpt
+</td>
+<td style="text-align:right;">
+0.134
+</td>
+<td style="text-align:right;">
+0.030
+</td>
+<td style="text-align:right;">
+0.088
+</td>
+<td style="text-align:right;">
+0.210
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;vertical-align: top !important;" rowspan="2">
+PEESE (CHE)
+</td>
+<td style="text-align:left;">
+FULL
+</td>
+<td style="text-align:left;">
+intrcpt
+</td>
+<td style="text-align:right;">
+0.182
+</td>
+<td style="text-align:right;">
+0.164
+</td>
+<td style="text-align:right;">
+-0.162
+</td>
+<td style="text-align:right;">
+0.526
+</td>
+<td style="text-align:right;">
+1.111
+</td>
+<td style="text-align:right;">
+18.38
+</td>
+<td style="text-align:right;">
+0.281
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NULL
+</td>
+<td style="text-align:left;">
+intrcpt
+</td>
+<td style="text-align:right;">
+0.188
+</td>
+<td style="text-align:right;">
+0.192
+</td>
+<td style="text-align:right;">
+-0.237
+</td>
+<td style="text-align:right;">
+0.614
+</td>
+<td style="text-align:right;">
+0.980
+</td>
+<td style="text-align:right;">
+10.40
+</td>
+<td style="text-align:right;">
+0.349
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+PEESE (RVE hier)
+</td>
+<td style="text-align:left;">
+FULL
+</td>
+<td style="text-align:left;">
+intrcpt
+</td>
+<td style="text-align:right;">
+0.189
+</td>
+<td style="text-align:right;">
+0.133
+</td>
+<td style="text-align:right;">
+-0.087
+</td>
+<td style="text-align:right;">
+0.466
+</td>
+<td style="text-align:right;">
+1.418
+</td>
+<td style="text-align:right;">
+22.18
+</td>
+<td style="text-align:right;">
+0.170
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;vertical-align: top !important;" rowspan="2">
+PEESE (RVE corr)
+</td>
+<td style="text-align:left;">
+NULL
+</td>
+<td style="text-align:left;">
+intrcpt
+</td>
+<td style="text-align:right;">
+0.224
+</td>
+<td style="text-align:right;">
+0.130
+</td>
+<td style="text-align:right;">
+-0.058
+</td>
+<td style="text-align:right;">
+0.506
+</td>
+<td style="text-align:right;">
+1.721
+</td>
+<td style="text-align:right;">
+12.61
+</td>
+<td style="text-align:right;">
+0.110
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FULL
+</td>
+<td style="text-align:left;">
+intrcpt
+</td>
+<td style="text-align:right;">
+0.333
+</td>
+<td style="text-align:right;">
+0.149
+</td>
+<td style="text-align:right;">
+0.020
+</td>
+<td style="text-align:right;">
+0.647
+</td>
+<td style="text-align:right;">
+2.230
+</td>
+<td style="text-align:right;">
+18.35
+</td>
+<td style="text-align:right;">
+0.038
+</td>
+<td style="text-align:left;">
+&lt;.05
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+trim and fill
+</td>
+<td style="text-align:left;vertical-align: top !important;" rowspan="2">
+NULL
+</td>
+<td style="text-align:left;">
+intrcpt
+</td>
+<td style="text-align:right;">
+0.501
+</td>
+<td style="text-align:right;">
+0.028
+</td>
+<td style="text-align:right;">
+0.449
+</td>
+<td style="text-align:right;">
+0.557
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p-uniform
+</td>
+<td style="text-align:left;">
+intrcpt
+</td>
+<td style="text-align:right;">
+0.713
+</td>
+<td style="text-align:right;">
+0.034
+</td>
+<td style="text-align:right;">
+0.644
+</td>
+<td style="text-align:right;">
+0.778
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+</tbody>
+</table>
+<p>Note: models are sorted from lower to higher estimate; background colour differentiates between full and null models.<br />
+- Trim and fill, p-uniform and 3-PSM rely on independent effect sizes (randomly selected from each paper).<br />
+- p values rely on different tests depending on the exact publication bias method and model used.<br />
+- For p-uniform, SE corresponds to the difference between the upper and lower bounds of confidence interval.<br />
+- For 3-PSM, the mean is the average and the SE is the standard deviation of estimates across
+100 bootstrapped samples.</p>
+<p><img src="MetaAnalysis_CrossSectional_files/figure-html/pb_intercepts-1.png" width="768" /></p>
+<div class="blue">
+<ul>
+<li>Across all analyses, the slope (tests of small-study effect / publication bias)
+was always significant.<br />
+</li>
+<li>The unbiased or corrected (i.e. publication-bias free) estimates vary tremendously
+and are thus reported as a form of a sensitivity analysis.</li>
+</ul>
+</div>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="effectsizes.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="final-words.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["MetaAnalysis_CrossSectional.pdf", "MetaAnalysis_CrossSectional.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

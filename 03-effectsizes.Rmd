@@ -1,0 +1,358 @@
+# Effect Sizes {#effectsizes}  
+
+Note: These plots are just raw effect sizes, it is not the output of a meta-analytic model.  
+Effect sizes are NOT corrected for non-independence or weighted by variance or sample size.  
+
+```{r include = F}
+library(readxl)
+library(tidyverse)
+library(DescTools)
+library(ggplot2) # for plots
+library(ggExtra)  # for ggMarginal
+library(papaja) # for APA styles
+library(knitr)
+library(kableExtra)
+library(DT)
+library(patchwork)
+
+# source('MA_cross_dataPrep.R')  
+load("MA_data_cross.RData")
+```
+
+
+## Effect sizes by Sample Size   
+```{r esByN, echo = FALSE, warning = FALSE, message = FALSE}
+ggplot(es_data, aes(x = (nExp+nCtl), y = g)) +
+  geom_point(aes(size = (nExp+nCtl)), shape = 1, alpha = .3) +
+  geom_smooth(method = "glm") +
+  scale_x_continuous(breaks = seq(0,300, 50)) +
+  xlim(c(0,300)) +
+  scale_size(breaks = seq(0,250,25), range = c(1,10), name = "sample size") +
+  labs(title = "effect size by sample size",y = "Hedges'g", y = "sample size",
+       subtitle = "studies with N > 100 highlighted") +
+  geom_hline(yintercept = 0, lty = 2) +
+  geom_vline(xintercept = 0, lty = 2) +
+  ggrepel::geom_text_repel(data = subset(es_data,(nExp+nCtl)>100),
+                           aes(label = Paper), color = "black", size = 2.5, segment.color = "grey") + # makes the ID visible for each point
+  theme_apa()
+```
+Note: studies with N > 100 are highlighted      
+
+**Studies with  N > 100**   
+<details>
+  <summary>Click to expand!</summary>
+```{r esDomainTable, echo = FALSE}
+es_data %>% 
+  filter((nExp+nCtl)>100) %>% 
+  select(Paper, Study, Cognitive_domain, Task, g) %>% 
+  kable() %>%
+  kable_paper(html_font = "helvetica", lightable_options = c("stripped", "hover"), full_width = FALSE, position = "left")
+  # DT::datatable()
+```
+</details>
+
+
+## Effect sizes by Source  
+```{r esByStats, echo = FALSE, warning = FALSE, message = FALSE}
+source_counts <- es_data %>%
+  group_by(g_source) %>%
+  dplyr::summarise(n = n())
+
+ggplot(es_data, aes(x = g_source, y = g)) +
+  geom_violin(trim = FALSE, alpha = .1) +
+  geom_boxplot(width = .2, alpha = .1) +
+  geom_point(aes(size = (nExp+nCtl)), shape = 1, alpha = .6, position = position_jitter(width = .05)) +
+  geom_hline(yintercept = 0, lty = 2) +
+  geom_text(data = source_counts, aes(x = g_source, y = 3, 
+                                      label = paste0("N=",n))) +
+  scale_x_discrete(limits = rev(levels(es_data$g_source))) +
+  scale_size(breaks = seq(0,250,25), range = c(1,10), name = "sample size") +
+  # labs(size = "sample size") +
+  coord_flip() +
+  theme_apa()
+```
+Note: when MeanSD and T-test or F-Test is available we use the MeanSD
+
+
+## Effect sizes by Cognitive Domain   
+```{r esByCogDom, echo = FALSE, warning = FALSE, message = FALSE}
+# ggplot(es_data, aes(x = g, fill = Cognitive_domain))+
+#   geom_histogram(aes(y =..density.., fill = Cognitive_domain),
+#                  binwidth = .2) +
+#   stat_function(aes(col = Cognitive_domain), fun = dnorm, args = list(mean = mean(es_data$g, na.rm = TRUE),
+#                                          sd = sd(es_data$g, na.rm = TRUE)))+
+#   labs(x = "")+
+#   coord_flip()+
+#   ggsci::scale_fill_jco()+
+#   ggsci::scale_colour_jco()+
+#   guides(fill = FALSE, color = FALSE) +
+#   facet_grid(~Cognitive_domain)+
+#   theme_apa()+
+#   theme(legend.position = "top")
+
+ggplot(es_data, aes(x = Cognitive_domain, y = g, col = Cognitive_domain))+
+  geom_violin(size = 1)+
+  geom_boxplot(width = .3, size = 1)+
+  geom_point(position = position_jitter(width = .1), alpha = .6, cex = 3)+
+  geom_hline(yintercept = 0, lty = 2, size = 1)+
+  labs(x = "")+
+  scale_x_discrete(limits = rev(levels(es_data$Cognitive_domain)))+
+  coord_flip()+
+  ggsci::scale_colour_jco()+
+  guides(col = "none")+
+  theme_apa()
+```
+
+
+## Examine outliers and Winsorize
+```{r winsorize, echo = FALSE, warning = FALSE, message = FALSE}
+# Based on Defaults of using the 95% CI to determine lower (5%-quantile of x) and upper (95%-quantile of x) #
+# There are other options to determine the cutpoints, but I just added this in for now as a reminder to make sure we assess and account for outliers - you would essentially run your primary model on the full dataset and the winsorized dataset to assess for any differences. I think most studies do all the analyses on the winsorize. 
+# I would reccommend examining any extremely large ES and ES variances - for both calculation or coding errors - and to see how the winsorizing cut pointt align with the distribution of effects. 
+
+# Full Datatset # 
+es_data_win <- 
+  es_data %>%
+  mutate(es_win = DescTools::Winsorize(es_data$g, na.rm = TRUE), 
+         flg_win = ifelse(g!=es_win, 1, 0))
+
+winsorized_studies <- es_data_win %>% 
+  filter(flg_win == 1) %>%
+  select(Paper, Study, Task, g, es_win)
+  
+  
+  
+
+
+pos <- position_jitterdodge(dodge.width = .8, jitter.width = .3, seed = 123)
+ggplot(es_data_win, aes(x = Cognitive_domain, y = g, shape = factor(flg_win)))+
+  geom_boxplot(aes(group = Cognitive_domain))+
+  geom_point(aes(, size = (nExp + nCtl)), cex = 3, position = pos, alpha = .6)+
+  ggrepel::geom_text_repel(data = es_data_win %>% filter(flg_win == 1), 
+                           aes(label = Paper), position = pos, 
+                           color = "black", size = 2.5, 
+                           segment.color = "grey") + # makes the ID visible for each point
+  geom_hline(yintercept = 0)+
+  coord_flip()+
+  labs(title = "windsorised effect sizes", shape = "windsorized?")+
+  # scale_shape_manual(labels = c("FALSE", "TRUE"))+
+  theme_linedraw()
+```
+
+currently `r sum(es_data_win$flg_win)` effects winsorized with this approach!  
+
+```{r es_winsorized, echo = FALSE, warning = FALSE, message = FALSE}
+es_compare <- data.frame(rbind(cbind("Paper" = es_data_win$Paper, "Study" = es_data_win$Study, 
+                                     "id" = es_data_win$ES_ID,
+                                     "effect" = "raw", 
+                                     "es" = as.numeric(es_data_win$g)),
+                               cbind("Paper" = es_data_win$Paper, "Study" = es_data_win$Study, 
+                                     "id" = es_data_win$ES_ID, 
+                                     "effect" = "winsorized", 
+                                     "es" = as.numeric(es_data_win$es_win)))) %>%
+  mutate(es = as.numeric(es))
+
+p1 <- es_compare %>%
+  ggplot(., aes(x = effect, y = es, col = effect)) +
+  geom_boxplot()+
+  geom_jitter(width = .05, size = 3, alpha = .3)+
+  labs(title = "Winsorizing", x = "", y="Hedges'g")+
+  scale_colour_manual(values = c("gray35", "gray65"))+
+  guides(color = "none")+
+  ggrepel::geom_text_repel(data = es_compare %>% filter(effect == "raw" & Paper %in% winsorized_studies$Paper),
+                           aes(label = Study), 
+                           color = "black", size = 2.5, segment.color = "grey") + # makes the ID visible for each point
+  papaja::theme_apa()
+
+ggMarginal(p1, type = "histogram", groupFill = TRUE)
+```
+
+<details>
+  <summary>Click to show Winsorized studies!</summary>
+```{r winstudies} 
+es_data_win %>%
+  filter(es_win != g) %>%
+  select(Paper, Study, Cognitive_domain, Task, g, es_win) %>% 
+  DT::datatable(options = list(pageLength = 10)) %>%
+  DT::formatRound(columns=c('g', 'es_win'), digits=3)
+```
+</details>
+
+ 
+
+## Final dataset  
+The analysis is based on `r nrow(es_data)` effect sizes (vs 194 effect sizes in Bediou et al. 2018).
+These ES's were extracted from `r length(unique(es_data$Study))` (vs. 89 in Bediou et al. 2018), 
+published in `r length(unique(es_data$Paper))` manuscripts (vs 73 in Bediou et al. 2018). 
+
+The following studies were included in the first MA but excluded in this new MA (see reason).   
+
+|Reference                       |Reason for exclusion                           |
+|:-------------------------------|:----------------------------------------------|
+|Appelbaum et al. 2013           |hours NVGP, gender ratio difference            |
+|Berard, Cain et al 2015	       |unmatched gender ratio                         |
+|Bailey et al 2009; 2010; 2012…  |hours AVGP (total)                             |
+|Buckley et al. 2010             |hours AVGP (range only)                        |
+|Cain et al 2009; 2012; 2014     |unmatched gender ratio                         |
+|Donohue et al. 2012             |hours AVGP (mean 3 h / week + expertise)       |
+|Dye et al 2009 Neuropsychologia |unmatched gender ratio (ADULT SAMPLE 18-22)    |
+|Dye et al 2010 ADULTS 18-22     |unmatched gender ratio (ADULT SAMPLE 18-22)    |
+|Novak & Tassel 2015             |cannot verify AVGP hours (see email exchanges) |
+|Unsworth et al. 2015 EXP1       |Unmatched gender ratio                         |
+
+The following manuscripts published after January 2015 were included:  
+`r es_data %>% filter(Year > 2015) %>% group_by(Paper, Study) %>% summarise(k = n()) %>% datatable()`  
+
+_notes_: Studied by Föcker et al. (2018, 2019, in prep) were included in Bediou et al. 2018 
+in their unpublished versions.  
+
+
+**Old vs New data (compared to Bediou et al. 2018)  **   
+The table below indicates how many ESs, Studies and Papers were included in 
+Bediou et al. 2018, and how many are new.   
+
+```{r Old-vs-New, echo = FALSE, warning = FALSE, message = FALSE}
+func <- function(z) if (is.numeric(z)) sum(z) else ''
+es_data %>% 
+  group_by(Included_in_Bediou2018, New) %>%
+  summarise(n_papers = length(unique(Paper)), n_studies = length(unique(Study)), n_es = n()) %>%
+  ungroup() %>%
+  mutate(New = c("included in Bediou et al. 2018", "New")) %>%
+  select(-1) %>%
+  rbind(., cbind(as.data.frame(lapply(X = ., FUN = func)))) %>%
+  mutate(New = ifelse(New=="", "TOTAL", New)) %>%
+  rename(" " = "New") %>%
+  kable() %>%
+  kable_paper(html_font = "helvetica", lightable_options = c("stripped", "hover"), full_width = FALSE, position = "left") %>%
+  row_spec(3, bold = TRUE)
+```
+
+
+## Small study effect?  
+Publication bias detection and correction relies on regression methods that relate 
+effect sizes with their precision (most often using sample size, standard error or variance).   
+
+The figure below shows the relationship between effect size and effect size variance
+(which is related to sample size). Effect sizes are colored by cognitive domain.      
+```{r fig.height = 10, echo = FALSE, warning = FALSE, message = FALSE}
+numCols <- names(es_data_win)[which(unlist(lapply(es_data_win, is.numeric)))]
+
+# selectInput("Xvar", label = "Select X variable:",
+#               choices = numCols, selected = "g_var")
+# selectInput("Yvar", label = "Select Y variable:",
+#               choices = numCols, selected = "g")
+
+
+# input <- data.frame(Xvar = "g_var", Yvar = "g")
+# lmformula <- as.formula(paste(input$Yvar, input$Xvar, sep = "~"))
+# to compute lower and upper bounds
+# renderPlot({
+#   
+#   lmformula <- as.formula(paste(input$Yvar, input$Xvar, sep = "~"))
+#   pred <- predict(lm(formula = lmformula, data = es_data_win), 
+#                 se.fit = TRUE, interval = "confidence")
+#   limits <- as.data.frame(pred$fit) 
+#   
+#   p1 <- ggplot(subset(es_data_win, is.na(g) == FALSE), aes_string(x = input$Xvar, y = input$Yvar, 
+#                           size = "(nExp+nCtl)",
+#                           col = "Cognitive_domain"))+
+#     geom_point(alpha = .6)+
+#     geom_smooth(method = "lm", colour = 'black', alpha = 0) + # can do alpha = 0.1 to make it grayish between lower and upper interval
+#     geom_line(aes(group = 1, x = .data[[input$Xvar]], y = limits$lwr), linetype = 2, col = "gray25", size = .5) + # make lower and upper bounds dotted
+#     geom_line(aes(group = 1, x = .data[[input$Xvar]], y = limits$upr), linetype = 2, col = "gray25", size = .5) +
+#     ggpubr::stat_cor(aes(group = 1, method = "pearson"), label.y = 3) + 
+#     # coord_trans(x = "log10")+
+#     papaja::theme_apa()+
+#     scale_size(trans = "log10")+
+#     guides(size = "none", colour = "none")#+# remove scale for size
+#     # scale_colour_brewer(palette = "Dark2")
+# 
+#   p2 <- ggplot(subset(es_data_win, is.na(g) == FALSE), aes_string(x = input$Xvar, y = input$Yvar, 
+#                           size = "(nExp+nCtl)",
+#                           col = "Cognitive_domain"))+
+#     geom_point(alpha = .6)+
+#     geom_smooth(method = "lm", colour = 'black', alpha = .6) + # can do alpha = 0.1 to make it grayish between lower and upper interval
+#     # geom_line(aes(group = 1, x = .data[[input$Xvar]], y = limits$lwr), linetype = 2, col = "gray25", size = .5) + # make lower and upper bounds dotted
+#     # geom_line(aes(group = 1, x = .data[[input$Xvar]], y = limits$upr), linetype = 2, col = "gray25", size = .5) +
+#     ggpubr::stat_cor(method = "pearson", label.y = 3) + 
+#     # coord_trans(x = "log10")+
+#     papaja::theme_apa()+
+#     scale_size(trans = "log10")+
+#     guides(size = "none", colour = "none")+# remove scale for size
+#     # scale_colour_brewer(palette = "Dark2")+
+#     facet_wrap(~Cognitive_domain)
+#   
+#   # cowplot::plot_grid(p1, p2, ncol = 1)
+#   p <- gridExtra::grid.arrange(p1, p2, ncol = 1)
+#   print(p)
+# })
+
+# NONINTERACTIVE VERSION
+pred <- predict(lm(formula = g~g_var, data = es_data_win),
+              se.fit = TRUE, interval = "confidence")
+limits <- as.data.frame(pred$fit)
+
+p1 <- ggplot(subset(es_data_win, is.na(g) == FALSE), aes(x = g_var, y = g,
+                        size = (nExp+nCtl),
+                        col = Cognitive_domain))+
+  geom_point(alpha = .6)+
+  geom_smooth(method = "lm", colour = 'black', alpha = 0) + # can do alpha = 0.1 to make it grayish between lower and upper interval
+  geom_line(aes(group = 1, x = .data[["g_var"]], y = limits$lwr), linetype = 2, col = "gray25", size = .5) + # make lower and upper bounds dotted
+  geom_line(aes(group = 1, x = .data[["g_var"]], y = limits$upr), linetype = 2, col = "gray25", size = .5) +
+  ggpubr::stat_cor(aes(group = 1, method = "pearson"), label.y = 3) +
+  # coord_trans(x = "log10")+
+  ggsci::scale_color_jco()+
+  papaja::theme_apa()+
+  scale_size(trans = "log10")+
+  guides(size = "none", colour = "none")#+# remove scale for size
+  # scale_colour_brewer(palette = "Dark2")
+
+p2 <- ggplot(subset(es_data_win, is.na(g) == FALSE), aes(x = g_var, y = g,
+                        size = (nExp+nCtl),
+                        col = Cognitive_domain))+
+  geom_point(alpha = .6)+
+  geom_smooth(method = "lm", colour = 'black', alpha = .6) + # can do alpha = 0.1 to make it grayish between lower and upper interval
+  # geom_line(aes(group = 1, x = .data[[input$Xvar]], y = limits$lwr), linetype = 2, col = "gray25", size = .5) + # make lower and upper bounds dotted
+  # geom_line(aes(group = 1, x = .data[[input$Xvar]], y = limits$upr), linetype = 2, col = "gray25", size = .5) +
+  ggpubr::stat_cor(method = "spearman", label.y = 3) +
+  # coord_trans(x = "log10")+
+  papaja::theme_apa()+
+  scale_size(trans = "log10")+
+  ggsci::scale_color_jco()+
+  guides(size = "none", colour = "none")+# remove scale for size
+  facet_wrap(~Cognitive_domain)
+
+# cowplot::plot_grid(p1, p2, ncol = 1)
+gridExtra::grid.arrange(p1, p2, ncol = 1)
+```
+
+
+## 2018 vs 2021   
+```{r esCompare, echo = FALSE, warning = FALSE, message = FALSE}
+es_compare_cross <- read_excel('/Users/bediou/Dropbox/Bavelier Lab Team Folder/MA files/ES_comparisons_MA1vsMA2_cross.xlsx', sheet = "data")
+
+toCompare_cross <- es_compare_cross %>% 
+  # select(-Task_old, -Cognitive_domain) %>%
+  mutate(g = as.numeric(g), g_var = as.numeric(g_var)) %>%
+  pivot_wider(id_cols = c("Study", "Cognitive_domain", "Task_new", "Measure"), names_from = MA_YEAR, values_from = c(g, g_var)) %>% 
+  dplyr::mutate(isna = g_MA_2021 + g_MA_2018 + g_var_MA_2018 + g_var_MA_2021) %>%
+  filter(!is.na(isna)) 
+
+p1 <- ggplot(toCompare_cross, aes(x = g_MA_2018, y = g_MA_2021))+
+  geom_point(cex = 3, alpha = .8)+
+  geom_abline(intercept = 0, slope = 1)+
+  labs(title = "Effect sizes 2018 vs. 2021",
+       x = "Hedge's g in 2018",
+       y = "Hedge's g in 2021")+
+  geom_smooth(method = "lm")+
+  theme_apa()
+
+p2 <- ggplot(toCompare_cross, aes(x = g_var_MA_2018, y = g_var_MA_2021))+
+  geom_point(cex = 3, alpha = .8)+
+  geom_abline(intercept = 0, slope = 1)+
+  labs(title = "ES variances 2018 vs 2021",
+       x = "var(g) in 2018",
+       y = "var(g) in 2021")+
+  geom_smooth(method = "lm")+
+p1|p2
+```

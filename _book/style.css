@@ -1,0 +1,23 @@
+p.caption {
+  color: #777;
+  margin-top: 10px;
+}
+p code {
+  white-space: inherit;
+}
+pre {
+  word-break: normal;
+  word-wrap: normal;
+}
+pre code {
+  white-space: inherit;
+}
+
+<html>
+<style>
+.table-hover > tbody > tr:hover { 
+  background-color: #f4f442;
+}
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+</html>

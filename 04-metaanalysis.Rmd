@@ -1,0 +1,960 @@
+# Meta-analysis {#metaana}  
+
+<div class = "blue">
+**Important Notes:**    
+  - All analyses are done on the _winsorized_ dataset (i.e., extreme values replaced distribution boundaries)     
+  - All clustering is done at the _manuscript_ level. 
+  => This can be changed!  Let me know if we should chat about these points!     
+
+This can be important given that:   
+  - the same data has sometimes been published across several manuscripts
+  - and some manuscripts contains different subject samples.  
+</div>
+
+
+```{r MA_setup, include = F}
+knitr::opts_chunk$set(echo = FALSE, message=FALSE, warning=FALSE, fig.heith=8,fig.width=8) 
+options(digits = 3)
+
+library(readxl) # for reading excel files
+library(tidyverse) # for data-cleaning
+library(kableExtra) # for making formatted table
+library(robumeta) # for original implementation of RVE
+library(metafor) # for multivariate meta-analytic working models 
+library(clubSandwich) # for RVE with metafor; requires version 0.5.1 or higher
+library(DT) # for datatable and formatRound
+# library(patchwork) # to combine ggplots  
+library(puniform)# p-uniform
+library(weightr)# for 3-PSM
+library(wesanderson)# for color palette
+library(ggplot2) # plots
+library(ggExtra) # for ggMarginal
+library(papaja) # for APA themes
+library(broom)# for tidy
+library(combinat)# for permn
+
+# prepare data
+# source('MA_cross_dataPrep.R')
+load("MA_data_cross.RData")
+
+# count studies and effects
+# es_data_win %>%
+#   group_by(Paper) %>%
+#   summarise(es = n()) %>%
+#   summarise(
+#     studies = n(), 
+#     effects = sum(es),
+#     es_min = min(es),
+#     es_max = max(es),
+#     es_median = median(es),
+#     es_Q1 = quantile(es, .25),
+#     es_q3 = quantile(es, .75)
+#   )
+
+# centering numeric moderators (remove median)
+## not applicable in this dataset
+
+# constant sampling correlation assumption
+rho <- 0.8# default in RVE
+```
+
+
+## Overall estimate      
+We use a multilevel meta-analytic model with robust variance estimates (RVE) 
+for correlated and hierarchical effects (CHE) with small sample correction.  
+The default correlation is set to `r rho` (default in RVE), and we use 
+sensitivity analyses (see below) to test the impact of different values.
+The model includes a random factor for Papers and one for each effect sizes nested 
+in papers.   
+
+
+### Multilevel model (without RVE)  
+```{r MLMA_model, echo = FALSE}
+# Impute variance covariance matrix
+vcov_mat <- impute_covariance_matrix(es_data_win$g_var, 
+                                       cluster = es_data$Paper,                            
+                                       r = rho, # 0.8 is default in RVE
+                                     smooth_vi = TRUE) # average Vi within each cluster
+# Intercept only MLMA model
+mlma_model<- metafor::rma.mv(es_win ~ 1, 
+                  V = vcov_mat, 
+                  random = ~ 1 | Paper / ES_ID,
+                  sparse = TRUE,
+                  data = es_data_win, 
+                  test="t")
+
+## Compare mlma model to CHE_model results
+### Usually CHE model will have smaller SE to improve precision. Hard to detect here at 3 decimal points
+mlma_model$pSignif <- symnum(mlma_model$pval, corr = FALSE, na = FALSE, 
+                           cutpoints = c(0, 0.001, 0.01, 0.05, 0.1, 1), 
+                           symbols = c("<.001", "<.01", "<.05", ".", " "))
+
+mlma_model$QSignif <- symnum(mlma_model$QEp, corr = FALSE, na = FALSE, 
+                           cutpoints = c(0, 0.001, 0.01, 0.05, 0.1, 1), 
+                           symbols = c("<.001", "<.01", "<.05", ".", " "))
+print(mlma_model)
+```
+Note that this model reports model-based (not robust) standard errors.   
+
+
+<div class = "blue">
+
+The MLMA model reveals significant effect of AVG experience on cognition, with 
+AVGPs outperforming NVGPs on cognitive tasks.    
+
+- Overall estimate: _g_ = `r round(mlma_model$beta[1], 3)`, _p_ = `r mlma_model$pSignif`   
+ 
+- Residual heterogeneity is significant (*QE*(`r mlma_model$QMdf[2]`) = `r round(mlma_model$QE, 3)`, 
+_p_ = `r mlma_model$QSignif`), suggesting possible moderating variables!    
+  
+</div>
+  
+
+### CHE model: Multilevel model with cluster-level RVE    
+This new model for Correlated and Hierarchical Effects (CHE) is based on recent work 
+from  Pustejovsky & Tipton (2021) as an extension of the range of RVE models. 
+The CHE model was shown to better capture the types of data structure that
+occur in practice and --under some circumstances-- to improve the efficiency of 
+meta-regression estimates.   
+```{r CHE_model, echo = FALSE}
+## Add RVE CI, standard error and stats using clubSandwich
+CI_mlma_model <- clubSandwich::conf_int(mlma_model, vcov = "CR2")
+
+CHE_model <- clubSandwich::coef_test(mlma_model, vcov = "CR2")  
+CHE_model$pSignif <- symnum(CHE_model$p_Satt, corr = FALSE, na = FALSE, 
+                           cutpoints = c(0, 0.001, 0.01, 0.05, 0.1, 1), 
+                           symbols = c("<.001", "<.01", "<.05", ".", " "))
+print(CHE_model) #%>% datatable()
+# CI_mlma_model %>% as.data.frame %>% full_join(as.data.frame(CHE_model)) %>% print()
+```
+The cluster RVE is applied to adjust degrees of freedom and confidence intervals.  
+The CHE model usually gives smaller SE indicating improved precision.  
+    
+    
+### Standard RVE models with correlated or hierarchical weights   
+For comparison with Bediou et al. 2018, we ran standard RVE models with correlated 
+and hierarchical weights.  
+```{r RVE_models}
+# no moderator: intercept-only model. 
+mod0_corr <- robu(formula = es_win ~ 1,# model with no moderator 
+            var.eff.size = g_var, # ES variance
+            studynum = Paper,# clustering
+            modelweights = "CORR",# Correlated weights
+            small = TRUE,# small sample correction ON => check df's if <4 then use smaller alpha to test significance. 
+            data = es_data_win)
+print(mod0_corr)
+
+mod0_hier <- robu(formula = es_win ~ 1,# model with no moderator 
+            var.eff.size = g_var, # ES variance
+            studynum = Paper,# clustering
+            modelweights = "HIER",# Correlated weights
+            small = TRUE,# small sample correction ON => check df's if <4 then use smaller alpha to test significance. 
+            data = es_data_win)
+print(mod0_hier)
+```  
+
+  
+**Sensitivity analysis**   
+We test impact of different values of rho (correlation among dependent ES's) on the 
+overall estimates using a standard RVE model with correlated weights.   
+```{r sensitivity, echo = FALSE}
+robumeta::sensitivity(mod0_corr)
+```
+
+<div class = "blue">
+
+- Overall estimate: _g_ = `r round(mod0_corr$reg_table$b.r[1], 3)`, _p_ = `r mlma_model$pSignif`
+
+- Residual heterogeneity is significant (*QE* (`r mlma_model$QMdf[2]`) = `r round(mlma_model$QE, 3)`, 
+_p_ = `r mlma_model$QSignif`), suggesting possible moderating variables!    
+  
+</div>
+  
+  
+### univariate meta-analysis (for pub bias)  
+We also ran univariate models to apply the more classical methods for 
+detection and correction of publication bias. Because univariate models assume 
+independent effect sizes, we first randomly selected one effect size per study (paper).   
+```{r univariate_model, echo = FALSE}
+# perform one analysis
+mod_uni <- es_data_win %>% 
+  group_by(Paper) %>%
+  sample_n(1, replace = FALSE, set.seed = 123) %>%
+  # ungroup() %>% 
+  rma(es_win ~ 1, vi = g_var, dat = .) 
+print(mod_uni)
+```
+
+
+### Summary of overall effects
+```{r overall_table, echo = FALSE}
+CI_robu_corr <- clubSandwich::conf_int(mod0_corr, vcov = "CR2")
+CI_robu_hier <- clubSandwich::conf_int(mod0_hier, vcov = "CR2")
+CI_CHE <- clubSandwich::conf_int(mlma_model, vcov = "CR2")
+
+test_robu_corr <- clubSandwich::coef_test(mod0_corr, vcov = "CR2")
+test_robu_hier <- clubSandwich::coef_test(mod0_hier, vcov = "CR2")
+test_CHE <- clubSandwich::coef_test(mlma_model, vcov = "CR2")
+
+res_univariate <- broom::tidy(mod_uni, conf.int = TRUE) %>%
+  select(-term, -type)
+
+model_results <- rbind(cbind("Model" = "RVE correlated",
+            left_join(CI_robu_corr, test_robu_corr)),
+      cbind("Model" = "RVE hierarchical",
+            left_join(CI_robu_hier, test_robu_hier)),
+      cbind("Model" = "CHE",
+            left_join(CI_CHE, test_CHE)),
+      cbind("Model" = "univariate",
+            Coef = "Intercept",
+            beta = res_univariate$estimate, SE = res_univariate$std.error,
+            df = mod_uni$k,
+            CI_L = res_univariate$conf.low, CI_U = res_univariate$conf.high,
+            tstat = res_univariate$statistic, df_Satt = mod_uni$k, p_Satt = res_univariate$p.value))
+
+model_results[,3:10] <- lapply(model_results[,3:10], as.numeric) 
+
+model_results %>%
+  mutate(pSignif = symnum(p_Satt, corr = FALSE, na = FALSE,
+                            cutpoints = c(0, 0.001, 0.01, 0.05, 0.1, 1),
+                            symbols = c("<.001", "<.01", "<.05", ".", " "))) %>%
+  select(Model, beta, SE, CI_L, CI_U, tstat, df, pSignif) %>%
+  kable(digits = 3) %>%
+  kable_paper(html_font = "helvetica", lightable_options = c("stripped", "hover"), full_width = FALSE, position = "left") %>%
+  row_spec(which(model_results$Model=="CHE"), bold = TRUE)
+```
+Note. We pre-registered the CHE model as our primary model; other models are presented
+to show sensitivity of our results to various meta-analytic models.      
+
+
+## Moderator analysis  
+Moderator analysis is based on the multilevel model (i.e. mlma **WITHOUT RVE**) because the 
+Wald_test is not compatible with the CHE model (i.e., mlma with RVE)...   
+
+Our model includes moderators:   
+  - Cognitive domain (9 levels)  
+  - DV type: speed, accuracy  (**should we relabel as** _performance_ **measure_ ?**)  
+  - Effect: main (e.g., overall performance), interaction (e.g., difference score)   
+  - Recruitment: overt, covert   
+
+```{r Moderator_frequencies, echo = FALSE}
+# source("MA_cross_moderator-analysis.R")
+load("MA_cross_moderator-effects.RData")
+```
+
+### Compare RVE, CHE and SCE models   
+>Notes:   
+  - RVE = Robust Variance Estimate (effect sizes clustered by paper, correlated weights)     
+  - CHE = Correlated Hierarchical Weights (random effects multilevel model with RVE)   
+  - SCE = Subgroup Correlated Effects (alternative to running meta-analyses for each subgroup)    
+  => SCE RANDOM EFFECTS TO BE CHECKED BY MELISSA !  
+
+This analysis focuses on cognitive domain (primary moderator) and controls for other (secondary) moderators. The magnitude of the obtained estimates depends on the choice of reference levels for secondary moderators.    
+The Wald Test of moderator effects test the relative differences between levels and is thus not sensitive to reference levels. However, to test if individual estimate differs from zero, we need to correct each estimate using the relative frequency of each moderator level in the dataset.     
+  
+```{r moderatorModels}
+# number of studies and effect per domain
+N_mod_cat <- 
+  es_data_win %>%
+  group_by(Cognitive_domain, Paper) %>%
+  summarise(effects = n()) %>%
+  summarise(
+    studies = n(),
+    effects = sum(effects)
+  ) %>%
+  mutate(
+    Cognitive_domain = str_replace_all(Cognitive_domain, "\\-", " ")# remove "-"
+  ) 
+
+
+#--- Multilevel model ----------------------------------------------------------
+# step 1: run model with all moderators 
+mod_mlma <- metafor::rma.mv(yi = es_win ~ 0 +
+                              Cognitive_domain + # PRIMARY moderator
+                              DV_type + # control moderator
+                              Effect + # control moderator
+                              Recruitment, # control moderator
+                V = vcov_mat,
+                random = ~ 1 | Paper / ES_ID,# clustering
+                sparse = TRUE,
+                # intercept = TRUE,# ignored when using formulas
+                data = es_data_win,
+                test="t")
+
+# step 2: add RVE / cluster variance
+mod_CHE <- clubSandwich::coef_test(mod_mlma, vcov = "CR2")
+
+#--- Correlated model ----------------------------------------------------------
+mod_robu <- robu(formula = es_win ~ 0 + 
+                   # sda +# Modified covariate for Egger's Regression test. 
+                   Cognitive_domain + # PRIMARY moderator
+                   DV_type + # control moderator
+                   Effect + # control moderator
+                   Recruitment, 
+                 var.eff.size = g_var, # ES variance
+                 studynum = Paper,# clustering
+                 modelweights = "CORR",# Correlated weights
+                 small = TRUE,# small sample correction ON => check df's if <4 then use smaller alpha to test significance. 
+                 data = es_data_win)
+
+#--- Subgroup-Correlated Effects model -----------------------------------------
+# SCE: subgroup random effects model with constant sampling correlation working model
+# constant sampling correlation working model within Cognitive_domain subgroups  
+V_dv_subgroup <- impute_covariance_matrix(es_data_win$g_var, 
+                                          cluster = es_data_win$Paper, 
+                                          r = rho,
+                                          smooth_vi = TRUE,
+                                          subgroup = es_data_win$Cognitive_domain)
+# fit random effects working model in metafor 
+mod_SCE <- rma.mv(es_win ~ 0 +
+                    Cognitive_domain + # PRIMARY moderator
+                    DV_type + # control moderator
+                    Effect + # control moderator
+                    Recruitment, # control moderator
+                V = V_dv_subgroup,
+                # clustering
+                random = list(~ Cognitive_domain | Paper),# CHECK RANDOM FACTOR WITH MELISSA!
+#                 random = list(~ Cognitive_domain | Paper),
+#                 random = list(~ Cognitive_domain | ES_ID),
+#                 random = list(~ Cognitive_domain | Paper, ~ Paper | ES_ID),
+                struct = "DIAG",# disregarded since the structure is specified in random factors
+                sparse = TRUE,
+                data = es_data_win)
+
+
+#--- Combine results -----------------------------------------------------------
+# confidence intervals
+CI_mod_robu <- clubSandwich::conf_int(mod_robu, vcov = "CR2")
+CI_mod_multilevel <- clubSandwich::conf_int(mod_mlma, vcov = "CR2")
+CI_mod_subgroup <- clubSandwich::conf_int(mod_SCE, vcov = "CR2")
+
+# heterogeneity
+vcomp_mod_robu <- data.frame(
+  term = "tau", 
+  beta = sqrt(as.numeric(mod_robu$mod_info$tau.sq)))
+vcomp_mod_multilevel <- data.frame(
+  term = c("tau","omega"),
+  beta = sqrt(mod_mlma$sigma2)
+)
+vcomp_mod_subgroup <- data.frame(
+  term = rownames(CI_mod_subgroup)[1:9],
+  tau = sqrt(mod_SCE$tau2)
+)
+
+# Robust F-test
+Wald_mod_robu <- Wald_test(mod_robu, 
+                          constraints = constrain_equal(1:9), 
+                          vcov = "CR2")
+Wald_mod_multilevel <- Wald_test(mod_mlma, 
+                          constraints = constrain_equal(1:9), 
+                          vcov = "CR2")
+Wald_mod_subgroup <- Wald_test(mod_SCE, 
+                              constraints = constrain_equal(1:9), 
+                              vcov = "CR2")
+mod_Wald_tests <- 
+  list(
+    robumeta = Wald_mod_robu,
+    multilevel = Wald_mod_multilevel,
+    subgroup = Wald_mod_subgroup
+    ) %>%
+  map(as_tibble, rownames = "term") %>%
+  bind_rows(.id = "Model") %>%
+  select(Model, term, Est = p_val) %>%
+  mutate(term = "Wald test p-value")
+
+# Combine, Format and Display summary table
+mod_results <- 
+  list(
+    robumeta = bind_rows(as_tibble(CI_mod_robu, rownames = "term"), vcomp_mod_robu),
+    multilevel = bind_rows(as_tibble(CI_mod_multilevel, rownames = "term"), vcomp_mod_multilevel),
+    subgroup = left_join(as_tibble(CI_mod_subgroup, rownames = "term"), vcomp_mod_subgroup)
+  )%>%
+  bind_rows(.id = "Model") %>%
+  select(Model, term, Est = beta, SE, tau) %>%# tau comes from the SCE model
+  filter(str_detect(term, "^Cognitive_domain") | term %in% c("tau","omega")) %>%
+  mutate(
+    term = str_remove(term, "^Cognitive_domain"),
+    term = str_replace_all(term, "\\-", " "),
+    term = str_replace_all(term, "\\.", " ")
+  ) %>%
+  bind_rows(mod_Wald_tests)
+mod_table <- 
+  mod_results %>%
+  mutate(
+    Est_SE = if_else(is.na(SE), 
+                     formatC(Est, digits = 3, format = "f"), 
+                     paste0(formatC(Est, digits = 3, format = "f"), "\n[", formatC(SE, digits = 3, format = "f"), "]"))
+  ) %>%
+  pivot_wider(id_cols = term, names_from = Model, values_from = c(Est, SE, Est_SE, tau)) %>%
+  left_join(N_mod_cat, by = c("term" = "Cognitive_domain"))
+
+options(knitr.kable.NA = " ")
+mod_table %>%
+  select(term, studies, effects, starts_with("Est_SE"), starts_with("tau")) %>%
+  select(term, studies, effects, ends_with("robumeta"), ends_with("multilevel"), ends_with("subgroup")) %>%
+  select(-tau_robumeta, -tau_multilevel) %>%
+  kable(
+    digits = 3, 
+    escape = FALSE,
+    col.names = c("Coef","Studies","Effect sizes","Est. [SE]","Est. [SE]","Est. [SE]","tau")
+  ) %>%
+  kable_paper(html_font = "helvetica", lightable_options = c("stripped", "hover"), full_width = FALSE, position = "left") %>%
+  add_header_above(c(" " = 3, 
+                     "Correlated effects" = 1, 
+                     "Correlated hierarchical effects" = 1, 
+                     "Sub-group correlated effects" = 2)) #%>%
+  # save_kable(file = "Table-DV.html")
+```
+All models include the following moderators and reference levels:   
+  - Cognitive domain: reference = perception  
+  - DV type: reference = accuracy  
+  - Effect type: reference = interaction  
+  - Recruitment: reference = covert   
+
+Analyses of moderator effects are based on CHE model.   
+Exploratory analyses using Subgroup Correlated Effects are also presented.    
+  
+
+### Tests of moderator effects (using CHE model)  
+```{r moderator_effects} 
+Wald_results[, c(7,1:6)] %>% 
+  mutate(moderator = str_replace_all(moderator, "\\_", " ")) %>%
+  kable() %>%
+  kable_paper(html_font = "helvetica", lightable_options = c("stripped", "hover"), full_width = FALSE, position = "left") %>%
+  collapse_rows(columns = 1) %>%#, col_names = "test") %>%
+  row_spec(which(Wald_results$p_val < .05), bold = T, color = "white", background = "orange") %>%
+  row_spec(which(Wald_results$p_val < .1), bold = T, color = "white", background = "gray") 
+```
+
+### Estimates for each moderator level (different from zero?)    
+```{r moderator_estimates, echo = FALSE}
+Moderator_estimates <- Moderator_estimates %>%
+  mutate(moderator = str_replace_all(moderator, "\\_", " "),
+         pSignif = symnum(pval, corr = FALSE, na = FALSE, 
+                           cutpoints = c(0, 0.001, 0.01, 0.05, 0.1, 1), 
+                           symbols = c("<.001", "<.01", "<.05", ".", " "))) 
+Moderator_estimates %>%
+  kable(format="html", booktabs = TRUE, row.names=FALSE) %>%
+  kable_paper(html_font = "helvetica", lightable_options = c("stripped", "hover"), full_width = FALSE, position = "left") %>%
+  collapse_rows(columns = 1:3, valign = "top", col_name = "Cognitive_domain") %>%  
+  row_spec(which(Moderator_estimates$df < 4), bold = T, color = "white", background = "orange")
+```
+Notes: Estimates with degrees of freedom under 4 should not be interpreted and are thus highlighted.   
+
+<div class = "blue">  
+
+  - None of the moderators showed significant moderating influence according to AHT-F test 
+  (using _clubSandwich::Wald_test_) on the multilevel model (i.e., **without RVE**) 
+  except a marginal effect of recruitment.   
+    
+    
+  - AVGPs outperformed NVGPs in irrespective of cognitive domain, DV type, effect or recruitment method:    
+    - Cognitive domain: stronger effects for perception and multitasking, followed by top-down attention,
+    spatial cognition and inhibition, and then verbal cognition. Marginal effect for problem solving and 
+    unreliable estimates (low df) for motor control and bottom-up attention.   
+    - DV type: significant effects on speed and accuracy.     
+    - Effect: significant group differences for both overall (main effect) performance measures and 
+    difference scores (interactions).    
+    - Significant effect in both overtly and covertly recruited participants, with numerically larger effect 
+    for overt vs. covert.   
+      
+      
+  - Residual heterogeneity is still significant (*QE*(`r mod_mlma$QMdf[2]`) = `r round(mod_mlma$QE, 2)`, 
+  *p* = `r mod_mlma$QSignif`), suggesting additional moderating variables may be involved ! 
+  => Additional analyses are needed to understand where this comes from:     
+    - publication bias / small study effect (adding variance or sda to moderator models?)    
+    - lab / joint publication group   
+    - single moderator models     
+   
+</div>  
+  
+  
+
+## Publication bias   
+Numerous techniques exist for detecting and correcting publication bias. 
+While methods for detecting publication bias (or small study effects) have 
+improved largely over the past decades, it is not the case of correction methods 
+such that estimating a unbiased (or publication-bias-corrected) estimate remains a challenge. 
+The numerous methods available to date provide very heterogeneous estimates and will thus 
+be reported in the form of sensitivity analysis as as recently recommended by 
+Mathur & VanderWeele (2020).    
+   
+Detection of publication bias was done for both:   
+  - The overall effect (intercept only model) and   
+  - The full model including all moderators  
+
+Our main publication bias detection approach is based on Egger's regression test 
+with a modified precision covariate (Pustejovsky & Rodgers, 2019).    
+
+In addition, we use a number of additional methods to estimate the adjusted effect, 
+because the estimates obtained from Eggers's test (and PET-PEESE) are known to be 
+unreliable.    
+The best method for estimating the publication bias (or small-study) adjusted effect
+is based on the 3-parameter model selection  (see below).   
+  
+  
+### (contour-enhanced) Funnel plots  
+Funnel plots are based on multilevel models _without RVE_, first for overall effect (i.e., intercept only) 
+and then for the full model (i.e., with all moderators).   
+In order to use trim and fill, we also conducted a univariate model using one randomly sampled estimate
+from each cluster.    
+```{r fig.height = 8, echo = FALSE}
+par(mfrow = c(2,2))
+pb1 <- metafor::funnel(mlma_model, 
+                       main = "intercept only", 
+                       level=c(90, 95, 99), 
+                       shade=c("white", "gray55", "gray75"), 
+                       refline=0,
+                       legend = FALSE) 
+pb1 <- legend("topright", c("p < 0.1", "p < 0.05", "p < 0.01"),bty = "n",
+           fill=c("white", "gray55", "gray75"), cex = .8)
+
+pb2 <- metafor::funnel(mod_mlma, 
+                       main = "full model (all moderators)", 
+                       level=c(90, 95, 99), shade=c("white", "gray55", "gray75"), 
+                       refline=0, 
+                       legend = FALSE)
+pb2 <- legend("topright", c("p < 0.1", "p < 0.05", "p < 0.01"),bty = "n",
+           fill=c("white", "gray55", "gray75"), cex = .8)
+
+pb3 <- metafor::funnel(mod_uni, 
+                       main = "Univariate uncorrected meta-analysis",
+                       level=c(90, 95, 99), 
+                       shade=c("white", "gray55", "gray75"), 
+                       refline=0,
+                       legend=FALSE) 
+pb3 <- legend("topright", c("p < 0.1", "p < 0.05", "p < 0.01"),bty = "n",
+           fill=c("white", "gray55", "gray75"), cex = .8)
+
+pb4 <- metafor::funnel(trimfill(mod_uni),
+                       main = "Bias-corrected univariate meta-analysis",
+                       level=c(90, 95, 99), 
+                       shade=c("white", "gray55", "gray75"), 
+                       refline=0,
+                       legend=FALSE) 
+pb4 <- legend("topright", c("p < 0.1", "p < 0.05", "p < 0.01"),bty = "n",
+           fill=c("white", "gray55", "gray75"), cex = .8)
+```
+  
+    
+### Significance funnel plot (Mathur & VanderWeele, 2020)  
+This new type of graphical illustration was introduced recently as an alternative to funnel plots.   
+```{r pb_estimates, echo = FALSE}
+# function to extract overall estimate
+getEstimate <- function(data = es_data_win){
+  vcov_mat <- impute_covariance_matrix(data$g_var, 
+                                       cluster = data$Paper,                            
+                                       r = rho, 
+                                       smooth_vi = TRUE)
+  mod <- metafor::rma.mv(es_win ~ 1, # Intercept only MLMA model
+                  V = vcov_mat, 
+                  random = ~ 1 | Paper / ES_ID,
+                  sparse = TRUE,
+                  data = data, 
+                  test="t")
+  mod$beta
+}
+
+# ##--- classification ---------------------------------------------------------
+# library("caret")
+# V <- 10
+# T <- 4
+# TrControl <- trainControl(method = "repeatedcv",
+#                           number = V,
+#                           repeats = T)
+# 
+# ### generate test data
+# nbp <- nrow(es_data_win)
+# PredA <- seq(min(es_data_win$g, na.rm = TRUE), max(es_data_win$g, na.rm = TRUE), length = nbp)
+# PredB <- seq(min(es_data_win$g_se, na.rm = TRUE), max(es_data_win$g_se, na.rm = TRUE), length = nbp)
+# Grid <- expand.grid(PredictorA = PredA, PredictorB = PredB)
+# 
+# ### Plotting function
+# PlotGrid <- function(pred,title) {
+#   surf <- (ggplot(data = twoClass, aes(x = PredictorA, y = PredictorB, 
+#                                       color = classes)) +
+#           geom_tile(data = cbind(Grid, classes = pred), aes(fill = classes)) +
+#           scale_fill_manual(name = 'classes', values = twoClassColor) +
+#           ggtitle("Decision region") + theme(legend.text = element_text(size = 10)) +
+#   scale_colour_manual(name = 'classes', values = twoClassColor)) +
+#   scale_x_continuous(expand = c(0,0)) +
+#   scale_y_continuous(expand = c(0,0))
+#   pts <- (ggplot(data = twoClass, aes(x = PredictorA, y = PredictorB,  
+#                                     color = classes)) +
+#           geom_contour(data = cbind(Grid, classes = pred), aes(z = as.numeric(classes)), 
+#                        color = "red", breaks = c(1.5)) +
+#           geom_point(size = 4, alpha = .5) + 
+#           ggtitle("Decision boundary") +
+#           theme(legend.text = element_text(size = 10)) +
+#           scale_colour_manual(name = 'classes', values = twoClassColor)) +
+#     scale_x_continuous(expand = c(0,0)) +
+#     scale_y_continuous(expand = c(0,0)) +
+#     coord_equal()
+#   surf + pts +
+#     labs(title = title)
+# }
+# ### custom function to store accuracies 
+# ErrsCaret <- function(Model, Name) {
+#   Errs <- data.frame(t(postResample(predict(Model, newdata = twoClass), twoClass[["classes"]])),
+#                      Resample = "None", model = Name)
+#   rbind(Errs, data.frame(Model$resample, model = Name))
+# }
+# Errs <- data.frame()
+# ### 
+# CaretLearnAndDisplay <- function (Errs, Name, Formula, Method, ...) {
+#   set.seed(Seed)
+#   Model <- train(as.formula(Formula), data = twoClass, method = Method, trControl = TrControl, ...)
+#   Pred <- predict(Model, newdata = Grid)
+#   print(PlotGrid(Pred, Name))
+#   Errs <- rbind(Errs, ErrsCaret(Model, Name))
+# }
+# 
+# # install.packages("AppliedPredictiveModeling")
+# # library(AppliedPredictiveModeling)
+# # data(twoClassData)
+# # twoClass <- cbind(as.data.frame(predictors),classes)
+# 
+# twoClass <- es_data_win %>% 
+#   filter(!is.na(g)) %>%
+#   select(g, g_se, pSignif.2t)
+# names(twoClass) <- c("PredictorA", "PredictorB", "classes")
+# twoClassColor <- brewer.pal(3,'Set1')[1:2]
+# 
+# ggplot(twoClass, aes(x = PredictorA, y = PredictorB, col = classes))+
+#   geom_point(aes(color = classes), size = 6, alpha = .5) 
+# 
+# Seed <- 123
+# Errs <- CaretLearnAndDisplay(Errs, "Linear Discrimant Analysis", "classes ~ .", "lda")
+
+
+## plot
+g_signif <- subset(es_data_win, pSignif.2t == "significant") %>% 
+  getEstimate(.) %>% 
+  as.numeric()
+g_nonsignif <- subset(es_data_win, pSignif.2t == "non-significant") %>% 
+  getEstimate(.)%>% 
+  as.numeric()
+
+# es_data_win %>% filter(is.na(pSignif.2t)) %>% View()
+es_data_win %>% 
+  filter(!is.na(g)) %>%
+  ggplot(., aes(x = es_win, y = g_se, col = pSignif.2t, fill = pSignif.2t)) +
+  geom_point(shape = 21, cex = 3, alpha = .6)+
+  scale_colour_manual(values = c("grey","orange"))+
+  scale_fill_manual(values = c("grey","orange"))+
+  geom_hline(yintercept = 0, size = 1)+
+  geom_point(y = 0, x = g_signif, shape = 23, col = "orange", fill = "white", cex = 5)+
+  geom_point(y = 0, x = g_nonsignif, shape = 23, col = "grey", fill = "white", cex = 5)+
+  geom_point(y = 0, x = g_signif, shape = 23, col = "orange", fill = "orange", cex = 3)+
+  geom_point(y = 0, x = g_nonsignif, shape = 23, col = "grey", fill = "grey", cex = 3)+
+  geom_abline(mapping = NULL, slope = .52, intercept = 0, col = "grey", size = 1)+
+  theme_linedraw()+
+  labs(caption = "Note: line added manually!")
+```
+Note: the line was drawn manually (i.e., no classification applied) with   
+intercept = 0 and slope = 0.52.    
+
+Non-affirmative studies have smaller point estimates than affirmative studies, 
+suggesting that results may be sensitive to publication bias.  
+
+
+### Egger's regression with modified precision covariate    
+This method is based on work from Pustejovsky and Rodgers (2018), and Rodgers & Pustejovsky (2020).   
+The new (Egger's sandwich) test has been shown to maintain type I error (unlike the inflated type I errors
+commonly reported with other methods).  
+
+> Quote from Pustejovsky & Rodgers 2020, page 36:  
+_"the Egger Sandwich is an acceptable, valid test for meta-analysis, but it must be interpreted 
+with caution both because it has limited power to detect funnel plot asymmetry 
+and because, in practice, such asymmetry may have other causes besides selective reporting."_  
+_"The Funnel Plot Test with MLMA maintains Type I error across nearly all conditions, 
+and like the Egger Sandwich, it lacks power to detect funnel plot asymmetry."_    
+  
+We ran both Egger's Sandwich and Egger's MLMA models on both overall effect (intercept only)
+and full model with all moderators.   
+   
+```{r pbias, echo = FALSE}
+# source('MA_cross_pubBias.R')
+load('MA_cross_pubBias.RData')
+source('tidy_functions.R')
+
+# Compare slopes
+egger_tab <- bind_rows(cbind("method" = "Egger Sandwich (RVE)","model" = "NULL", tidy_robu(egg_sand)),
+          cbind("method" = "Egger CHE (MLMA + RVE)", "model" = "NULL", tidy_CHE(egg_mlma)),
+          cbind("method" = "Egger Sandwich (RVE)","model" = "FULL", tidy_robu(egg_sand_full)),
+          cbind("method" = "Egger CHE (MLMA + RVE)", "model" = "FULL", tidy_CHE(egg_mlma_full))) %>%
+  filter(term == "sda" | term == "intrcpt") %>%# keep only the slope & intercept
+  arrange(method, desc(model), term)
+egger_tab %>% 
+  kable() %>%
+  kable_paper(html_font = "helvetica", lightable_options = c("stripped", "hover"), full_width = FALSE, position = "left") %>%
+  row_spec(which(egger_tab$p<.05), bold = TRUE) %>%
+  row_spec(which(egger_tab$method == "Egger CHE (MLMA + RVE)"), background = "yellow") %>%
+  collapse_rows(columns = 1:2, valign = "top")
+```
+_notes:   _    
+  _- Terms: sda is the test of small-study effect; intercept is the corrected estimate_  
+  _- Models: NULL is the intercept-only model; FULL is the full moderator model_  
+
+
+**Summary:**   
+
+<div class = "blue">
+  - The slope (sda) is significant indicating significant publication bias.    
+  - The Intercept is not a reliable estimate of the bias-corrected effect (but shows how adding 
+  publication bias / small study affects the estimate).         
+  - The other estimates can be ignored too as they are sensitive to choice of reference levels!     
+  - Surprisingly, heterogeneity is still highly significant, even when including all moderators!       
+      => subgroup analyses?   
+      => moderators lab / joint publication group?   
+      => other suggestions...?   
+</div>
+
+
+### PET-PEESE    
+Here, we applied PET and PEESE to our multilevel model with cluster robust variance (CHE model).  
+For PEESE, we used the modified precision estimate because it increases precision.      
+
+For comparison with Bediou et al., 2018, we also applied PET and PEESE to standard RVE models 
+hierarchical weights and obtained similar results. In addition to the hierarchical weights 
+used in Bediou et al. 2018, we also use correlated weights because they have been shown to 
+perform significantly better in most situations.    
+   
+Again, we ran the analysis both on the overall effect (i.e., intercept only) model and on the full model
+with all moderators.   
+  
+Following Stanley & Doucouliagos 2013, we use the conditional PET-PEESE estimate as follows:      
+  - If PET estimate is significant, we use PEESE estimate.    
+  - If PET is NS, then we use PET estimate.    
+    
+> Note that this approach has been extensively criticized for its limitations, 
+including by the authors themselves.  
+> Melissa recommended to drop PET-PEESE entirely because it is known to inflate 
+type I error and has been consistently outperformed by the new precision estimate 
+used by Egger Sandwich. 
+> I left them for comparison with Bediou et al. 2018.   
+
+```{r PET-PEESE_funnel, echo = FALSE}
+petpeese_tab %>%
+  ggplot(., aes(x=method, y = b, ymin = b-se, ymax = b+se, shape = model, lty = model))+
+  geom_point(position = position_dodge(width =.2), cex= 3)+
+  geom_linerange(position = position_dodge(width =.2))+
+  geom_hline(yintercept = 0)+
+  coord_flip()+
+  scale_shape_manual(values = c(19, 1))+
+  facet_grid(~term, scales = "free_x")+
+  labs(x = "estimate", y = "")+
+  theme_apa()
+```
+
+<details>
+  <summary>Click to see detailed results table!</summary>
+```{r PET-PEESE_table, echo = FALSE}
+petpeese_tab %>% 
+  kable() %>%
+  kable_paper(html_font = "helvetica", lightable_options = c("stripped", "hover"), full_width = FALSE, position = "left") %>%
+  row_spec(which(petpeese_tab$p<.05), bold = TRUE) %>%
+  row_spec(which(petpeese_tab$method == "Egger CHE (MLMA + RVE)"), background = "yellow") %>%
+  collapse_rows(columns = 1:2, valign = "top")
+```
+</details>
+
+
+### Univariate methods (boostrapped)   
+
+#### Bootstrapped trim and fill (Duval & Tweedie, 2001)   
+Trim and fill, p-uniform and 3-PSM  work only with independent effect sizes.  
+In order to run these analyses, we thus randomly picked one effect size per study (i.e. paper).  
+To verify that this random sampling does not introduce bias, we first checked the distribution of 
+the overall effect obtained from 1000 bootstrapped samples of one effect size per paper.  
+
+The univariate meta-analysis of `r mean(bootstrapped_tf$k)` randomly selected independent effect sizes revealed 
+an average overall effect of *mean g* = `r round(mean(bootstrapped_tf$b), 3)` 
+(*SD* = `r round(sd(bootstrapped_tf$b),3)`)    
+```{r bootstrap_tf, echo = FALSE}
+# bootstrapped univariate random effects model & trim and fill analysis 
+# bootstrapped_tf <- bootstrap_tf(es_data_win, Paper)
+tidy_boot(bootstrapped_tf$tf)
+
+par(mfrow = c(3,1))
+hist(bootstrapped_tf$b , breaks = 50, xlim = c(0.3, .8), main = "univariate effects")
+hist(bootstrapped_tf$tf, breaks = 50, xlim = c(0.3, .8), main = "trim and fill estimates")
+hist(bootstrapped_tf$k_added, 
+     breaks = length(unique(bootstrapped_tf$k_added)), 
+     xlim = c(min(bootstrapped_tf$k_added), max(bootstrapped_tf$k_added)), 
+     main = "number of added ESs")
+```
+
+Across the 1000 bootstrapped samples, trim and fill analysis imputed between 
+`r min(bootstrapped_tf$k_added)` and `r max(bootstrapped_tf$k_added)` additional effects 
+on the left side of the funnel plot (median = `r median(bootstrapped_tf$k_added)`), in order
+to correct for its asymmetry.  
+
+These additional studies decreased the overall estimate to a mean of *g* = `r round(mean(bootstrapped_tf$tf), 3)` 
+(*SD* = `r round(sd(bootstrapped_tf$tf),3)`), but did not alter significance *all p's* < .001).   
+
+
+#### P-Uniform (van Assen, van Aert & Wicherts, 2015)   
+p-uniform is fundamentally similar to a p-curve that estimates the true effect 
+using only significant effects. This method is not without limitations; it tends 
+to overestimate effect sizes when heterogeneity is moderate to large, and is 
+insensitive to p-values that are close to significance, or in the presence of 
+p-hacking (Van Aerts, Wicherts & van Assen, 2016).   
+```{r punif, echo = FALSE}
+# p-uniform
+# bootstrapped_punif <- bootstrap_punif(es_data_win, Paper) 
+tidy_boot(bootstrapped_punif$est)
+
+par(mfrow = c(1,1))
+hist(bootstrapped_punif$est, breaks = 50, main = "p-uniform estimates")
+```
+Studies with lower p values are observed less often than expected, whereas studies with high p values 
+are more frequent than expected.  Yet, the test of publication bias is not significant (pval = 1).  
+
+
+#### 3-Parameter Selection Model (3PSM, Hedges & Vevea 1996).      
+Selection models are a general class of models that attempt to model the process by which the studies included in a meta-analysis may have been influenced by some form of publication bias. If a particular selection model is an adequate approximation for the underlying selection process, then the model provides estimates of the parameters of interest (e.g., the average true outcome and the amount of heterogeneity in the true outcomes) that are ‘corrected’ for this selection process (i.e., they are estimates of the parameters in the population of studies before any selection has taken place). 
+
+**PSM Using selmodel function from metafor **     
+This function allows to test different models.    
+```{r 4-PSM}
+# https://wviechtb.github.io/metafor/reference/selmodel.html 
+# fit step model
+sel <- metafor::selmodel(x = mod_uni, type="stepfun", alternative="greater", steps=c(.01, .025,.10,.50,1))
+
+# fit half-normal, negative-exponential, logistic, and power selection models
+sel1 <- selmodel(mod_uni, type="halfnorm", alternative="two.sided")
+sel2 <- selmodel(mod_uni, type="negexp",   alternative="two.sided")
+sel3 <- selmodel(mod_uni, type="logistic", alternative="two.sided")
+sel4 <- selmodel(mod_uni, type="power",    alternative="two.sided")
+
+# plot selection functions
+par(mfrow=c(1,1))
+plot(sel)
+plot(sel1, add=TRUE, col="magenta")
+plot(sel2, add=TRUE, col="blue")
+plot(sel3, add=TRUE, col="red")
+plot(sel4, add=TRUE, col="green")
+legend(.8, 1.4, legend=c("stepfun", "halfnorm", "negexp", "logistic", "power"),
+       col=c("black", "magenta", "blue", "red", "green"), lty=1, lwd=2, cex=0.8)
+```
+Colours show different (model-based) selective reporting biases:       
+  - Negexpm and logistic selection give identical results.   
+  - Step, halfnorm and Power give different results.   
+
+
+**3-PSM Using weightfunc from weightr   **  
+Here we focus on the 3-PSM approach, which models publication bias with 3-parameters. 
+The first one represents how much less likely a non-significant result is to be published 
+than a significant result. The other two parameters represent the estimated bias-adjusted 
+mean effect and the estimated heterogeneity of the effects.   
+   
+Below we plot the distribution of estimates corrected for publication bias that are 
+obtained from 100 bootstrapped samples with different thresholds for selective reporting 
+ranging from 0.1 to 0.001.     
+```{r 3-PSM}
+bootstrapped_3psm_merged <- bind_rows(cbind("method" = "3-PSM", "model" = "NULL", bootstrapped_3psm),
+                                      cbind("method" = "3-PSM", "model" = "FULL", bootstrapped_3psm_cogdom)) %>%
+  mutate(pSignif = symnum(prob, corr = FALSE, na = FALSE,
+                          cutpoints = c(0, 0.001, 0.01, 0.05, 0.1, 1),
+                          symbols = c("<.001", "<.01", "<.05", ".", "NS"))) %>%
+  mutate(pSignif = factor(pSignif, levels = c("<.001", "<.01", "<.05", ".", "NS"), ordered = TRUE)) 
+# tidy_boot(bootstrapped_3psm$prob)
+# hist(bootstrapped_psm$prob)
+
+# table(bootstrapped_3psm_merged$model)
+ggplot(bootstrapped_3psm_merged, aes(x = prob, fill = factor(pSignif)))+
+  geom_histogram(col = "white")+
+  coord_flip()+
+  geom_vline(xintercept = .05)+
+  facet_grid(model~step, scales = "free")+
+  theme_apa()
+
+# plot the output
+p <- ggplot(bootstrapped_3psm_merged, aes(x = factor(step), y = prob, col = factor(pSignif)))+
+  geom_point(alpha = .1, size = 3, 
+             position = position_jitter(width = .1)) + 
+  geom_path(aes(group = sample), col = "gray", size = .5, alpha = .1)+
+  geom_violin(aes(group = factor(step)), width = .8, size = 1, trim=FALSE, alpha = .01) +
+  geom_boxplot(aes(group = factor(step)), width = 0.1, size = 1, alpha = .01,
+               position = position_dodge(width = .3)) +
+  geom_hline(yintercept = .05, col = muted("red"))+
+  geom_rug()+
+  # coord_flip()+
+  facet_grid(~model)+
+  labs(title = "bootstrapped 3PSM estimates", x="Step", y = "(PB-corrected) Estimate") +
+  scale_shape_manual(values=c(0:2, 5:6), name = "p value") + 
+  # scale_colour_brewer(palette = "YlGnBu", name = "p value") +
+  scale_colour_manual(values = wesanderson::wes_palette("Zissou1", n = 5, type = "discrete"), name = "p value")+
+  geom_hline(yintercept = 0)+
+  theme_bw(base_size = 14) +
+  theme(panel.grid.major = element_blank(),
+         panel.grid.minor = element_blank(),
+         panel.border = element_blank(),
+         # legend.title = element_blank(),
+         legend.position = "top",
+         axis.line = element_line(colour = "black"))
+p+
+  labs(caption = "red line shows significance at p = 0.05")
+# ggExtra::ggMarginal(p, type = "histogram", groupFill = TRUE, yparams = list(binwidth = .01, size = .5))
+```
+  
+  
+### Summary of publication-bias-corrected estimates    
+```{r pbcorr}
+# compare intercepts & slopes 
+pb_results <- bind_rows(
+  data.frame("method" = "3-PSM", "model" = "NULL",tidy_boot(bootstrapped_3psm$prob)),
+  data.frame("method" = "3-PSM", "model" = "FULL",tidy_boot(bootstrapped_3psm_cogdom$prob)),
+  data.frame("method" = "trim and fill", "model" = "NULL",tidy_boot(bootstrapped_tf$tf)),
+  data.frame("method" = "p-uniform", "model" = "NULL",tidy_boot(bootstrapped_punif$est)),
+  egger_tab,
+  petpeese_tab,
+  ) %>% 
+  arrange(model, method, desc(term)) %>%
+  # mutate(est = as.numeric(est), se = as.numeric(se), p_nomissing = as.numeric(p_nomissing)) %>%
+  mutate(pSignif = symnum(p, corr = FALSE, na = FALSE, 
+                           cutpoints = c(0, 0.001, 0.01, 0.05, 0.1, 1), 
+                           symbols = c("<.001", "<.01", "<.05", ".", " "))) 
+
+pb_intercepts <- pb_results %>%
+  filter(term == "intrcpt") %>%
+  select(-Coef, -df_Satt) %>%
+  arrange(b) 
+pb_intercepts %>%
+  kable(., digits = 3) %>%
+  kable_paper(html_font = "helvetica", lightable_options = c("stripped", "hover"), full_width = FALSE, position = "left") %>%
+  row_spec(which(pb_intercepts$model =="full"), color = "gray", background = "#85C1E9") %>%
+  row_spec(which(pb_intercepts$model =="null"), color = "gray", background = "#ABEBC6") %>%
+  row_spec(which(pb_intercepts$p_nomissing < .05), bold = TRUE, italic = TRUE, color = "black") %>%
+  collapse_rows(columns = 1:2, valign = "top")
+```
+Note: models are sorted from lower to higher estimate; background colour differentiates between full and null models.    
+- Trim and fill, p-uniform and 3-PSM rely on independent effect sizes (randomly selected from each paper).   
+- p values rely on different tests depending on the exact publication bias method and model used.           
+- For p-uniform, SE corresponds to the difference between the upper and lower bounds of confidence interval.   
+- For 3-PSM, the mean is the average and the SE is the standard deviation of estimates across 
+100 bootstrapped samples.  
+   
+```{r pb_intercepts}
+pb_intercepts %>% 
+  ggplot(., aes(x = method, y = b, ymin = (b-se), ymax= (b+se), shape = model, lty = model))+
+  geom_pointrange(position = position_dodge(width = .5), size = 1)+
+  geom_hline(yintercept = 0)+
+  scale_shape_manual(values = c(5, 9))+
+  labs(title = "publication-bias corrected estimates", caption = "error bar = standard error")+
+  coord_flip()+
+  theme_apa()
+```
+
+<div class = "blue">
+
+- Across all analyses, the slope (tests of small-study effect / publication bias) 
+was always significant.   
+- The unbiased or corrected (i.e. publication-bias free) estimates vary tremendously
+and are thus reported as a form of a sensitivity analysis.    
+
+</div> 
+
+
+

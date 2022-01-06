@@ -1,0 +1,41 @@
+# Introduction {#intro}
+
+Preregistration details and links available in Chapter \@ref(preamble). 
+  
+This meta-analysis covers 2000-2020. It thus overlaps partially with the meta-analysis 
+by Bediou et al. 2018 and extends it by 5 years.  
+  
+  
+## Overview of our first meta-analysis (Bediou et al., 2018)    
+The literature review from our former meta-analysis (Bediou et al., 2018) covered the period between
+January 2000 and December 2015. A total of 5,770 abstracts were identified, from which 630 full texts 
+were dimmed eligible. Only 82 manuscripts passed our inclusion/exclusion criteria, comprising 
+65 published and 17 unpublished studies.  
+The cross-sectional meta-analysis by Bediou et al. (2018) included 194 effects extracted 
+from 89 experiments drawn from 73 distinct manuscripts.   
+  
+  
+## The present dataset  
+For the present meta-analysis, the search keywords were identical. However, our selection criteria were 
+slightly different which could result in differences in terms of inclusion or exclusion. Therefore, 
+all 5,770 abstracts that had been identified by our initial search were re-assessed again for eligibility 
+by three independent reviewers. 
+In addition, a new literature search  was conducted covering the period January 2015 - June 2020. With this 
+new search an additional 3,497 abstracts were identified (after removal of duplicates). Reading of the abstracts 
+led to 506 exclusions leaving 243 additional new full texts to assess.  
+
+<div class = "blue">
+<h4> TO CHECK </h4>
+From these combined searches, a total of 105 cross-sectional studies were found in 73 manuscripts.  
+The table below indicates the number of studies, effects and min/max/median number of effect sizes extracted per study.   
+</div>
+
+Studies with unbalanced gender ratios were discarded from analysis.    
+
+In the next section, Chapter \@ref(datachecks), we first review the raw dataset, and then the filtered dataset which was used for all analyses.  
+
+<div class = "blue">
+<h4> TO CHECK </h4>
+The final dataset includes **224 effect sizes extracted from 105 studies found in 76 manuscripts (??X published??)**   
+</div>
+

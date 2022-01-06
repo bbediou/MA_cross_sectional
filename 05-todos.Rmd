@@ -1,0 +1,57 @@
+# TO DO's / exploratory analyses  {#todos}
+
+```{r }
+library(tidyverse)
+library(kableExtra)
+library(DT)
+```
+
+
+## Including studies with unmatched gender groups?   
+I could focus on studies for which we obtained gender-matched data and compare with the
+original data reported in the paper with unmatched genders?   
+However, because I contacted authors to ask for male-only data, I'd need to check 
+how much data I am missing data to compute the original (gender unmatched) effects... 
+
+
+## Subgroup analyses 
+Adding with moderators and precision estimate to find the source of heterogeneity (and small-study effect).      
+
+
+## Moderator Joint Publication Group   
+Not sure how to do the clustering...  
+We could parse the text and focus on surnames?     
+```{r }
+unique(es_data$Authors) %>% as.data.frame() %>% datatable()
+```
+
+
+**Cognitive sub-domains**    
+The following spatial and verbal tasks with a working-memory component will be re-coded 
+as measuring working memory instead of measuring spatial vs verbal skills.    
+```{r }
+es_data %>% 
+  filter(SubDomain != Cognitive_domain) %>%
+  group_by(Cognitive_domain, SubDomain) %>%
+  dplyr::summarise(examples = unique(Task)) %>%
+  arrange(Cognitive_domain, SubDomain, examples) %>%
+  kable() %>%
+  kable_paper(html_font = "helvetica", lightable_options = c("stripped", "hover"), full_width = FALSE, position = "left") %>%
+  collapse_rows(columns = 1:2, valign = "top")
+```
+
+Please, check Table _List of Tasks and Cognitive Domains_ to see if tasks may be missing.    
+
+
+## Analysis on full dataset (i.e., without excluding studies based on gender ratio)   
+We excluded quite a large number of studies based on gender ratio.  
+Follow-up analyses will examine whether those studies that were excluded appear to have 
+a different ES distribution than those we kept.  And I always think it's nice to anticipate 
+possible bad faith complaints (i.e., we excluded those studies on theoretical grounds, 
+because those types of gender ratios make it impossible to separate gender effects from gaming effects; 
+but it's nice to be able to say that if we had kept them, it wouldn't have made a difference empirically).  
+
+
+
+## Task difficulty   
+USE mean performance (%error, % correct, RT) as a measure of task difficulty to check impact on ES's? 

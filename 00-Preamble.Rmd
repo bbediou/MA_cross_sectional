@@ -1,0 +1,15 @@
+# Preamble {#preamble}   
+
+OSF project: https://osf.io/3xdh8/   
+
+pre-registration: https://osf.io/6qpye 
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'), 'packages.bib')
+
+# set options
+knitr::opts_chunk$set(echo = FALSE, message=FALSE, warning=FALSE, fig.heith=8,fig.width=8) 
+options(digits = 3)
+```

@@ -1,0 +1,315 @@
+# Data preparation and cleaning {#datachecks}   
+
+## Raw dataset {#rawdata}
+
+**included studies**   
+```{r setup, include=FALSE, echo = FALSE, warning = FALSE, message = FALSE}
+#--- setup ---------------------------------------------------------------------
+# load data
+library(readxl)
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+library(foreign)
+library(ggplot2)
+library(ggExtra)
+library(RColorBrewer)
+library(kableExtra)
+library(papaja)
+
+# source('MA_cross_dataPrep.R')
+load('MA_data_cross.RData')
+```
+
+
+Our thorough literature review identified potentially relevant studies based on predefined keywords.       
+After screening of eligible studies, the _raw_ data set includes:   
+  - `r length(unique(data$Paper))` manuscripts  
+  - `r length(unique(data$Study))` studies  
+  - `r length(unique(data$SS))` independent samples of participants  
+
+
+_# effect sizes per paper_  
+```{r es_counts, echo = FALSE}
+# combine included + excluded 
+study_data <- rbind(data, data_excluded) %>%
+  dplyr::select(Paper, SS, SubSample, Study, nExp, nCtl, males_AVGP, males_NVGP, MaleRatioDiff) %>%
+  unique() 
+
+# check number of ES per subject sample
+study_data %>%
+  # remove Dale and Green 2017 Overt-  & Covert- only samples, we included combined sample
+  filter(!grepl(x = SubSample, pattern = "overt only")) %>%
+  # remove Male-Only samples (obtained after)   
+  filter(SubSample != "male only") %>%
+  group_by(Paper) %>%
+  summarise(es = n()) %>%
+  summarise(
+    manuscripts = n(), 
+    effects = sum(es),
+    es_min = min(es),
+    es_max = max(es),
+    es_median = median(es),
+    es_Q1 = quantile(es, .25),
+    es_Q3 = quantile(es, .75)
+  ) %>%
+  kable() %>%
+  kable_paper(html_font = "helvetica", lightable_options = c("stripped", "hover"), full_width = FALSE, position = "left")
+```
+
+
+Second, we checked gender distributions of the AVGP and NVGP groups.
+
+```{r genderDistrib, echo = FALSE}
+mycols <- brewer.pal(name = "RdYlGn", n = 6)
+a <- study_data %>%
+  # remove Dale and Green 2017 Overt-  & Covert- only samples, we included combined sample
+  filter(!grepl(x = SubSample, pattern = "overt only")) %>%
+  # remove Male-Only samples (obtained after)   
+  filter(SubSample != "male only") %>%
+  ggplot(., aes(x = males_AVGP, y = males_NVGP, 
+                            fill = MaleRatioDiff, 
+                            col = (abs(MaleRatioDiff)<.2)))+
+  geom_point(alpha=.8, cex = 3, shape = 21) +
+  geom_smooth(method = "glm", col = "steelblue", fullrange = TRUE)  +
+  geom_abline(intercept = .2, slope = 1, lty = 2, col = "darkgreen", size = .6) +
+  geom_abline(intercept = -.2, slope = 1, lty = 2, col = "darkorange", size = .6) +
+  scale_color_manual(values = c("tomato","limegreen")) +
+  scale_fill_distiller(type = "seq", palette = "RdYlGn", limits = c(-1, 1), n.breaks = 6) +
+  labs(fill = "AVGP - NVGP difference\n") +
+  guides(col = "none") +
+  theme_apa() +
+  xlim(0, 1) + 
+  ylim(0, 1) +
+  coord_fixed(ratio = .8)+
+  theme(legend.position = "bottom", legend.box = "black")
+
+ggExtra::ggMarginal(a, type = "histogram", 
+                         xparams = list(binwidth = .05, fill = "steelblue", size = .01),
+                         yparams = list(binwidth = .05, fill = "steelblue", size = .01))
+```
+  
+There is a predominance of males in both AVGPs and NVGPs. 
+The green and orange dashed lines define 3 regions on the between-group difference 
+in the proportion of males:   
+  - The upper left region (above green) contains studies with greater proportion of males in NVGPs  
+  - The bottom right corner (below orange) contains studies with more males in AVGPs    
+  - Between these two lines are studies with less than 25% difference in gender ratio  
+  
+
+There is a bias toward having more males in the AVGP group.  
+Therefore, only studies with a difference in gender ratio less than 25% 
+will be included in subsequent plots and analyses
+
+
+These studies are shown with a green contour   
+
+```{r genderPlot, echo = FALSE}
+study_data %>%
+  # remove Dale and Green 2017 Overt-  & Covert- only samples, we included combined sample
+  filter(!grepl(x = SubSample, pattern = "overt only")) %>%
+  # remove Male-Only samples (obtained after)   
+  filter(SubSample != "male only") %>%
+  ggplot(., aes(x = MaleRatioDiff, fill = MaleRatioDiff, 
+                            group = MaleRatioDiff,
+                            col = (abs(MaleRatioDiff)<.2))) +
+  geom_histogram(binwidth = .05) + 
+  geom_vline(xintercept = -.2, lty = 2, col = "darkgreen", size = .6) +
+  geom_vline(xintercept = .2, lty = 2, col = "darkorange", size = .6) +
+  scale_color_manual(values = c("tomato","limegreen")) +
+  scale_fill_gradient2(low = "white", mid = "gray", high = "black", midpoint = 0, limits = c(-1, 1)) +
+  scale_fill_distiller(type = "seq", palette = "RdYlGn", limits = c(-1, 1)) +
+  labs(x = "male ratio difference") +
+  xlim(-1, 1) +
+  guides(fill = "none", col = "none") +
+  theme_apa()
+```
+
+When the difference exceeded 20%, authors were contacted in order to obtain data 
+from male-only samples, only if a minimum of 10 participants in each group.   
+
+
+**excluded studies**   
+
+Studies excluded at the data extraction stage for various reasons: gender imbalance, criteria  for defining AVGP or NVGPs, etc.   
+_# effect sizes per paper - excluded studies only_   
+```{r echo = FALSE}
+# keep only male-only data
+data_excluded %>%
+  dplyr::select(Paper, SS, SS_overlap, SubSample, Study, nExp, nCtl, males_AVGP, males_NVGP, MaleRatioDiff) %>%
+  unique() %>% 
+  # filter(SubSample != "male only") # exclude male-only samples and take only original full sample
+  group_by(Paper) %>%
+  summarise(es = n()) %>%
+  summarise(
+    studies = n(),
+    effects = sum(es)) %>%
+  kable() %>%
+  kable_paper(html_font = "helvetica", lightable_options = c("stripped", "hover"), full_width = FALSE, position = "left")
+
+
+#--- STUDIES EXCLUDED BECAUSE OF GENDER IMBALANCE ------------------------------
+excluded_Papers <- unique(data_excluded$Paper)
+included_Papers <- unique(data$Paper)
+Papers_tocheck_gender <- c(excluded_Papers[excluded_Papers %in% included_Papers],
+                           included_Papers[included_Papers %in% excluded_Papers])
+
+data_tocheck <- rbind(data %>% filter(Paper %in% Papers_tocheck_gender),
+                      data_excluded %>% filter(Paper %in% Papers_tocheck_gender)) %>%
+  dplyr::select(Paper, SS, SS_overlap, SubSample, Study, 
+                nExp, nCtl, males_AVGP, males_NVGP, MaleRatioDiff, 
+                Cognitive_domain, Task, Measure, g, g_var) %>%
+  arrange(Paper, SS, Cognitive_domain, Task, Measure)
+# write_csv(data_tocheck, file = "/Users/bediou/GoogleDrive/Meta-Analysis/DATA/ANALYSIS/2021/MA_cross_tocheck.csv")
+```
+
+
+## Filtered dataset (i.e., matched gender)  {#cleandata}  
+
+Effect sizes as well subject and study characteristics were then extracted from all studies that were eligible.   
+
+```{r recoding, echo = FALSE}
+# define moderators to recode as factor
+moderators <- c("Cognitive_domain", "DV_type", "Effect", "Recruitment")
+domains <- c("perception", 
+             "motor control", 
+             "bottom-up attention", 
+             "top-down attention", 
+             "inhibition", 
+             "spatial cognition", 
+             "multi-tasking", 
+             "verbal cognition", 
+             "problem solving")
+
+es_data <- data %>% 
+  filter(!is.na(keep), keep != "IQ") %>% 
+  mutate_at(vars(Paper:SS_overlap), factor) %>%# recode cluster info as factor
+  mutate_at(vars(moderators), factor) %>%# moderators as factor
+  mutate(Cognitive_domain = factor(Cognitive_domain, 
+                        levels = domains, 
+                        ordered = FALSE)) %>%
+  mutate(Paper = as.character(Paper)) %>%# recode paper as character (or wald_test _0.53 crashes)
+  mutate(g_se = sqrt(g_var),# add significance
+         z = g / sqrt(g_var),
+         p.2t = 2*pnorm(z, lower.tail = F),
+         p.1t = pnorm(z, lower.tail = F)) %>%
+  mutate(pSignif.2t = if_else(p.2t < .05, "significant", "non-significant")) %>%
+  # Create new variable for Egger Sandwich/Egger MLMA analysis as well as ES ID variable for MLMA
+  mutate(Va = 4 / (nExp + nCtl), 
+         sda = sqrt(Va),
+         ES_ID = factor(1:nrow(.))) #%>%
+  # filter(!is.na(g)) # There are missing values for g so I dropped them to test the code fully. 
+```
+
+
+After exclusion of studies with unbalanced gender, the final data set includes:  
+  - `r nrow(es_data)` effect sizes   
+  - `r length(unique(es_data$Paper))` papers   
+  - `r length(unique(es_data$Study))` studies   
+  - `r length(unique(es_data$SS))` independent samples     
+  
+```{r EScounts_clean, echo = FALSE}
+es_data %>%
+  group_by(Paper) %>%
+  summarise(es = n()) %>%
+  summarise(
+    manuscripts = n(), 
+    effects = sum(es),
+    es_min = min(es),
+    es_max = max(es),
+    es_median = median(es),
+    es_Q1 = quantile(es, .25),
+    es_q3 = quantile(es, .75)
+  ) %>%
+  kable() %>%
+  kable_paper(html_font = "helvetica", lightable_options = c("stripped", "hover"), full_width = FALSE, position = "left")
+``` 
+
+
+The figure Below shows the number of effect sizes extracted from each manuscript, study or subject sample...   
+```{r EShistograms, echo = FALSE}
+par(mfrow = c(3,1))
+hist(table(es_data$Study), main = "# ES per Study", xlab = "# ES", breaks = seq_len(20)) 
+hist(table(es_data$Paper), main = "# ES per Paper", xlab = "# ES", seq(0,20,1)) 
+hist(table(es_data$SS), main = "# ES per Subject Sample", xlab = "# ES", breaks = seq(0, 20, 1)) 
+```
+
+
+Most studies contributed only few effects.  
+
+---------------
+
+Notes:   
+- Studies are embedded in Papers.  
+- There are cases of overlap in participants across studies and papers   
+  o Studies reported in a paper can involve overlapping samples of participants   
+  o Samples of participants (complete or partial) can be reported in several studies or papers     
+
+---------------
+
+
+
+## Moderators
+```{r esDistrib, echo = FALSE}
+# print(dfSummary(es_data, graph.magnif = 0.75, valid.col = FALSE), 
+#       max.tbl.height = 600, method = "render")
+
+# DataExplorer::create_report(es_data, output_file = "EffectSizes_DataExplorer_output.html")
+es_data %>% 
+  mutate("Cognitive_domain " = as.character(Cognitive_domain)) %>%
+  pivot_longer(cols = c("Cognitive_domain ", "DV_type", "Effect", "Recruitment"), 
+                         names_to = "Moderator", values_to = "Level") %>%
+  group_by(Moderator, Level) %>%
+  dplyr::summarise(n = n()) %>%
+  # ggplot(.,aes(x = Level, y = n, fill = Moderator))+
+  # geom_bar(stat = "identity")+
+  # # coord_flip()+
+  # facet_grid(~Moderator, drop = TRUE, scales = "free_x")+
+  # theme_apa()
+  kable() %>%
+  kable_styling(bootstrap_options = c("condensed", "striped", "hover"), full_width = FALSE, position = "left") %>%
+  collapse_rows(columns = 1, valign = "top")
+```
+
+> _note: problematic levels will be recoded before moderator analysis_     
+
+
+### Number of effect sizes and studies (i.e. manuscript) in each cognitive domain    
+```{r nESbyCogDom}
+es_data %>% 
+  group_by(Cognitive_domain, ) %>%
+  dplyr::summarise(n_es = n(), n_studies = length(unique(Study)), n_papers = length(unique(Paper))) %>%
+  ggplot(., aes(x = reorder(Cognitive_domain, n_es), y = n_es, fill = Cognitive_domain))+
+  geom_bar(stat = "identity")+
+  geom_text(colour="white", size=3.5,
+           aes(label=paste(n_papers, n_es, sep="/"), y=0.5*n_es))+
+  coord_flip()+
+  labs(x = "")+
+  ggsci::scale_fill_jco()+
+  guides(fill = "none")+
+  theme_apa()+
+  labs(title= "number of effect sizes / papers per cognitive domain")
+```
+
+
+### List of Tasks and Cognitive Domains   
+
+<details>
+  <summary>Click to expand!</summary>
+```{r CogDomTasks, echo = FALSE}
+es_data %>% 
+    group_by(Cognitive_domain, Task, Measure) %>%
+  # dplyr::summarise(n_es = n()) %>%
+  # arrange(Cognitive_domain, Task, Measure) %>%
+  dplyr::summarise(examples = unique(Task)) %>%
+  group_by(Cognitive_domain, examples) %>%
+  summarise(measures = unique(Measure)) %>%
+  arrange(Cognitive_domain, examples, measures) %>%
+  kable() %>%
+  kable_styling(bootstrap_options = c("condensed", "striped", "hover"), full_width = FALSE, position = "left") %>%
+  collapse_rows(columns = 1, valign = "top")
+```
+</details>  
+
+
+
