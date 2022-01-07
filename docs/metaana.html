@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 5 Meta-analysis | Meta Analysis of cross-sectional studies</title>
   <meta name="description" content="Meta-analysis of cross-sectional studies of action video game studies on cognitive skills The output format for this example is bookdown::gitbook." />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 5 Meta-analysis | Meta Analysis of cross-sectional studies" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Benoit Bediou" />
 
 
-<meta name="date" content="2021-08-04" />
+<meta name="date" content="2022-01-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +33,9 @@
   
 <link rel="prev" href="effectsizes.html"/>
 <link rel="next" href="final-words.html"/>
-<script src="libs/header-attrs-2.9/header-attrs.js"></script>
-<script src="libs/jquery-3.5.1/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -50,12 +51,11 @@
 
 
 
-
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
 <link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
 <script src="libs/datatables-binding-0.18/datatables.js"></script>
 <link href="libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
@@ -187,21 +187,21 @@ in papers.</p>
 <div id="multilevel-model-without-rve" class="section level3" number="5.1.1">
 <h3><span class="header-section-number">5.1.1</span> Multilevel model (without RVE)</h3>
 <pre><code>## 
-## Multivariate Meta-Analysis Model (k = 224; method: REML)
+## Multivariate Meta-Analysis Model (k = 219; method: REML)
 ## 
 ## Variance Components:
 ## 
 ##             estim    sqrt  nlvls  fixed       factor 
-## sigma^2.1  0.0191  0.1382     73     no        Paper 
-## sigma^2.2  0.1200  0.3464    224     no  Paper/ES_ID 
+## sigma^2.1  0.0222  0.1491     71     no        Paper 
+## sigma^2.2  0.1130  0.3361    219     no  Paper/ES_ID 
 ## 
 ## Test for Heterogeneity:
-## Q(df = 223) = 1007.1261, p-val &lt; .0001
+## Q(df = 218) = 953.5576, p-val &lt; .0001
 ## 
 ## Model Results:
 ## 
 ## estimate      se     tval   df    pval   ci.lb   ci.ub 
-##   0.6227  0.0512  12.1651  223  &lt;.0001  0.5218  0.7236  *** 
+##   0.6238  0.0519  12.0124  218  &lt;.0001  0.5215  0.7262  *** 
 ## 
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
@@ -210,8 +210,8 @@ in papers.</p>
 <p>The MLMA model reveals significant effect of AVG experience on cognition, with
 AVGPs outperforming NVGPs on cognitive tasks.</p>
 <ul>
-<li><p>Overall estimate: <em>g</em> = 0.623, <em>p</em> = &lt;.001</p></li>
-<li><p>Residual heterogeneity is significant (<em>QE</em>(223) = 1007.126,
+<li><p>Overall estimate: <em>g</em> = 0.624, <em>p</em> = &lt;.001</p></li>
+<li><p>Residual heterogeneity is significant (<em>QE</em>(218) = 953.558,
 <em>p</em> = &lt;.001), suggesting possible moderating variables!</p></li>
 </ul>
 </div>
@@ -223,8 +223,8 @@ from Pustejovsky &amp; Tipton (2021) as an extension of the range of RVE models.
 The CHE model was shown to better capture the types of data structure that
 occur in practice and –under some circumstances– to improve the efficiency of
 meta-regression estimates.</p>
-<pre><code>##     Coef. Estimate     SE t-stat d.f. p-val (Satt) Sig.
-## 1 intrcpt    0.623 0.0513   12.1 59.6       &lt;0.001  ***</code></pre>
+<pre><code>##    Coef. Estimate    SE t-stat d.f. (Satt) p-val (Satt) Sig.
+##  intrcpt    0.624 0.052     12        58.4       &lt;0.001  ***</code></pre>
 <p>The cluster RVE is applied to adjust degrees of freedom and confidence intervals.<br />
 The CHE model usually gives smaller SE indicating improved precision.</p>
 </div>
@@ -236,14 +236,14 @@ and hierarchical weights.</p>
 ## 
 ## Model: es_win ~ 1 
 ## 
-## Number of studies = 73 
-## Number of outcomes = 224 (min = 1 , mean = 3.07 , median = 2 , max = 18 )
+## Number of studies = 71 
+## Number of outcomes = 219 (min = 1 , mean = 3.08 , median = 2 , max = 18 )
 ## Rho = 0.8 
-## I.sq = 53.6 
-## Tau.sq = 0.13 
+## I.sq = 53.5 
+## Tau.sq = 0.129 
 ## 
-##                Estimate StdErr t-value  dfs P(|t|&gt;) 95% CI.L 95% CI.U Sig
-## 1 X.Intercept.    0.667 0.0513      13 67.9       0    0.565     0.77 ***
+##                Estimate StdErr t-value dfs P(|t|&gt;) 95% CI.L 95% CI.U Sig
+## 1 X.Intercept.    0.669 0.0527    12.7  66       0    0.564    0.774 ***
 ## ---
 ## Signif. codes: &lt; .01 *** &lt; .05 ** &lt; .10 *
 ## ---
@@ -252,13 +252,13 @@ and hierarchical weights.</p>
 ## 
 ## Model: es_win ~ 1 
 ## 
-## Number of clusters = 73 
-## Number of outcomes = 224 (min = 1 , mean = 3.07 , median = 2 , max = 18 )
+## Number of clusters = 71 
+## Number of outcomes = 219 (min = 1 , mean = 3.08 , median = 2 , max = 18 )
 ## Omega.sq = 0 
-## Tau.sq = 0.11 
+## Tau.sq = 0.106 
 ## 
 ##                Estimate StdErr t-value  dfs       P(|t|&gt;) 95% CI.L 95% CI.U Sig
-## 1 X.Intercept.    0.527 0.0614    8.59 27.2 0.00000000312    0.401    0.653 ***
+## 1 X.Intercept.    0.524  0.062    8.45 26.1 0.00000000599    0.396    0.651 ***
 ## ---
 ## Signif. codes: &lt; .01 *** &lt; .05 ** &lt; .10 *
 ## ---
@@ -272,17 +272,17 @@ overall estimates using a standard RVE model with correlated weights.</p>
 ## Sensitivity Analysis 
 ## 
 ##                           Rho = 0 Rho = 0.2 Rho = 0.4 Rho = 0.6 Rho = 0.8
-##  X.Intercept. Coefficient 0.6673  0.6674    0.6674    0.6674    0.6675   
-##               Std. Error  0.0513  0.0513    0.0513    0.0513    0.0513   
-##  Tau.sq       Estimate    0.1291  0.1292    0.1293    0.1295    0.1296   
+##  X.Intercept. Coefficient 0.6687  0.6688    0.6688    0.6688    0.6689   
+##               Std. Error  0.0527  0.0527    0.0527    0.0527    0.0527   
+##  Tau.sq       Estimate    0.1282  0.1283    0.1285    0.1286    0.1287   
 ##  Rho = 1
-##  0.6675 
-##  0.0513 
-##  0.1297</code></pre>
+##  0.6689 
+##  0.0527 
+##  0.1289</code></pre>
 <div class="blue">
 <ul>
-<li><p>Overall estimate: <em>g</em> = 0.667, <em>p</em> = &lt;.001</p></li>
-<li><p>Residual heterogeneity is significant (<em>QE</em> (223) = 1007.126,
+<li><p>Overall estimate: <em>g</em> = 0.669, <em>p</em> = &lt;.001</p></li>
+<li><p>Residual heterogeneity is significant (<em>QE</em> (218) = 953.558,
 <em>p</em> = &lt;.001), suggesting possible moderating variables!</p></li>
 </ul>
 </div>
@@ -293,20 +293,20 @@ overall estimates using a standard RVE model with correlated weights.</p>
 detection and correction of publication bias. Because univariate models assume
 independent effect sizes, we first randomly selected one effect size per study (paper).</p>
 <pre><code>## 
-## Random-Effects Model (k = 73; tau^2 estimator: REML)
+## Random-Effects Model (k = 71; tau^2 estimator: REML)
 ## 
-## tau^2 (estimated amount of total heterogeneity): 0.1214 (SE = 0.0408)
-## tau (square root of estimated tau^2 value):      0.3485
-## I^2 (total heterogeneity / total variability):   52.39%
-## H^2 (total variability / sampling variability):  2.10
+## tau^2 (estimated amount of total heterogeneity): 0.1185 (SE = 0.0409)
+## tau (square root of estimated tau^2 value):      0.3442
+## I^2 (total heterogeneity / total variability):   51.84%
+## H^2 (total variability / sampling variability):  2.08
 ## 
 ## Test for Heterogeneity:
-## Q(df = 72) = 151.0859, p-val &lt; .0001
+## Q(df = 70) = 146.4369, p-val &lt; .0001
 ## 
 ## Model Results:
 ## 
 ## estimate      se     zval    pval   ci.lb   ci.ub 
-##   0.6689  0.0587  11.3909  &lt;.0001  0.5538  0.7840  *** 
+##   0.6812  0.0595  11.4573  &lt;.0001  0.5647  0.7977  *** 
 ## 
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
@@ -348,22 +348,22 @@ pSignif
 RVE correlated
 </td>
 <td style="text-align:right;">
-0.667
+0.669
 </td>
 <td style="text-align:right;">
-0.051
+0.053
 </td>
 <td style="text-align:right;">
-0.565
+0.564
 </td>
 <td style="text-align:right;">
-0.770
+0.774
 </td>
 <td style="text-align:right;">
-13.01
+12.69
 </td>
 <td style="text-align:right;">
-67.9
+66.0
 </td>
 <td style="text-align:left;">
 &lt;.001
@@ -374,22 +374,22 @@ RVE correlated
 RVE hierarchical
 </td>
 <td style="text-align:right;">
-0.527
+0.524
 </td>
 <td style="text-align:right;">
-0.061
+0.062
 </td>
 <td style="text-align:right;">
-0.401
+0.396
 </td>
 <td style="text-align:right;">
-0.653
+0.651
 </td>
 <td style="text-align:right;">
-8.59
+8.45
 </td>
 <td style="text-align:right;">
-27.2
+26.1
 </td>
 <td style="text-align:left;">
 &lt;.001
@@ -400,22 +400,22 @@ RVE hierarchical
 CHE
 </td>
 <td style="text-align:right;font-weight: bold;">
-0.623
+0.624
 </td>
 <td style="text-align:right;font-weight: bold;">
-0.051
+0.052
 </td>
 <td style="text-align:right;font-weight: bold;">
 0.520
 </td>
 <td style="text-align:right;font-weight: bold;">
-0.725
+0.728
 </td>
 <td style="text-align:right;font-weight: bold;">
-12.15
+12.00
 </td>
 <td style="text-align:right;font-weight: bold;">
-59.6
+58.4
 </td>
 <td style="text-align:left;font-weight: bold;">
 &lt;.001
@@ -426,22 +426,22 @@ CHE
 univariate
 </td>
 <td style="text-align:right;">
-0.669
+0.681
 </td>
 <td style="text-align:right;">
 0.059
 </td>
 <td style="text-align:right;">
-0.554
+0.565
 </td>
 <td style="text-align:right;">
-0.784
+0.798
 </td>
 <td style="text-align:right;">
-11.39
+11.46
 </td>
 <td style="text-align:right;">
-73.0
+71.0
 </td>
 <td style="text-align:left;">
 &lt;.001
@@ -473,6 +473,319 @@ Wald_test is not compatible with the CHE model (i.e., mlma with RVE)…</p>
 </blockquote>
 <p>This analysis focuses on cognitive domain (primary moderator) and controls for other (secondary) moderators. The magnitude of the obtained estimates depends on the choice of reference levels for secondary moderators.<br />
 The Wald Test of moderator effects test the relative differences between levels and is thus not sensitive to reference levels. However, to test if individual estimate differs from zero, we need to correct each estimate using the relative frequency of each moderator level in the dataset.</p>
+<table class=" lightable-paper lightable-hover" style="font-family: helvetica; width: auto !important; ">
+<thead>
+<tr>
+<th style="empty-cells: hide;" colspan="3">
+</th>
+<th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
+<div style="TRUE">
+Correlated effects
+</div>
+</th>
+<th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
+<div style="TRUE">
+Correlated hierarchical effects
+</div>
+</th>
+<th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="TRUE">
+Sub-group correlated effects
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:left;">
+Coef
+</th>
+<th style="text-align:right;">
+Studies
+</th>
+<th style="text-align:right;">
+Effect sizes
+</th>
+<th style="text-align:left;">
+Est. [SE]
+</th>
+<th style="text-align:left;">
+Est. [SE]
+</th>
+<th style="text-align:left;">
+Est. [SE]
+</th>
+<th style="text-align:right;">
+tau
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+perception
+</td>
+<td style="text-align:right;">
+23
+</td>
+<td style="text-align:right;">
+38
+</td>
+<td style="text-align:left;">
+0.770
+[0.135]
+</td>
+<td style="text-align:left;">
+0.531
+[0.140]
+</td>
+<td style="text-align:left;">
+0.608
+[0.158]
+</td>
+<td style="text-align:right;">
+0.220
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+bottom up attention
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:left;">
+-0.069
+[0.183]
+</td>
+<td style="text-align:left;">
+0.026
+[0.172]
+</td>
+<td style="text-align:left;">
+-0.005
+[0.192]
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+top down attention
+</td>
+<td style="text-align:right;">
+44
+</td>
+<td style="text-align:right;">
+74
+</td>
+<td style="text-align:left;">
+0.668
+[0.138]
+</td>
+<td style="text-align:left;">
+0.461
+[0.134]
+</td>
+<td style="text-align:left;">
+0.591
+[0.127]
+</td>
+<td style="text-align:right;">
+0.327
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+inhibition
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:left;">
+0.242
+[0.149]
+</td>
+<td style="text-align:left;">
+0.353
+[0.148]
+</td>
+<td style="text-align:left;">
+0.320
+[0.155]
+</td>
+<td style="text-align:right;">
+0.266
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+spatial cognition
+</td>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:right;">
+27
+</td>
+<td style="text-align:left;">
+0.561
+[0.202]
+</td>
+<td style="text-align:left;">
+0.476
+[0.169]
+</td>
+<td style="text-align:left;">
+0.471
+[0.159]
+</td>
+<td style="text-align:right;">
+0.255
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+multi tasking
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+24
+</td>
+<td style="text-align:left;">
+0.497
+[0.204]
+</td>
+<td style="text-align:left;">
+0.641
+[0.259]
+</td>
+<td style="text-align:left;">
+0.595
+[0.241]
+</td>
+<td style="text-align:right;">
+0.505
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+verbal cognition
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+31
+</td>
+<td style="text-align:left;">
+0.283
+[0.178]
+</td>
+<td style="text-align:left;">
+0.296
+[0.151]
+</td>
+<td style="text-align:left;">
+0.250
+[0.143]
+</td>
+<td style="text-align:right;">
+0.107
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+problem solving
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:left;">
+0.134
+[0.151]
+</td>
+<td style="text-align:left;">
+0.141
+[0.136]
+</td>
+<td style="text-align:left;">
+0.120
+[0.106]
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+tau
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:left;">
+0.340
+</td>
+<td style="text-align:left;">
+0.130
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+omega
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+0.325
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Wald test p-value
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:left;">
+0.003
+</td>
+<td style="text-align:left;">
+0.110
+</td>
+<td style="text-align:left;">
+0.010
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+</tbody>
+</table>
 <p>All models include the following moderators and reference levels:<br />
 - Cognitive domain: reference = perception<br />
 - DV type: reference = accuracy<br />
@@ -518,19 +831,19 @@ Cognitive domain
 HTZ
 </td>
 <td style="text-align:right;">
-0.575
+2.550
 </td>
 <td style="text-align:right;">
-1.000
+0.564
 </td>
 <td style="text-align:right;">
-1
+7
 </td>
 <td style="text-align:right;">
-1.18
+7.76
 </td>
 <td style="text-align:right;">
-0.570
+0.110
 </td>
 </tr>
 <tr>
@@ -541,19 +854,19 @@ DV type
 HTZ
 </td>
 <td style="text-align:right;">
-2.260
+0.562
 </td>
 <td style="text-align:right;">
-0.488
+1.000
 </td>
 <td style="text-align:right;">
-8
+1
 </td>
 <td style="text-align:right;">
-6.67
+24.88
 </td>
 <td style="text-align:right;">
-0.155
+0.461
 </td>
 </tr>
 <tr>
@@ -564,7 +877,7 @@ Effect
 HTZ
 </td>
 <td style="text-align:right;">
-0.021
+0.071
 </td>
 <td style="text-align:right;">
 1.000
@@ -573,10 +886,10 @@ HTZ
 1
 </td>
 <td style="text-align:right;">
-21.36
+21.10
 </td>
 <td style="text-align:right;">
-0.885
+0.793
 </td>
 </tr>
 <tr>
@@ -587,7 +900,7 @@ Recruitment
 HTZ
 </td>
 <td style="text-align:right;font-weight: bold;color: white !important;background-color: gray !important;">
-4.573
+4.729
 </td>
 <td style="text-align:right;font-weight: bold;color: white !important;background-color: gray !important;">
 1.000
@@ -596,10 +909,10 @@ HTZ
 1
 </td>
 <td style="text-align:right;font-weight: bold;color: white !important;background-color: gray !important;">
-7.71
+7.96
 </td>
 <td style="text-align:right;font-weight: bold;color: white !important;background-color: gray !important;">
-0.066
+0.062
 </td>
 </tr>
 </tbody>
@@ -647,7 +960,7 @@ pSignif
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:left;vertical-align: top !important;" rowspan="8">
 Cognitive domain
 </td>
 <td style="text-align:left;">
@@ -660,65 +973,28 @@ perception
 23
 </td>
 <td style="text-align:right;">
-0.705
+0.700
 </td>
 <td style="text-align:left;">
-0.522,0.888
+0.517,0.883
 </td>
 <td style="text-align:right;">
-23.14
+23.44
 </td>
 <td style="text-align:right;">
 0.000
 </td>
 <td style="text-align:right;">
-0.522
+0.517
 </td>
 <td style="text-align:right;">
-0.888
+0.883
 </td>
 <td style="text-align:left;">
 &lt;.001
 </td>
 </tr>
 <tr>
-<td style="text-align:left;font-weight: bold;color: white !important;background-color: orange !important;">
-Cognitive domain
-</td>
-<td style="text-align:left;font-weight: bold;color: white !important;background-color: orange !important;">
-motor control
-</td>
-<td style="text-align:right;font-weight: bold;color: white !important;background-color: orange !important;">
-3
-</td>
-<td style="text-align:right;font-weight: bold;color: white !important;background-color: orange !important;">
-2
-</td>
-<td style="text-align:right;font-weight: bold;color: white !important;background-color: orange !important;">
-1.055
-</td>
-<td style="text-align:left;font-weight: bold;color: white !important;background-color: orange !important;">
--4.294,6.404
-</td>
-<td style="text-align:right;font-weight: bold;color: white !important;background-color: orange !important;">
-1.03
-</td>
-<td style="text-align:right;font-weight: bold;color: white !important;background-color: orange !important;">
-0.251
-</td>
-<td style="text-align:right;font-weight: bold;color: white !important;background-color: orange !important;">
--4.294
-</td>
-<td style="text-align:right;font-weight: bold;color: white !important;background-color: orange !important;">
-6.404
-</td>
-<td style="text-align:left;font-weight: bold;color: white !important;background-color: orange !important;">
-</td>
-</tr>
-<tr>
-<td style="text-align:left;font-weight: bold;color: white !important;background-color: orange !important;">
-Cognitive domain
-</td>
 <td style="text-align:left;font-weight: bold;color: white !important;background-color: orange !important;">
 bottom-up attention
 </td>
@@ -729,65 +1005,59 @@ bottom-up attention
 4
 </td>
 <td style="text-align:right;font-weight: bold;color: white !important;background-color: orange !important;">
-0.184
+0.194
 </td>
 <td style="text-align:left;font-weight: bold;color: white !important;background-color: orange !important;">
--0.188,0.556
+-0.179,0.567
 </td>
 <td style="text-align:right;font-weight: bold;color: white !important;background-color: orange !important;">
-3.18
+3.21
 </td>
 <td style="text-align:right;font-weight: bold;color: white !important;background-color: orange !important;">
-0.220
+0.203
 </td>
 <td style="text-align:right;font-weight: bold;color: white !important;background-color: orange !important;">
--0.188
+-0.179
 </td>
 <td style="text-align:right;font-weight: bold;color: white !important;background-color: orange !important;">
-0.556
+0.567
 </td>
 <td style="text-align:left;font-weight: bold;color: white !important;background-color: orange !important;">
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Cognitive domain
-</td>
-<td style="text-align:left;">
 top-down attention
 </td>
 <td style="text-align:right;">
-76
+74
 </td>
 <td style="text-align:right;">
 44
 </td>
 <td style="text-align:right;">
-0.614
+0.630
 </td>
 <td style="text-align:left;">
-0.471,0.756
+0.485,0.775
 </td>
 <td style="text-align:right;">
-40.62
+41.23
 </td>
 <td style="text-align:right;">
 0.000
 </td>
 <td style="text-align:right;">
-0.471
+0.485
 </td>
 <td style="text-align:right;">
-0.756
+0.775
 </td>
 <td style="text-align:left;">
 &lt;.001
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-Cognitive domain
-</td>
 <td style="text-align:left;">
 inhibition
 </td>
@@ -798,31 +1068,28 @@ inhibition
 9
 </td>
 <td style="text-align:right;">
-0.519
+0.521
 </td>
 <td style="text-align:left;">
-0.208,0.83
+0.207,0.835
 </td>
 <td style="text-align:right;">
-8.03
+8.06
 </td>
 <td style="text-align:right;">
 0.005
 </td>
 <td style="text-align:right;">
-0.208
+0.207
 </td>
 <td style="text-align:right;">
-0.830
+0.835
 </td>
 <td style="text-align:left;">
 &lt;.01
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-Cognitive domain
-</td>
 <td style="text-align:left;">
 spatial cognition
 </td>
@@ -833,31 +1100,28 @@ spatial cognition
 16
 </td>
 <td style="text-align:right;">
-0.628
+0.644
 </td>
 <td style="text-align:left;">
-0.428,0.829
+0.438,0.851
 </td>
 <td style="text-align:right;">
-14.39
+14.74
 </td>
 <td style="text-align:right;">
 0.000
 </td>
 <td style="text-align:right;">
-0.428
+0.438
 </td>
 <td style="text-align:right;">
-0.829
+0.851
 </td>
 <td style="text-align:left;">
 &lt;.001
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-Cognitive domain
-</td>
 <td style="text-align:left;">
 multi-tasking
 </td>
@@ -868,31 +1132,28 @@ multi-tasking
 11
 </td>
 <td style="text-align:right;">
-0.792
+0.809
 </td>
 <td style="text-align:left;">
-0.248,1.336
+0.267,1.352
 </td>
 <td style="text-align:right;">
-8.59
+8.70
 </td>
 <td style="text-align:right;">
-0.010
+0.008
 </td>
 <td style="text-align:right;">
-0.248
+0.267
 </td>
 <td style="text-align:right;">
-1.336
+1.352
 </td>
 <td style="text-align:left;">
 &lt;.01
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-Cognitive domain
-</td>
 <td style="text-align:left;">
 verbal cognition
 </td>
@@ -903,31 +1164,28 @@ verbal cognition
 14
 </td>
 <td style="text-align:right;">
-0.450
+0.465
 </td>
 <td style="text-align:left;">
-0.265,0.635
+0.274,0.655
 </td>
 <td style="text-align:right;">
-12.64
+13.04
 </td>
 <td style="text-align:right;">
 0.000
 </td>
 <td style="text-align:right;">
-0.265
+0.274
 </td>
 <td style="text-align:right;">
-0.635
+0.655
 </td>
 <td style="text-align:left;">
 &lt;.001
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-Cognitive domain
-</td>
 <td style="text-align:left;">
 problem solving
 </td>
@@ -938,57 +1196,57 @@ problem solving
 6
 </td>
 <td style="text-align:right;">
-0.288
+0.309
 </td>
 <td style="text-align:left;">
--0.017,0.593
+0.001,0.618
 </td>
 <td style="text-align:right;">
-4.43
+4.48
 </td>
 <td style="text-align:right;">
-0.059
+0.050
 </td>
 <td style="text-align:right;">
--0.017
+0.001
 </td>
 <td style="text-align:right;">
-0.593
+0.618
 </td>
 <td style="text-align:left;">
-.
+&lt;.05
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:left;vertical-align: top !important;" rowspan="2">
 DV type
 </td>
 <td style="text-align:left;">
 accuracy
 </td>
 <td style="text-align:right;">
-121
+118
 </td>
 <td style="text-align:right;">
-51
+49
 </td>
 <td style="text-align:right;">
-0.640
+0.633
 </td>
 <td style="text-align:left;">
-0.515,0.765
+0.508,0.757
 </td>
 <td style="text-align:right;">
-43.71
+43.80
 </td>
 <td style="text-align:right;">
 0.000
 </td>
 <td style="text-align:right;">
-0.515
+0.508
 </td>
 <td style="text-align:right;">
-0.765
+0.757
 </td>
 <td style="text-align:left;">
 &lt;.001
@@ -996,22 +1254,19 @@ accuracy
 </tr>
 <tr>
 <td style="text-align:left;">
-DV type
-</td>
-<td style="text-align:left;">
 speed
 </td>
 <td style="text-align:right;">
-103
+101
 </td>
 <td style="text-align:right;">
-46
+45
 </td>
 <td style="text-align:right;">
-0.561
+0.582
 </td>
 <td style="text-align:left;">
-0.44,0.683
+0.459,0.705
 </td>
 <td style="text-align:right;">
 37.06
@@ -1020,17 +1275,17 @@ speed
 0.000
 </td>
 <td style="text-align:right;">
-0.440
+0.459
 </td>
 <td style="text-align:right;">
-0.683
+0.705
 </td>
 <td style="text-align:left;">
 &lt;.001
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:left;vertical-align: top !important;" rowspan="2">
 Effect
 </td>
 <td style="text-align:left;">
@@ -1043,64 +1298,61 @@ interaction
 26
 </td>
 <td style="text-align:right;">
-0.593
+0.590
 </td>
 <td style="text-align:left;">
-0.394,0.793
+0.388,0.792
 </td>
 <td style="text-align:right;">
-23.92
+24.60
 </td>
 <td style="text-align:right;">
 0.000
 </td>
 <td style="text-align:right;">
-0.394
+0.388
 </td>
 <td style="text-align:right;">
-0.793
+0.792
 </td>
 <td style="text-align:left;">
 &lt;.001
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-Effect
-</td>
 <td style="text-align:left;">
 main
 </td>
 <td style="text-align:right;">
-161
+156
 </td>
 <td style="text-align:right;">
-63
+61
 </td>
 <td style="text-align:right;">
-0.608
+0.617
 </td>
 <td style="text-align:left;">
-0.502,0.714
+0.509,0.726
 </td>
 <td style="text-align:right;">
-47.27
+47.55
 </td>
 <td style="text-align:right;">
 0.000
 </td>
 <td style="text-align:right;">
-0.502
+0.509
 </td>
 <td style="text-align:right;">
-0.714
+0.726
 </td>
 <td style="text-align:left;">
 &lt;.001
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:left;vertical-align: top !important;" rowspan="2">
 Recruitment
 </td>
 <td style="text-align:left;">
@@ -1113,22 +1365,22 @@ Covert
 9
 </td>
 <td style="text-align:right;">
-0.436
+0.437
 </td>
 <td style="text-align:left;">
-0.231,0.641
+0.233,0.642
 </td>
 <td style="text-align:right;">
-5.86
+6.20
 </td>
 <td style="text-align:right;">
 0.002
 </td>
 <td style="text-align:right;">
-0.231
+0.233
 </td>
 <td style="text-align:right;">
-0.641
+0.642
 </td>
 <td style="text-align:left;">
 &lt;.01
@@ -1136,34 +1388,31 @@ Covert
 </tr>
 <tr>
 <td style="text-align:left;">
-Recruitment
-</td>
-<td style="text-align:left;">
 Overt
 </td>
 <td style="text-align:right;">
-192
+187
 </td>
 <td style="text-align:right;">
-67
+65
 </td>
 <td style="text-align:right;">
-0.632
+0.639
 </td>
 <td style="text-align:left;">
-0.523,0.741
+0.527,0.751
 </td>
 <td style="text-align:right;">
-55.21
+55.23
 </td>
 <td style="text-align:right;">
 0.000
 </td>
 <td style="text-align:right;">
-0.523
+0.527
 </td>
 <td style="text-align:right;">
-0.741
+0.751
 </td>
 <td style="text-align:left;">
 &lt;.001
@@ -1191,7 +1440,7 @@ difference scores (interactions).<br />
 <li>Significant effect in both overtly and covertly recruited participants, with numerically larger effect
 for overt vs. covert.</li>
 </ul></li>
-<li><p>Residual heterogeneity is still significant (<em>QE</em>(212) = 915.77,
+<li><p>Residual heterogeneity is still significant (<em>QE</em>(208) = 866.71,
 <em>p</em> = ), suggesting additional moderating variables may be involved !
 =&gt; Additional analyses are needed to understand where this comes from:</p>
 <ul>
@@ -1289,263 +1538,279 @@ ci.lb
 <th style="text-align:right;">
 ci.ub
 </th>
+<th style="text-align:left;">
+Coef
+</th>
+<th style="text-align:right;">
+df_Satt
+</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left;background-color: yellow !important;">
+<td style="text-align:left;background-color: yellow !important;vertical-align: top !important;" rowspan="4">
 Egger CHE (MLMA + RVE)
 </td>
-<td style="text-align:left;background-color: yellow !important;">
+<td style="text-align:left;background-color: yellow !important;vertical-align: top !important;" rowspan="2">
 NULL
 </td>
 <td style="text-align:left;background-color: yellow !important;">
 intrcpt
 </td>
 <td style="text-align:right;background-color: yellow !important;">
--0.043
+-0.025
 </td>
 <td style="text-align:right;background-color: yellow !important;">
-0.182
+0.183
 </td>
 <td style="text-align:right;background-color: yellow !important;">
--0.234
+-0.134
 </td>
 <td style="text-align:right;background-color: yellow !important;">
-13.4
+13.3
 </td>
 <td style="text-align:right;background-color: yellow !important;">
-0.819
+0.895
 </td>
 <td style="text-align:right;background-color: yellow !important;">
--0.434
+-0.418
 </td>
 <td style="text-align:right;background-color: yellow !important;">
-0.349
+0.369
+</td>
+<td style="text-align:left;background-color: yellow !important;">
+intrcpt
+</td>
+<td style="text-align:right;background-color: yellow !important;">
+13.3
 </td>
 </tr>
 <tr>
 <td style="text-align:left;font-weight: bold;background-color: yellow !important;">
-Egger CHE (MLMA + RVE)
+sda
 </td>
-<td style="text-align:left;font-weight: bold;background-color: yellow !important;">
-NULL
+<td style="text-align:right;font-weight: bold;background-color: yellow !important;">
+1.845
+</td>
+<td style="text-align:right;font-weight: bold;background-color: yellow !important;">
+0.535
+</td>
+<td style="text-align:right;font-weight: bold;background-color: yellow !important;">
+3.452
+</td>
+<td style="text-align:right;font-weight: bold;background-color: yellow !important;">
+18.4
+</td>
+<td style="text-align:right;font-weight: bold;background-color: yellow !important;">
+0.003
+</td>
+<td style="text-align:right;font-weight: bold;background-color: yellow !important;">
+0.724
+</td>
+<td style="text-align:right;font-weight: bold;background-color: yellow !important;">
+2.966
 </td>
 <td style="text-align:left;font-weight: bold;background-color: yellow !important;">
 sda
 </td>
 <td style="text-align:right;font-weight: bold;background-color: yellow !important;">
-1.897
+18.4
 </td>
-<td style="text-align:right;font-weight: bold;background-color: yellow !important;">
-0.533
+</tr>
+<tr>
+<td style="text-align:left;background-color: yellow !important;vertical-align: top !important;" rowspan="2">
+FULL
 </td>
-<td style="text-align:right;font-weight: bold;background-color: yellow !important;">
-3.560
+<td style="text-align:left;background-color: yellow !important;">
+intrcpt
 </td>
-<td style="text-align:right;font-weight: bold;background-color: yellow !important;">
-18.3
-</td>
-<td style="text-align:right;font-weight: bold;background-color: yellow !important;">
+<td style="text-align:right;background-color: yellow !important;">
 0.002
 </td>
-<td style="text-align:right;font-weight: bold;background-color: yellow !important;">
-0.779
+<td style="text-align:right;background-color: yellow !important;">
+0.199
 </td>
-<td style="text-align:right;font-weight: bold;background-color: yellow !important;">
-3.014
+<td style="text-align:right;background-color: yellow !important;">
+0.010
 </td>
-</tr>
-<tr>
-<td style="text-align:left;background-color: yellow !important;">
-Egger CHE (MLMA + RVE)
+<td style="text-align:right;background-color: yellow !important;">
+19.4
 </td>
-<td style="text-align:left;background-color: yellow !important;">
-FULL
+<td style="text-align:right;background-color: yellow !important;">
+0.992
+</td>
+<td style="text-align:right;background-color: yellow !important;">
+-0.414
+</td>
+<td style="text-align:right;background-color: yellow !important;">
+0.418
 </td>
 <td style="text-align:left;background-color: yellow !important;">
 intrcpt
 </td>
 <td style="text-align:right;background-color: yellow !important;">
-0.025
-</td>
-<td style="text-align:right;background-color: yellow !important;">
-0.200
-</td>
-<td style="text-align:right;background-color: yellow !important;">
-0.125
-</td>
-<td style="text-align:right;background-color: yellow !important;">
-19.5
-</td>
-<td style="text-align:right;background-color: yellow !important;">
-0.902
-</td>
-<td style="text-align:right;background-color: yellow !important;">
--0.394
-</td>
-<td style="text-align:right;background-color: yellow !important;">
-0.444
+19.4
 </td>
 </tr>
 <tr>
 <td style="text-align:left;font-weight: bold;background-color: yellow !important;">
-Egger CHE (MLMA + RVE)
-</td>
-<td style="text-align:left;font-weight: bold;background-color: yellow !important;">
-FULL
-</td>
-<td style="text-align:left;font-weight: bold;background-color: yellow !important;">
 sda
 </td>
 <td style="text-align:right;font-weight: bold;background-color: yellow !important;">
-1.793
+1.768
 </td>
 <td style="text-align:right;font-weight: bold;background-color: yellow !important;">
-0.648
+0.638
 </td>
 <td style="text-align:right;font-weight: bold;background-color: yellow !important;">
-2.767
+2.772
 </td>
 <td style="text-align:right;font-weight: bold;background-color: yellow !important;">
-22.3
+22.0
 </td>
 <td style="text-align:right;font-weight: bold;background-color: yellow !important;">
 0.011
 </td>
 <td style="text-align:right;font-weight: bold;background-color: yellow !important;">
-0.450
+0.445
 </td>
 <td style="text-align:right;font-weight: bold;background-color: yellow !important;">
-3.136
+3.091
+</td>
+<td style="text-align:left;font-weight: bold;background-color: yellow !important;">
+sda
+</td>
+<td style="text-align:right;font-weight: bold;background-color: yellow !important;">
+22.0
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:left;vertical-align: top !important;" rowspan="4">
 Egger Sandwich (RVE)
 </td>
-<td style="text-align:left;">
+<td style="text-align:left;vertical-align: top !important;" rowspan="2">
 NULL
 </td>
 <td style="text-align:left;">
 intrcpt
 </td>
 <td style="text-align:right;">
--0.028
+-0.016
 </td>
 <td style="text-align:right;">
-0.258
+0.257
 </td>
 <td style="text-align:right;">
--0.109
+-0.064
 </td>
 <td style="text-align:right;">
-12.0
+11.9
 </td>
 <td style="text-align:right;">
-0.915
+0.950
 </td>
 <td style="text-align:right;">
--0.591
+-0.578
 </td>
 <td style="text-align:right;">
-0.535
+0.545
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:right;">
 </td>
 </tr>
 <tr>
-<td style="text-align:left;font-weight: bold;">
-Egger Sandwich (RVE)
-</td>
-<td style="text-align:left;font-weight: bold;">
-NULL
-</td>
 <td style="text-align:left;font-weight: bold;">
 sda
 </td>
 <td style="text-align:right;font-weight: bold;">
-2.043
+2.015
 </td>
 <td style="text-align:right;font-weight: bold;">
-0.729
+0.726
 </td>
 <td style="text-align:right;font-weight: bold;">
-2.803
+2.778
 </td>
 <td style="text-align:right;font-weight: bold;">
-14.9
+14.8
 </td>
 <td style="text-align:right;font-weight: bold;">
-0.013
+0.014
 </td>
 <td style="text-align:right;font-weight: bold;">
-0.488
+0.467
 </td>
 <td style="text-align:right;font-weight: bold;">
-3.597
+3.563
+</td>
+<td style="text-align:left;font-weight: bold;">
+</td>
+<td style="text-align:right;font-weight: bold;">
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-Egger Sandwich (RVE)
-</td>
-<td style="text-align:left;">
+<td style="text-align:left;vertical-align: top !important;" rowspan="2">
 FULL
 </td>
 <td style="text-align:left;">
 intrcpt
 </td>
 <td style="text-align:right;">
-0.156
+0.123
 </td>
 <td style="text-align:right;">
-0.243
+0.240
 </td>
 <td style="text-align:right;">
-0.640
+0.513
 </td>
 <td style="text-align:right;">
 23.5
 </td>
 <td style="text-align:right;">
-0.528
+0.613
 </td>
 <td style="text-align:right;">
--0.347
+-0.372
 </td>
 <td style="text-align:right;">
-0.658
+0.618
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:right;">
 </td>
 </tr>
 <tr>
 <td style="text-align:left;font-weight: bold;">
-Egger Sandwich (RVE)
-</td>
-<td style="text-align:left;font-weight: bold;">
-FULL
-</td>
-<td style="text-align:left;font-weight: bold;">
 sda
 </td>
 <td style="text-align:right;font-weight: bold;">
-1.906
+1.914
 </td>
 <td style="text-align:right;font-weight: bold;">
-0.732
+0.710
 </td>
 <td style="text-align:right;font-weight: bold;">
-2.605
+2.696
 </td>
 <td style="text-align:right;font-weight: bold;">
-15.0
+14.8
 </td>
 <td style="text-align:right;font-weight: bold;">
-0.020
+0.017
 </td>
 <td style="text-align:right;font-weight: bold;">
-0.346
+0.399
 </td>
 <td style="text-align:right;font-weight: bold;">
-3.466
+3.430
+</td>
+<td style="text-align:left;font-weight: bold;">
+</td>
+<td style="text-align:right;font-weight: bold;">
 </td>
 </tr>
 </tbody>
@@ -1630,11 +1895,17 @@ ci.lb
 <th style="text-align:right;">
 ci.ub
 </th>
+<th style="text-align:left;">
+Coef
+</th>
+<th style="text-align:right;">
+df_Satt
+</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:left;vertical-align: top !important;" rowspan="4">
 PET (RVE hier)
 </td>
 <td style="text-align:left;">
@@ -1644,703 +1915,752 @@ NULL
 intrcpt
 </td>
 <td style="text-align:right;">
--0.385
-</td>
-<td style="text-align:right;">
-0.170
-</td>
-<td style="text-align:right;">
--2.262
-</td>
-<td style="text-align:right;">
-6.26
-</td>
-<td style="text-align:right;">
-0.063
-</td>
-<td style="text-align:right;">
--0.797
-</td>
-<td style="text-align:right;">
-0.027
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-PET (RVE hier)
-</td>
-<td style="text-align:left;">
-FULL
-</td>
-<td style="text-align:left;">
-intrcpt
-</td>
-<td style="text-align:right;">
--0.291
-</td>
-<td style="text-align:right;">
-0.163
-</td>
-<td style="text-align:right;">
--1.789
-</td>
-<td style="text-align:right;">
-24.09
-</td>
-<td style="text-align:right;">
-0.086
-</td>
-<td style="text-align:right;">
--0.627
-</td>
-<td style="text-align:right;">
-0.045
-</td>
-</tr>
-<tr>
-<td style="text-align:left;font-weight: bold;">
-PET (RVE hier)
-</td>
-<td style="text-align:left;font-weight: bold;">
-NULL
-</td>
-<td style="text-align:left;font-weight: bold;">
-slope
-</td>
-<td style="text-align:right;font-weight: bold;">
-2.739
-</td>
-<td style="text-align:right;font-weight: bold;">
-0.476
-</td>
-<td style="text-align:right;font-weight: bold;">
-5.753
-</td>
-<td style="text-align:right;font-weight: bold;">
-9.87
-</td>
-<td style="text-align:right;font-weight: bold;">
-0.000
-</td>
-<td style="text-align:right;font-weight: bold;">
-1.676
-</td>
-<td style="text-align:right;font-weight: bold;">
-3.802
-</td>
-</tr>
-<tr>
-<td style="text-align:left;font-weight: bold;">
-PET (RVE hier)
-</td>
-<td style="text-align:left;font-weight: bold;">
-FULL
-</td>
-<td style="text-align:left;font-weight: bold;">
-slope
-</td>
-<td style="text-align:right;font-weight: bold;">
-2.995
-</td>
-<td style="text-align:right;font-weight: bold;">
-0.541
-</td>
-<td style="text-align:right;font-weight: bold;">
-5.540
-</td>
-<td style="text-align:right;font-weight: bold;">
-18.73
-</td>
-<td style="text-align:right;font-weight: bold;">
-0.000
-</td>
-<td style="text-align:right;font-weight: bold;">
-1.863
-</td>
-<td style="text-align:right;font-weight: bold;">
-4.128
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-PET (RVE corr)
-</td>
-<td style="text-align:left;">
-NULL
-</td>
-<td style="text-align:left;">
-intrcpt
-</td>
-<td style="text-align:right;">
--0.272
-</td>
-<td style="text-align:right;">
-0.218
-</td>
-<td style="text-align:right;">
--1.247
-</td>
-<td style="text-align:right;">
-14.73
-</td>
-<td style="text-align:right;">
-0.232
-</td>
-<td style="text-align:right;">
--0.738
-</td>
-<td style="text-align:right;">
-0.194
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-PET (RVE corr)
-</td>
-<td style="text-align:left;">
-FULL
-</td>
-<td style="text-align:left;">
-intrcpt
-</td>
-<td style="text-align:right;">
--0.085
-</td>
-<td style="text-align:right;">
-0.185
-</td>
-<td style="text-align:right;">
--0.458
-</td>
-<td style="text-align:right;">
-23.79
-</td>
-<td style="text-align:right;">
-0.651
-</td>
-<td style="text-align:right;">
--0.467
-</td>
-<td style="text-align:right;">
-0.297
-</td>
-</tr>
-<tr>
-<td style="text-align:left;font-weight: bold;">
-PET (RVE corr)
-</td>
-<td style="text-align:left;font-weight: bold;">
-NULL
-</td>
-<td style="text-align:left;font-weight: bold;">
-slope
-</td>
-<td style="text-align:right;font-weight: bold;">
-2.679
-</td>
-<td style="text-align:right;font-weight: bold;">
-0.581
-</td>
-<td style="text-align:right;font-weight: bold;">
-4.613
-</td>
-<td style="text-align:right;font-weight: bold;">
-17.15
-</td>
-<td style="text-align:right;font-weight: bold;">
-0.000
-</td>
-<td style="text-align:right;font-weight: bold;">
-1.454
-</td>
-<td style="text-align:right;font-weight: bold;">
-3.903
-</td>
-</tr>
-<tr>
-<td style="text-align:left;font-weight: bold;">
-PET (RVE corr)
-</td>
-<td style="text-align:left;font-weight: bold;">
-FULL
-</td>
-<td style="text-align:left;font-weight: bold;">
-slope
-</td>
-<td style="text-align:right;font-weight: bold;">
-2.515
-</td>
-<td style="text-align:right;font-weight: bold;">
-0.585
-</td>
-<td style="text-align:right;font-weight: bold;">
-4.296
-</td>
-<td style="text-align:right;font-weight: bold;">
-17.65
-</td>
-<td style="text-align:right;font-weight: bold;">
-0.000
-</td>
-<td style="text-align:right;font-weight: bold;">
-1.283
-</td>
-<td style="text-align:right;font-weight: bold;">
-3.746
-</td>
-</tr>
-<tr>
-<td style="text-align:left;font-weight: bold;">
-PET (CHE)
-</td>
-<td style="text-align:left;font-weight: bold;">
-NULL
-</td>
-<td style="text-align:left;font-weight: bold;">
-intrcpt
-</td>
-<td style="text-align:right;font-weight: bold;">
--0.498
-</td>
-<td style="text-align:right;font-weight: bold;">
-0.203
-</td>
-<td style="text-align:right;font-weight: bold;">
--2.454
-</td>
-<td style="text-align:right;font-weight: bold;">
-15.87
-</td>
-<td style="text-align:right;font-weight: bold;">
-0.026
-</td>
-<td style="text-align:right;font-weight: bold;">
--0.928
-</td>
-<td style="text-align:right;font-weight: bold;">
--0.067
-</td>
-</tr>
-<tr>
-<td style="text-align:left;font-weight: bold;">
-PET (CHE)
-</td>
-<td style="text-align:left;font-weight: bold;">
-FULL
-</td>
-<td style="text-align:left;font-weight: bold;">
-intrcpt
-</td>
-<td style="text-align:right;font-weight: bold;">
--0.411
-</td>
-<td style="text-align:right;font-weight: bold;">
-0.195
-</td>
-<td style="text-align:right;font-weight: bold;">
--2.108
-</td>
-<td style="text-align:right;font-weight: bold;">
-20.56
-</td>
-<td style="text-align:right;font-weight: bold;">
-0.048
-</td>
-<td style="text-align:right;font-weight: bold;">
--0.818
-</td>
-<td style="text-align:right;font-weight: bold;">
--0.005
-</td>
-</tr>
-<tr>
-<td style="text-align:left;font-weight: bold;">
-PET (CHE)
-</td>
-<td style="text-align:left;font-weight: bold;">
-NULL
-</td>
-<td style="text-align:left;font-weight: bold;">
-slope
-</td>
-<td style="text-align:right;font-weight: bold;">
-3.228
-</td>
-<td style="text-align:right;font-weight: bold;">
-0.548
-</td>
-<td style="text-align:right;font-weight: bold;">
-5.886
-</td>
-<td style="text-align:right;font-weight: bold;">
-19.89
-</td>
-<td style="text-align:right;font-weight: bold;">
-0.000
-</td>
-<td style="text-align:right;font-weight: bold;">
-2.083
-</td>
-<td style="text-align:right;font-weight: bold;">
-4.372
-</td>
-</tr>
-<tr>
-<td style="text-align:left;font-weight: bold;">
-PET (CHE)
-</td>
-<td style="text-align:left;font-weight: bold;">
-FULL
-</td>
-<td style="text-align:left;font-weight: bold;">
-slope
-</td>
-<td style="text-align:right;font-weight: bold;">
-3.220
-</td>
-<td style="text-align:right;font-weight: bold;">
-0.636
-</td>
-<td style="text-align:right;font-weight: bold;">
-5.062
-</td>
-<td style="text-align:right;font-weight: bold;">
-22.88
-</td>
-<td style="text-align:right;font-weight: bold;">
-0.000
-</td>
-<td style="text-align:right;font-weight: bold;">
-1.904
-</td>
-<td style="text-align:right;font-weight: bold;">
-4.536
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-PEESE (RVE hier)
-</td>
-<td style="text-align:left;">
-NULL
-</td>
-<td style="text-align:left;">
-intrcpt
-</td>
-<td style="text-align:right;">
-0.085
-</td>
-<td style="text-align:right;">
-0.096
-</td>
-<td style="text-align:right;">
-0.885
-</td>
-<td style="text-align:right;">
-6.68
-</td>
-<td style="text-align:right;">
-0.407
-</td>
-<td style="text-align:right;">
--0.144
-</td>
-<td style="text-align:right;">
-0.314
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-PEESE (RVE hier)
-</td>
-<td style="text-align:left;">
-FULL
-</td>
-<td style="text-align:left;">
-intrcpt
-</td>
-<td style="text-align:right;">
-0.211
-</td>
-<td style="text-align:right;">
-0.133
-</td>
-<td style="text-align:right;">
-1.589
-</td>
-<td style="text-align:right;">
-22.09
-</td>
-<td style="text-align:right;">
-0.126
-</td>
-<td style="text-align:right;">
--0.064
-</td>
-<td style="text-align:right;">
-0.487
-</td>
-</tr>
-<tr>
-<td style="text-align:left;font-weight: bold;">
-PEESE (RVE hier)
-</td>
-<td style="text-align:left;font-weight: bold;">
-NULL
-</td>
-<td style="text-align:left;font-weight: bold;">
-slope
-</td>
-<td style="text-align:right;font-weight: bold;">
-3.676
-</td>
-<td style="text-align:right;font-weight: bold;">
-0.780
-</td>
-<td style="text-align:right;font-weight: bold;">
-4.714
-</td>
-<td style="text-align:right;font-weight: bold;">
-7.42
-</td>
-<td style="text-align:right;font-weight: bold;">
-0.002
-</td>
-<td style="text-align:right;font-weight: bold;">
-1.853
-</td>
-<td style="text-align:right;font-weight: bold;">
-5.498
-</td>
-</tr>
-<tr>
-<td style="text-align:left;font-weight: bold;">
-PEESE (RVE hier)
-</td>
-<td style="text-align:left;font-weight: bold;">
-FULL
-</td>
-<td style="text-align:left;font-weight: bold;">
-slope
-</td>
-<td style="text-align:right;font-weight: bold;">
-3.673
-</td>
-<td style="text-align:right;font-weight: bold;">
-1.011
-</td>
-<td style="text-align:right;font-weight: bold;">
-3.634
-</td>
-<td style="text-align:right;font-weight: bold;">
-7.00
-</td>
-<td style="text-align:right;font-weight: bold;">
-0.008
-</td>
-<td style="text-align:right;font-weight: bold;">
-1.283
-</td>
-<td style="text-align:right;font-weight: bold;">
-6.063
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-PEESE (RVE corr)
-</td>
-<td style="text-align:left;">
-NULL
-</td>
-<td style="text-align:left;">
-intrcpt
-</td>
-<td style="text-align:right;">
-0.220
-</td>
-<td style="text-align:right;">
-0.128
-</td>
-<td style="text-align:right;">
-1.719
-</td>
-<td style="text-align:right;">
-12.71
-</td>
-<td style="text-align:right;">
-0.110
-</td>
-<td style="text-align:right;">
--0.057
-</td>
-<td style="text-align:right;">
-0.496
-</td>
-</tr>
-<tr>
-<td style="text-align:left;font-weight: bold;">
-PEESE (RVE corr)
-</td>
-<td style="text-align:left;font-weight: bold;">
-FULL
-</td>
-<td style="text-align:left;font-weight: bold;">
-intrcpt
-</td>
-<td style="text-align:right;font-weight: bold;">
-0.367
-</td>
-<td style="text-align:right;font-weight: bold;">
-0.148
-</td>
-<td style="text-align:right;font-weight: bold;">
-2.478
-</td>
-<td style="text-align:right;font-weight: bold;">
-18.24
-</td>
-<td style="text-align:right;font-weight: bold;">
-0.023
-</td>
-<td style="text-align:right;font-weight: bold;">
-0.056
-</td>
-<td style="text-align:right;font-weight: bold;">
-0.677
-</td>
-</tr>
-<tr>
-<td style="text-align:left;font-weight: bold;">
-PEESE (RVE corr)
-</td>
-<td style="text-align:left;font-weight: bold;">
-NULL
-</td>
-<td style="text-align:left;font-weight: bold;">
-slope
-</td>
-<td style="text-align:right;font-weight: bold;">
-3.390
-</td>
-<td style="text-align:right;font-weight: bold;">
-0.928
-</td>
-<td style="text-align:right;font-weight: bold;">
-3.654
-</td>
-<td style="text-align:right;font-weight: bold;">
-7.82
-</td>
-<td style="text-align:right;font-weight: bold;">
-0.007
-</td>
-<td style="text-align:right;font-weight: bold;">
-1.242
-</td>
-<td style="text-align:right;font-weight: bold;">
-5.539
-</td>
-</tr>
-<tr>
-<td style="text-align:left;font-weight: bold;">
-PEESE (RVE corr)
-</td>
-<td style="text-align:left;font-weight: bold;">
-FULL
-</td>
-<td style="text-align:left;font-weight: bold;">
-slope
-</td>
-<td style="text-align:right;font-weight: bold;">
-3.145
-</td>
-<td style="text-align:right;font-weight: bold;">
-0.900
-</td>
-<td style="text-align:right;font-weight: bold;">
-3.494
-</td>
-<td style="text-align:right;font-weight: bold;">
-7.69
-</td>
-<td style="text-align:right;font-weight: bold;">
-0.009
-</td>
-<td style="text-align:right;font-weight: bold;">
-1.055
-</td>
-<td style="text-align:right;font-weight: bold;">
-5.235
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-PEESE (CHE)
-</td>
-<td style="text-align:left;">
-NULL
-</td>
-<td style="text-align:left;">
-intrcpt
-</td>
-<td style="text-align:right;">
-0.175
-</td>
-<td style="text-align:right;">
-0.192
-</td>
-<td style="text-align:right;">
-0.911
-</td>
-<td style="text-align:right;">
-10.41
-</td>
-<td style="text-align:right;">
-0.383
-</td>
-<td style="text-align:right;">
--0.251
-</td>
-<td style="text-align:right;">
-0.601
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-PEESE (CHE)
-</td>
-<td style="text-align:left;">
-FULL
-</td>
-<td style="text-align:left;">
-intrcpt
-</td>
-<td style="text-align:right;">
-0.206
+-0.371
 </td>
 <td style="text-align:right;">
 0.167
 </td>
 <td style="text-align:right;">
-1.236
+-2.216
 </td>
 <td style="text-align:right;">
-18.45
+6.19
 </td>
 <td style="text-align:right;">
-0.232
+0.067
 </td>
 <td style="text-align:right;">
--0.144
+-0.778
 </td>
 <td style="text-align:right;">
-0.556
+0.036
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:right;">
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
+FULL
+</td>
+<td style="text-align:left;">
+intrcpt
+</td>
+<td style="text-align:right;">
+-0.313
+</td>
+<td style="text-align:right;">
+0.162
+</td>
+<td style="text-align:right;">
+-1.928
+</td>
+<td style="text-align:right;">
+24.01
+</td>
+<td style="text-align:right;">
+0.066
+</td>
+<td style="text-align:right;">
+-0.648
+</td>
+<td style="text-align:right;">
+0.022
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+NULL
+</td>
+<td style="text-align:left;font-weight: bold;">
+slope
+</td>
+<td style="text-align:right;font-weight: bold;">
+2.700
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.472
+</td>
+<td style="text-align:right;font-weight: bold;">
+5.721
+</td>
+<td style="text-align:right;font-weight: bold;">
+9.83
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.000
+</td>
+<td style="text-align:right;font-weight: bold;">
+1.646
+</td>
+<td style="text-align:right;font-weight: bold;">
+3.755
+</td>
+<td style="text-align:left;font-weight: bold;">
+</td>
+<td style="text-align:right;font-weight: bold;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+FULL
+</td>
+<td style="text-align:left;font-weight: bold;">
+slope
+</td>
+<td style="text-align:right;font-weight: bold;">
+2.998
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.543
+</td>
+<td style="text-align:right;font-weight: bold;">
+5.518
+</td>
+<td style="text-align:right;font-weight: bold;">
+18.50
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.000
+</td>
+<td style="text-align:right;font-weight: bold;">
+1.859
+</td>
+<td style="text-align:right;font-weight: bold;">
+4.137
+</td>
+<td style="text-align:left;font-weight: bold;">
+</td>
+<td style="text-align:right;font-weight: bold;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;vertical-align: top !important;" rowspan="4">
+PET (RVE corr)
+</td>
+<td style="text-align:left;">
+NULL
+</td>
+<td style="text-align:left;">
+intrcpt
+</td>
+<td style="text-align:right;">
+-0.261
+</td>
+<td style="text-align:right;">
+0.219
+</td>
+<td style="text-align:right;">
+-1.192
+</td>
+<td style="text-align:right;">
+14.43
+</td>
+<td style="text-align:right;">
+0.252
+</td>
+<td style="text-align:right;">
+-0.729
+</td>
+<td style="text-align:right;">
+0.207
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FULL
+</td>
+<td style="text-align:left;">
+intrcpt
+</td>
+<td style="text-align:right;">
+-0.113
+</td>
+<td style="text-align:right;">
+0.184
+</td>
+<td style="text-align:right;">
+-0.616
+</td>
+<td style="text-align:right;">
+23.70
+</td>
+<td style="text-align:right;">
+0.544
+</td>
+<td style="text-align:right;">
+-0.493
+</td>
+<td style="text-align:right;">
+0.267
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+NULL
+</td>
+<td style="text-align:left;font-weight: bold;">
+slope
+</td>
+<td style="text-align:right;font-weight: bold;">
+2.655
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.583
+</td>
+<td style="text-align:right;font-weight: bold;">
+4.552
+</td>
+<td style="text-align:right;font-weight: bold;">
+16.87
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.000
+</td>
+<td style="text-align:right;font-weight: bold;">
+1.424
+</td>
+<td style="text-align:right;font-weight: bold;">
+3.887
+</td>
+<td style="text-align:left;font-weight: bold;">
+</td>
+<td style="text-align:right;font-weight: bold;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+FULL
+</td>
+<td style="text-align:left;font-weight: bold;">
+slope
+</td>
+<td style="text-align:right;font-weight: bold;">
+2.520
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.579
+</td>
+<td style="text-align:right;font-weight: bold;">
+4.353
+</td>
+<td style="text-align:right;font-weight: bold;">
+17.28
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.000
+</td>
+<td style="text-align:right;font-weight: bold;">
+1.300
+</td>
+<td style="text-align:right;font-weight: bold;">
+3.740
+</td>
+<td style="text-align:left;font-weight: bold;">
+</td>
+<td style="text-align:right;font-weight: bold;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;vertical-align: top !important;" rowspan="4">
+PET (CHE)
+</td>
+<td style="text-align:left;font-weight: bold;">
+NULL
+</td>
+<td style="text-align:left;font-weight: bold;">
+intrcpt
+</td>
+<td style="text-align:right;font-weight: bold;">
+-0.471
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.202
+</td>
+<td style="text-align:right;font-weight: bold;">
+-2.331
+</td>
+<td style="text-align:right;font-weight: bold;">
+15.68
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.033
+</td>
+<td style="text-align:right;font-weight: bold;">
+-0.900
+</td>
+<td style="text-align:right;font-weight: bold;">
+-0.042
+</td>
+<td style="text-align:left;font-weight: bold;">
+intrcpt
+</td>
+<td style="text-align:right;font-weight: bold;">
+15.68
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+FULL
+</td>
+<td style="text-align:left;font-weight: bold;">
+intrcpt
+</td>
+<td style="text-align:right;font-weight: bold;">
+-0.426
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.194
+</td>
+<td style="text-align:right;font-weight: bold;">
+-2.196
+</td>
+<td style="text-align:right;font-weight: bold;">
+20.39
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.040
+</td>
+<td style="text-align:right;font-weight: bold;">
+-0.830
+</td>
+<td style="text-align:right;font-weight: bold;">
+-0.022
+</td>
+<td style="text-align:left;font-weight: bold;">
+intrcpt
+</td>
+<td style="text-align:right;font-weight: bold;">
+20.39
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+NULL
+</td>
+<td style="text-align:left;font-weight: bold;">
+slope
+</td>
+<td style="text-align:right;font-weight: bold;">
+3.161
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.548
+</td>
+<td style="text-align:right;font-weight: bold;">
+5.769
+</td>
+<td style="text-align:right;font-weight: bold;">
+19.74
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.000
+</td>
+<td style="text-align:right;font-weight: bold;">
+2.017
+</td>
+<td style="text-align:right;font-weight: bold;">
+4.304
+</td>
+<td style="text-align:left;font-weight: bold;">
+sqrt(g_var)
+</td>
+<td style="text-align:right;font-weight: bold;">
+19.74
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+FULL
+</td>
+<td style="text-align:left;font-weight: bold;">
+slope
+</td>
+<td style="text-align:right;font-weight: bold;">
+3.183
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.635
+</td>
+<td style="text-align:right;font-weight: bold;">
+5.014
+</td>
+<td style="text-align:right;font-weight: bold;">
+22.55
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.000
+</td>
+<td style="text-align:right;font-weight: bold;">
+1.868
+</td>
+<td style="text-align:right;font-weight: bold;">
+4.498
+</td>
+<td style="text-align:left;font-weight: bold;">
+sqrt(g_var)
+</td>
+<td style="text-align:right;font-weight: bold;">
+22.55
+</td>
+</tr>
+<tr>
+<td style="text-align:left;vertical-align: top !important;" rowspan="4">
+PEESE (RVE hier)
+</td>
+<td style="text-align:left;">
+NULL
+</td>
+<td style="text-align:left;">
+intrcpt
+</td>
+<td style="text-align:right;">
+0.091
+</td>
+<td style="text-align:right;">
+0.094
+</td>
+<td style="text-align:right;">
+0.962
+</td>
+<td style="text-align:right;">
+6.55
+</td>
+<td style="text-align:right;">
+0.370
+</td>
+<td style="text-align:right;">
+-0.136
+</td>
+<td style="text-align:right;">
+0.317
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FULL
+</td>
+<td style="text-align:left;">
+intrcpt
+</td>
+<td style="text-align:right;">
+0.193
+</td>
+<td style="text-align:right;">
+0.133
+</td>
+<td style="text-align:right;">
+1.447
+</td>
+<td style="text-align:right;">
+22.15
+</td>
+<td style="text-align:right;">
+0.162
+</td>
+<td style="text-align:right;">
+-0.083
+</td>
+<td style="text-align:right;">
+0.469
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+NULL
+</td>
+<td style="text-align:left;font-weight: bold;">
+slope
+</td>
+<td style="text-align:right;font-weight: bold;">
+3.628
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.773
+</td>
+<td style="text-align:right;font-weight: bold;">
+4.695
+</td>
+<td style="text-align:right;font-weight: bold;">
+7.31
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.002
+</td>
+<td style="text-align:right;font-weight: bold;">
+1.816
+</td>
+<td style="text-align:right;font-weight: bold;">
+5.439
+</td>
+<td style="text-align:left;font-weight: bold;">
+</td>
+<td style="text-align:right;font-weight: bold;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+FULL
+</td>
+<td style="text-align:left;font-weight: bold;">
+slope
+</td>
+<td style="text-align:right;font-weight: bold;">
+3.666
+</td>
+<td style="text-align:right;font-weight: bold;">
+1.021
+</td>
+<td style="text-align:right;font-weight: bold;">
+3.589
+</td>
+<td style="text-align:right;font-weight: bold;">
+6.88
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.009
+</td>
+<td style="text-align:right;font-weight: bold;">
+1.242
+</td>
+<td style="text-align:right;font-weight: bold;">
+6.089
+</td>
+<td style="text-align:left;font-weight: bold;">
+</td>
+<td style="text-align:right;font-weight: bold;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;vertical-align: top !important;" rowspan="4">
+PEESE (RVE corr)
+</td>
+<td style="text-align:left;">
+NULL
+</td>
+<td style="text-align:left;">
+intrcpt
+</td>
+<td style="text-align:right;">
+0.227
+</td>
+<td style="text-align:right;">
+0.128
+</td>
+<td style="text-align:right;">
+1.772
+</td>
+<td style="text-align:right;">
+12.45
+</td>
+<td style="text-align:right;">
+0.101
+</td>
+<td style="text-align:right;">
+-0.051
+</td>
+<td style="text-align:right;">
+0.504
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+FULL
+</td>
+<td style="text-align:left;font-weight: bold;">
+intrcpt
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.342
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.148
+</td>
+<td style="text-align:right;font-weight: bold;">
+2.303
+</td>
+<td style="text-align:right;font-weight: bold;">
+18.32
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.033
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.030
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.653
+</td>
+<td style="text-align:left;font-weight: bold;">
+</td>
+<td style="text-align:right;font-weight: bold;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+NULL
+</td>
+<td style="text-align:left;font-weight: bold;">
+slope
+</td>
+<td style="text-align:right;font-weight: bold;">
+3.355
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.930
+</td>
+<td style="text-align:right;font-weight: bold;">
+3.609
+</td>
+<td style="text-align:right;font-weight: bold;">
+7.63
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.007
+</td>
+<td style="text-align:right;font-weight: bold;">
+1.193
+</td>
+<td style="text-align:right;font-weight: bold;">
+5.516
+</td>
+<td style="text-align:left;font-weight: bold;">
+</td>
+<td style="text-align:right;font-weight: bold;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+FULL
+</td>
+<td style="text-align:left;font-weight: bold;">
+slope
+</td>
+<td style="text-align:right;font-weight: bold;">
+3.143
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.904
+</td>
+<td style="text-align:right;font-weight: bold;">
+3.476
+</td>
+<td style="text-align:right;font-weight: bold;">
+7.62
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.009
+</td>
+<td style="text-align:right;font-weight: bold;">
+1.040
+</td>
+<td style="text-align:right;font-weight: bold;">
+5.246
+</td>
+<td style="text-align:left;font-weight: bold;">
+</td>
+<td style="text-align:right;font-weight: bold;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;vertical-align: top !important;" rowspan="4">
 PEESE (CHE)
 </td>
+<td style="text-align:left;">
+NULL
+</td>
+<td style="text-align:left;">
+intrcpt
+</td>
+<td style="text-align:right;">
+0.188
+</td>
+<td style="text-align:right;">
+0.189
+</td>
+<td style="text-align:right;">
+0.995
+</td>
+<td style="text-align:right;">
+10.33
+</td>
+<td style="text-align:right;">
+0.342
+</td>
+<td style="text-align:right;">
+-0.231
+</td>
+<td style="text-align:right;">
+0.608
+</td>
+<td style="text-align:left;">
+intrcpt
+</td>
+<td style="text-align:right;">
+10.33
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FULL
+</td>
+<td style="text-align:left;">
+intrcpt
+</td>
+<td style="text-align:right;">
+0.186
+</td>
+<td style="text-align:right;">
+0.164
+</td>
+<td style="text-align:right;">
+1.137
+</td>
+<td style="text-align:right;">
+18.38
+</td>
+<td style="text-align:right;">
+0.270
+</td>
+<td style="text-align:right;">
+-0.157
+</td>
+<td style="text-align:right;">
+0.530
+</td>
+<td style="text-align:left;">
+intrcpt
+</td>
+<td style="text-align:right;">
+18.38
+</td>
+</tr>
+<tr>
 <td style="text-align:left;">
 NULL
 </td>
@@ -2348,31 +2668,34 @@ NULL
 slope
 </td>
 <td style="text-align:right;">
-3.417
+3.328
 </td>
 <td style="text-align:right;">
-1.506
+1.488
 </td>
 <td style="text-align:right;">
-2.268
+2.237
 </td>
 <td style="text-align:right;">
-5.75
+5.64
 </td>
 <td style="text-align:right;">
-0.066
+0.069
 </td>
 <td style="text-align:right;">
--0.309
+-0.369
 </td>
 <td style="text-align:right;">
-7.142
+7.025
+</td>
+<td style="text-align:left;">
+g_var
+</td>
+<td style="text-align:right;">
+5.64
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-PEESE (CHE)
-</td>
 <td style="text-align:left;">
 FULL
 </td>
@@ -2380,25 +2703,31 @@ FULL
 slope
 </td>
 <td style="text-align:right;">
-3.318
+3.268
 </td>
 <td style="text-align:right;">
-1.553
+1.538
 </td>
 <td style="text-align:right;">
-2.136
+2.125
 </td>
 <td style="text-align:right;">
-5.63
+5.56
 </td>
 <td style="text-align:right;">
-0.080
+0.081
 </td>
 <td style="text-align:right;">
--0.544
+-0.569
 </td>
 <td style="text-align:right;">
-7.179
+7.106
+</td>
+<td style="text-align:left;">
+g_var
+</td>
+<td style="text-align:right;">
+5.56
 </td>
 </tr>
 </tbody>
@@ -2413,18 +2742,18 @@ slope
 In order to run these analyses, we thus randomly picked one effect size per study (i.e. paper).<br />
 To verify that this random sampling does not introduce bias, we first checked the distribution of
 the overall effect obtained from 1000 bootstrapped samples of one effect size per paper.</p>
-<p>The univariate meta-analysis of 73 randomly selected independent effect sizes revealed
-an average overall effect of <em>mean g</em> = 0.659
-(<em>SD</em> = 0.031)</p>
+<p>The univariate meta-analysis of 71 randomly selected independent effect sizes revealed
+an average overall effect of <em>mean g</em> = 0.663
+(<em>SD</em> = 0.028)</p>
 <pre><code>##      term     b     se ci.lb ci.ub
-## 1 intrcpt 0.494 0.0307 0.433 0.558</code></pre>
+## 1 intrcpt 0.496 0.0294 0.441 0.558</code></pre>
 <p><img src="MetaAnalysis_CrossSectional_files/figure-html/bootstrap_tf-1.png" width="768" /></p>
 <p>Across the 1000 bootstrapped samples, trim and fill analysis imputed between
-8 and 20 additional effects
+11 and 20 additional effects
 on the left side of the funnel plot (median = 16), in order
 to correct for its asymmetry.</p>
-<p>These additional studies decreased the overall estimate to a mean of <em>g</em> = 0.494
-(<em>SD</em> = 0.031), but did not alter significance <em>all p’s</em> &lt; .001).</p>
+<p>These additional studies decreased the overall estimate to a mean of <em>g</em> = 0.496
+(<em>SD</em> = 0.029), but did not alter significance <em>all p’s</em> &lt; .001).</p>
 </div>
 <div id="p-uniform-van-assen-van-aert-wicherts-2015" class="section level4" number="5.3.5.2">
 <h4><span class="header-section-number">5.3.5.2</span> P-Uniform (van Assen, van Aert &amp; Wicherts, 2015)</h4>
@@ -2433,8 +2762,8 @@ using only significant effects. This method is not without limitations; it tends
 to overestimate effect sizes when heterogeneity is moderate to large, and is
 insensitive to p-values that are close to significance, or in the presence of
 p-hacking (Van Aerts, Wicherts &amp; van Assen, 2016).</p>
-<pre><code>##      term     b     se ci.lb ci.ub
-## 1 intrcpt 0.706 0.0338 0.637 0.772</code></pre>
+<pre><code>##      term     b    se ci.lb ci.ub
+## 1 intrcpt 0.715 0.035 0.645 0.779</code></pre>
 <p><img src="MetaAnalysis_CrossSectional_files/figure-html/punif-1.png" width="768" />
 Studies with lower p values are observed less often than expected, whereas studies with high p values
 are more frequent than expected. Yet, the test of publication bias is not significant (pval = 1).</p>
@@ -2501,613 +2830,592 @@ pSignif
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left;color: gray !important;background-color: #85C1E9 !important;">
+<td style="text-align:left;vertical-align: top !important;" rowspan="2">
 PET (CHE)
 </td>
-<td style="text-align:left;color: gray !important;background-color: #85C1E9 !important;">
+<td style="text-align:left;">
 NULL
 </td>
-<td style="text-align:left;color: gray !important;background-color: #85C1E9 !important;">
+<td style="text-align:left;">
 intrcpt
 </td>
-<td style="text-align:right;color: gray !important;background-color: #85C1E9 !important;">
--0.498
+<td style="text-align:right;">
+-0.471
 </td>
-<td style="text-align:right;color: gray !important;background-color: #85C1E9 !important;">
-0.203
+<td style="text-align:right;">
+0.202
 </td>
-<td style="text-align:right;color: gray !important;background-color: #85C1E9 !important;">
--0.928
+<td style="text-align:right;">
+-0.900
 </td>
-<td style="text-align:right;color: gray !important;background-color: #85C1E9 !important;">
--0.067
+<td style="text-align:right;">
+-0.042
 </td>
-<td style="text-align:right;color: gray !important;background-color: #85C1E9 !important;">
--2.454
+<td style="text-align:right;">
+-2.331
 </td>
-<td style="text-align:right;color: gray !important;background-color: #85C1E9 !important;">
-15.87
+<td style="text-align:right;">
+15.68
 </td>
-<td style="text-align:right;color: gray !important;background-color: #85C1E9 !important;">
-0.026
+<td style="text-align:right;">
+0.033
 </td>
-<td style="text-align:left;color: gray !important;background-color: #85C1E9 !important;">
+<td style="text-align:left;">
 &lt;.05
 </td>
 </tr>
 <tr>
-<td style="text-align:left;color: gray !important;background-color: #85C1E9 !important;">
-PET (CHE)
-</td>
-<td style="text-align:left;color: gray !important;background-color: #85C1E9 !important;">
+<td style="text-align:left;">
 FULL
 </td>
-<td style="text-align:left;color: gray !important;background-color: #85C1E9 !important;">
+<td style="text-align:left;">
 intrcpt
 </td>
-<td style="text-align:right;color: gray !important;background-color: #85C1E9 !important;">
--0.411
+<td style="text-align:right;">
+-0.426
 </td>
-<td style="text-align:right;color: gray !important;background-color: #85C1E9 !important;">
-0.195
-</td>
-<td style="text-align:right;color: gray !important;background-color: #85C1E9 !important;">
--0.818
-</td>
-<td style="text-align:right;color: gray !important;background-color: #85C1E9 !important;">
--0.005
-</td>
-<td style="text-align:right;color: gray !important;background-color: #85C1E9 !important;">
--2.108
-</td>
-<td style="text-align:right;color: gray !important;background-color: #85C1E9 !important;">
-20.56
-</td>
-<td style="text-align:right;color: gray !important;background-color: #85C1E9 !important;">
-0.048
-</td>
-<td style="text-align:left;color: gray !important;background-color: #85C1E9 !important;">
-&lt;.05
-</td>
-</tr>
-<tr>
-<td style="text-align:left;color: gray !important;background-color: #85C1E9 !important;font-weight: bold;font-style: italic;color: black !important;">
-PET (RVE hier)
-</td>
-<td style="text-align:left;color: gray !important;background-color: #85C1E9 !important;font-weight: bold;font-style: italic;color: black !important;">
-NULL
-</td>
-<td style="text-align:left;color: gray !important;background-color: #85C1E9 !important;font-weight: bold;font-style: italic;color: black !important;">
-intrcpt
-</td>
-<td style="text-align:right;color: gray !important;background-color: #85C1E9 !important;font-weight: bold;font-style: italic;color: black !important;">
--0.385
-</td>
-<td style="text-align:right;color: gray !important;background-color: #85C1E9 !important;font-weight: bold;font-style: italic;color: black !important;">
-0.170
-</td>
-<td style="text-align:right;color: gray !important;background-color: #85C1E9 !important;font-weight: bold;font-style: italic;color: black !important;">
--0.797
-</td>
-<td style="text-align:right;color: gray !important;background-color: #85C1E9 !important;font-weight: bold;font-style: italic;color: black !important;">
-0.027
-</td>
-<td style="text-align:right;color: gray !important;background-color: #85C1E9 !important;font-weight: bold;font-style: italic;color: black !important;">
--2.262
-</td>
-<td style="text-align:right;color: gray !important;background-color: #85C1E9 !important;font-weight: bold;font-style: italic;color: black !important;">
-6.26
-</td>
-<td style="text-align:right;color: gray !important;background-color: #85C1E9 !important;font-weight: bold;font-style: italic;color: black !important;">
-0.063
-</td>
-<td style="text-align:left;color: gray !important;background-color: #85C1E9 !important;font-weight: bold;font-style: italic;color: black !important;">
-.
-</td>
-</tr>
-<tr>
-<td style="text-align:left;color: gray !important;background-color: #85C1E9 !important;">
-PET (RVE hier)
-</td>
-<td style="text-align:left;color: gray !important;background-color: #85C1E9 !important;">
-FULL
-</td>
-<td style="text-align:left;color: gray !important;background-color: #85C1E9 !important;">
-intrcpt
-</td>
-<td style="text-align:right;color: gray !important;background-color: #85C1E9 !important;">
--0.291
-</td>
-<td style="text-align:right;color: gray !important;background-color: #85C1E9 !important;">
-0.163
-</td>
-<td style="text-align:right;color: gray !important;background-color: #85C1E9 !important;">
--0.627
-</td>
-<td style="text-align:right;color: gray !important;background-color: #85C1E9 !important;">
-0.045
-</td>
-<td style="text-align:right;color: gray !important;background-color: #85C1E9 !important;">
--1.789
-</td>
-<td style="text-align:right;color: gray !important;background-color: #85C1E9 !important;">
-24.09
-</td>
-<td style="text-align:right;color: gray !important;background-color: #85C1E9 !important;">
-0.086
-</td>
-<td style="text-align:left;color: gray !important;background-color: #85C1E9 !important;">
-.
-</td>
-</tr>
-<tr>
-<td style="text-align:left;color: gray !important;background-color: #85C1E9 !important;">
-PET (RVE corr)
-</td>
-<td style="text-align:left;color: gray !important;background-color: #85C1E9 !important;">
-NULL
-</td>
-<td style="text-align:left;color: gray !important;background-color: #85C1E9 !important;">
-intrcpt
-</td>
-<td style="text-align:right;color: gray !important;background-color: #85C1E9 !important;">
--0.272
-</td>
-<td style="text-align:right;color: gray !important;background-color: #85C1E9 !important;">
-0.218
-</td>
-<td style="text-align:right;color: gray !important;background-color: #85C1E9 !important;">
--0.738
-</td>
-<td style="text-align:right;color: gray !important;background-color: #85C1E9 !important;">
+<td style="text-align:right;">
 0.194
 </td>
-<td style="text-align:right;color: gray !important;background-color: #85C1E9 !important;">
--1.247
+<td style="text-align:right;">
+-0.830
 </td>
-<td style="text-align:right;color: gray !important;background-color: #85C1E9 !important;">
-14.73
+<td style="text-align:right;">
+-0.022
 </td>
-<td style="text-align:right;color: gray !important;background-color: #85C1E9 !important;">
-0.232
+<td style="text-align:right;">
+-2.196
 </td>
-<td style="text-align:left;color: gray !important;background-color: #85C1E9 !important;">
+<td style="text-align:right;">
+20.39
 </td>
-</tr>
-<tr>
-<td style="text-align:left;color: gray !important;background-color: #85C1E9 !important;">
-PET (RVE corr)
-</td>
-<td style="text-align:left;color: gray !important;background-color: #85C1E9 !important;">
-FULL
-</td>
-<td style="text-align:left;color: gray !important;background-color: #85C1E9 !important;">
-intrcpt
-</td>
-<td style="text-align:right;color: gray !important;background-color: #85C1E9 !important;">
--0.085
-</td>
-<td style="text-align:right;color: gray !important;background-color: #85C1E9 !important;">
-0.185
-</td>
-<td style="text-align:right;color: gray !important;background-color: #85C1E9 !important;">
--0.467
-</td>
-<td style="text-align:right;color: gray !important;background-color: #85C1E9 !important;">
-0.297
-</td>
-<td style="text-align:right;color: gray !important;background-color: #85C1E9 !important;">
--0.458
-</td>
-<td style="text-align:right;color: gray !important;background-color: #85C1E9 !important;">
-23.79
-</td>
-<td style="text-align:right;color: gray !important;background-color: #85C1E9 !important;">
-0.651
-</td>
-<td style="text-align:left;color: gray !important;background-color: #85C1E9 !important;">
-</td>
-</tr>
-<tr>
-<td style="text-align:left;color: gray !important;background-color: #85C1E9 !important;">
-Egger CHE (MLMA + RVE)
-</td>
-<td style="text-align:left;color: gray !important;background-color: #85C1E9 !important;">
-NULL
-</td>
-<td style="text-align:left;color: gray !important;background-color: #85C1E9 !important;">
-intrcpt
-</td>
-<td style="text-align:right;color: gray !important;background-color: #85C1E9 !important;">
--0.043
-</td>
-<td style="text-align:right;color: gray !important;background-color: #85C1E9 !important;">
-0.182
-</td>
-<td style="text-align:right;color: gray !important;background-color: #85C1E9 !important;">
--0.434
-</td>
-<td style="text-align:right;color: gray !important;background-color: #85C1E9 !important;">
-0.349
-</td>
-<td style="text-align:right;color: gray !important;background-color: #85C1E9 !important;">
--0.234
-</td>
-<td style="text-align:right;color: gray !important;background-color: #85C1E9 !important;">
-13.35
-</td>
-<td style="text-align:right;color: gray !important;background-color: #85C1E9 !important;">
-0.819
-</td>
-<td style="text-align:left;color: gray !important;background-color: #85C1E9 !important;">
-</td>
-</tr>
-<tr>
-<td style="text-align:left;color: gray !important;background-color: #ABEBC6 !important;font-weight: bold;font-style: italic;color: black !important;">
-Egger Sandwich (RVE)
-</td>
-<td style="text-align:left;color: gray !important;background-color: #ABEBC6 !important;font-weight: bold;font-style: italic;color: black !important;">
-NULL
-</td>
-<td style="text-align:left;color: gray !important;background-color: #ABEBC6 !important;font-weight: bold;font-style: italic;color: black !important;">
-intrcpt
-</td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;font-weight: bold;font-style: italic;color: black !important;">
--0.028
-</td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;font-weight: bold;font-style: italic;color: black !important;">
-0.258
-</td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;font-weight: bold;font-style: italic;color: black !important;">
--0.591
-</td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;font-weight: bold;font-style: italic;color: black !important;">
-0.535
-</td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;font-weight: bold;font-style: italic;color: black !important;">
--0.109
-</td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;font-weight: bold;font-style: italic;color: black !important;">
-12.00
-</td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;font-weight: bold;font-style: italic;color: black !important;">
-0.915
-</td>
-<td style="text-align:left;color: gray !important;background-color: #ABEBC6 !important;font-weight: bold;font-style: italic;color: black !important;">
-</td>
-</tr>
-<tr>
-<td style="text-align:left;color: gray !important;background-color: #ABEBC6 !important;">
-Egger CHE (MLMA + RVE)
-</td>
-<td style="text-align:left;color: gray !important;background-color: #ABEBC6 !important;">
-FULL
-</td>
-<td style="text-align:left;color: gray !important;background-color: #ABEBC6 !important;">
-intrcpt
-</td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;">
-0.025
-</td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;">
-0.200
-</td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;">
--0.394
-</td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;">
-0.444
-</td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;">
-0.125
-</td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;">
-19.51
-</td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;">
-0.902
-</td>
-<td style="text-align:left;color: gray !important;background-color: #ABEBC6 !important;">
-</td>
-</tr>
-<tr>
-<td style="text-align:left;color: gray !important;background-color: #ABEBC6 !important;font-weight: bold;font-style: italic;color: black !important;">
-3-PSM
-</td>
-<td style="text-align:left;color: gray !important;background-color: #ABEBC6 !important;font-weight: bold;font-style: italic;color: black !important;">
-FULL
-</td>
-<td style="text-align:left;color: gray !important;background-color: #ABEBC6 !important;font-weight: bold;font-style: italic;color: black !important;">
-intrcpt
-</td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;font-weight: bold;font-style: italic;color: black !important;">
-0.079
-</td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;font-weight: bold;font-style: italic;color: black !important;">
-0.024
-</td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;font-weight: bold;font-style: italic;color: black !important;">
+<td style="text-align:right;">
 0.040
 </td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;font-weight: bold;font-style: italic;color: black !important;">
-0.136
-</td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;font-weight: bold;font-style: italic;color: black !important;">
-</td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;font-weight: bold;font-style: italic;color: black !important;">
-</td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;font-weight: bold;font-style: italic;color: black !important;">
-</td>
-<td style="text-align:left;color: gray !important;background-color: #ABEBC6 !important;font-weight: bold;font-style: italic;color: black !important;">
+<td style="text-align:left;">
+&lt;.05
 </td>
 </tr>
 <tr>
-<td style="text-align:left;color: gray !important;background-color: #ABEBC6 !important;">
-PEESE (RVE hier)
+<td style="text-align:left;vertical-align: top !important;" rowspan="2">
+PET (RVE hier)
 </td>
-<td style="text-align:left;color: gray !important;background-color: #ABEBC6 !important;">
+<td style="text-align:left;">
 NULL
 </td>
-<td style="text-align:left;color: gray !important;background-color: #ABEBC6 !important;">
+<td style="text-align:left;">
 intrcpt
 </td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;">
-0.085
+<td style="text-align:right;">
+-0.371
 </td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;">
-0.096
-</td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;">
--0.144
-</td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;">
-0.314
-</td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;">
-0.885
-</td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;">
-6.68
-</td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;">
-0.407
-</td>
-<td style="text-align:left;color: gray !important;background-color: #ABEBC6 !important;">
-</td>
-</tr>
-<tr>
-<td style="text-align:left;color: gray !important;background-color: #ABEBC6 !important;font-weight: bold;font-style: italic;color: black !important;">
-3-PSM
-</td>
-<td style="text-align:left;color: gray !important;background-color: #ABEBC6 !important;font-weight: bold;font-style: italic;color: black !important;">
-NULL
-</td>
-<td style="text-align:left;color: gray !important;background-color: #ABEBC6 !important;font-weight: bold;font-style: italic;color: black !important;">
-intrcpt
-</td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;font-weight: bold;font-style: italic;color: black !important;">
-0.125
-</td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;font-weight: bold;font-style: italic;color: black !important;">
-0.032
-</td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;font-weight: bold;font-style: italic;color: black !important;">
-0.074
-</td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;font-weight: bold;font-style: italic;color: black !important;">
-0.207
-</td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;font-weight: bold;font-style: italic;color: black !important;">
-</td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;font-weight: bold;font-style: italic;color: black !important;">
-</td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;font-weight: bold;font-style: italic;color: black !important;">
-</td>
-<td style="text-align:left;color: gray !important;background-color: #ABEBC6 !important;font-weight: bold;font-style: italic;color: black !important;">
-</td>
-</tr>
-<tr>
-<td style="text-align:left;color: gray !important;background-color: #ABEBC6 !important;">
-Egger Sandwich (RVE)
-</td>
-<td style="text-align:left;color: gray !important;background-color: #ABEBC6 !important;">
-FULL
-</td>
-<td style="text-align:left;color: gray !important;background-color: #ABEBC6 !important;">
-intrcpt
-</td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;">
-0.156
-</td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;">
-0.243
-</td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;">
--0.347
-</td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;">
-0.658
-</td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;">
-0.640
-</td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;">
-23.51
-</td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;">
-0.528
-</td>
-<td style="text-align:left;color: gray !important;background-color: #ABEBC6 !important;">
-</td>
-</tr>
-<tr>
-<td style="text-align:left;color: gray !important;background-color: #ABEBC6 !important;">
-PEESE (CHE)
-</td>
-<td style="text-align:left;color: gray !important;background-color: #ABEBC6 !important;">
-NULL
-</td>
-<td style="text-align:left;color: gray !important;background-color: #ABEBC6 !important;">
-intrcpt
-</td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;">
-0.175
-</td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;">
-0.192
-</td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;">
--0.251
-</td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;">
-0.601
-</td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;">
-0.911
-</td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;">
-10.41
-</td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;">
-0.383
-</td>
-<td style="text-align:left;color: gray !important;background-color: #ABEBC6 !important;">
-</td>
-</tr>
-<tr>
-<td style="text-align:left;color: gray !important;background-color: #ABEBC6 !important;font-weight: bold;font-style: italic;color: black !important;">
-PEESE (CHE)
-</td>
-<td style="text-align:left;color: gray !important;background-color: #ABEBC6 !important;font-weight: bold;font-style: italic;color: black !important;">
-FULL
-</td>
-<td style="text-align:left;color: gray !important;background-color: #ABEBC6 !important;font-weight: bold;font-style: italic;color: black !important;">
-intrcpt
-</td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;font-weight: bold;font-style: italic;color: black !important;">
-0.206
-</td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;font-weight: bold;font-style: italic;color: black !important;">
+<td style="text-align:right;">
 0.167
 </td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;font-weight: bold;font-style: italic;color: black !important;">
--0.144
+<td style="text-align:right;">
+-0.778
 </td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;font-weight: bold;font-style: italic;color: black !important;">
-0.556
+<td style="text-align:right;">
+0.036
 </td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;font-weight: bold;font-style: italic;color: black !important;">
-1.236
+<td style="text-align:right;">
+-2.216
 </td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;font-weight: bold;font-style: italic;color: black !important;">
-18.45
+<td style="text-align:right;">
+6.19
 </td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;font-weight: bold;font-style: italic;color: black !important;">
-0.232
+<td style="text-align:right;">
+0.067
 </td>
-<td style="text-align:left;color: gray !important;background-color: #ABEBC6 !important;font-weight: bold;font-style: italic;color: black !important;">
+<td style="text-align:left;">
+.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;color: gray !important;background-color: #ABEBC6 !important;">
-PEESE (RVE hier)
-</td>
-<td style="text-align:left;color: gray !important;background-color: #ABEBC6 !important;">
+<td style="text-align:left;">
 FULL
 </td>
-<td style="text-align:left;color: gray !important;background-color: #ABEBC6 !important;">
+<td style="text-align:left;">
 intrcpt
 </td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;">
-0.211
+<td style="text-align:right;">
+-0.313
 </td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;">
-0.133
+<td style="text-align:right;">
+0.162
 </td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;">
--0.064
+<td style="text-align:right;">
+-0.648
 </td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;">
-0.487
+<td style="text-align:right;">
+0.022
 </td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;">
-1.589
+<td style="text-align:right;">
+-1.928
 </td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;">
-22.09
+<td style="text-align:right;">
+24.01
 </td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;">
-0.126
+<td style="text-align:right;">
+0.066
 </td>
-<td style="text-align:left;color: gray !important;background-color: #ABEBC6 !important;">
+<td style="text-align:left;">
+.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;color: gray !important;background-color: #ABEBC6 !important;">
-PEESE (RVE corr)
+<td style="text-align:left;vertical-align: top !important;" rowspan="2">
+PET (RVE corr)
 </td>
-<td style="text-align:left;color: gray !important;background-color: #ABEBC6 !important;">
+<td style="text-align:left;">
 NULL
 </td>
-<td style="text-align:left;color: gray !important;background-color: #ABEBC6 !important;">
+<td style="text-align:left;">
 intrcpt
 </td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;">
-0.220
+<td style="text-align:right;">
+-0.261
 </td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;">
-0.128
+<td style="text-align:right;">
+0.219
 </td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;">
--0.057
+<td style="text-align:right;">
+-0.729
 </td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;">
-0.496
+<td style="text-align:right;">
+0.207
 </td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;">
-1.719
+<td style="text-align:right;">
+-1.192
 </td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;">
-12.71
+<td style="text-align:right;">
+14.43
 </td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;">
-0.110
+<td style="text-align:right;">
+0.252
 </td>
-<td style="text-align:left;color: gray !important;background-color: #ABEBC6 !important;">
+<td style="text-align:left;">
 </td>
 </tr>
 <tr>
-<td style="text-align:left;color: gray !important;background-color: #ABEBC6 !important;font-weight: bold;font-style: italic;color: black !important;">
-PEESE (RVE corr)
-</td>
-<td style="text-align:left;color: gray !important;background-color: #ABEBC6 !important;font-weight: bold;font-style: italic;color: black !important;">
+<td style="text-align:left;">
 FULL
 </td>
-<td style="text-align:left;color: gray !important;background-color: #ABEBC6 !important;font-weight: bold;font-style: italic;color: black !important;">
+<td style="text-align:left;">
 intrcpt
 </td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;font-weight: bold;font-style: italic;color: black !important;">
-0.367
+<td style="text-align:right;">
+-0.113
 </td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;font-weight: bold;font-style: italic;color: black !important;">
+<td style="text-align:right;">
+0.184
+</td>
+<td style="text-align:right;">
+-0.493
+</td>
+<td style="text-align:right;">
+0.267
+</td>
+<td style="text-align:right;">
+-0.616
+</td>
+<td style="text-align:right;">
+23.70
+</td>
+<td style="text-align:right;">
+0.544
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Egger CHE (MLMA + RVE)
+</td>
+<td style="text-align:left;vertical-align: top !important;" rowspan="2">
+NULL
+</td>
+<td style="text-align:left;">
+intrcpt
+</td>
+<td style="text-align:right;">
+-0.025
+</td>
+<td style="text-align:right;">
+0.183
+</td>
+<td style="text-align:right;">
+-0.418
+</td>
+<td style="text-align:right;">
+0.369
+</td>
+<td style="text-align:right;">
+-0.134
+</td>
+<td style="text-align:right;">
+13.32
+</td>
+<td style="text-align:right;">
+0.895
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Egger Sandwich (RVE)
+</td>
+<td style="text-align:left;">
+intrcpt
+</td>
+<td style="text-align:right;">
+-0.016
+</td>
+<td style="text-align:right;">
+0.257
+</td>
+<td style="text-align:right;">
+-0.578
+</td>
+<td style="text-align:right;">
+0.545
+</td>
+<td style="text-align:right;">
+-0.064
+</td>
+<td style="text-align:right;">
+11.89
+</td>
+<td style="text-align:right;">
+0.950
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Egger CHE (MLMA + RVE)
+</td>
+<td style="text-align:left;vertical-align: top !important;" rowspan="2">
+FULL
+</td>
+<td style="text-align:left;">
+intrcpt
+</td>
+<td style="text-align:right;">
+0.002
+</td>
+<td style="text-align:right;">
+0.199
+</td>
+<td style="text-align:right;">
+-0.414
+</td>
+<td style="text-align:right;">
+0.418
+</td>
+<td style="text-align:right;">
+0.010
+</td>
+<td style="text-align:right;">
+19.39
+</td>
+<td style="text-align:right;">
+0.992
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3-PSM
+</td>
+<td style="text-align:left;">
+intrcpt
+</td>
+<td style="text-align:right;">
+0.086
+</td>
+<td style="text-align:right;">
+0.025
+</td>
+<td style="text-align:right;">
+0.047
+</td>
+<td style="text-align:right;">
+0.145
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+PEESE (RVE hier)
+</td>
+<td style="text-align:left;">
+NULL
+</td>
+<td style="text-align:left;">
+intrcpt
+</td>
+<td style="text-align:right;">
+0.091
+</td>
+<td style="text-align:right;">
+0.094
+</td>
+<td style="text-align:right;">
+-0.136
+</td>
+<td style="text-align:right;">
+0.317
+</td>
+<td style="text-align:right;">
+0.962
+</td>
+<td style="text-align:right;">
+6.55
+</td>
+<td style="text-align:right;">
+0.370
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Egger Sandwich (RVE)
+</td>
+<td style="text-align:left;">
+FULL
+</td>
+<td style="text-align:left;">
+intrcpt
+</td>
+<td style="text-align:right;">
+0.123
+</td>
+<td style="text-align:right;">
+0.240
+</td>
+<td style="text-align:right;">
+-0.372
+</td>
+<td style="text-align:right;">
+0.618
+</td>
+<td style="text-align:right;">
+0.513
+</td>
+<td style="text-align:right;">
+23.48
+</td>
+<td style="text-align:right;">
+0.613
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3-PSM
+</td>
+<td style="text-align:left;">
+NULL
+</td>
+<td style="text-align:left;">
+intrcpt
+</td>
+<td style="text-align:right;">
+0.132
+</td>
+<td style="text-align:right;">
+0.032
+</td>
+<td style="text-align:right;">
+0.085
+</td>
+<td style="text-align:right;">
+0.214
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;vertical-align: top !important;" rowspan="2">
+PEESE (CHE)
+</td>
+<td style="text-align:left;">
+FULL
+</td>
+<td style="text-align:left;">
+intrcpt
+</td>
+<td style="text-align:right;">
+0.186
+</td>
+<td style="text-align:right;">
+0.164
+</td>
+<td style="text-align:right;">
+-0.157
+</td>
+<td style="text-align:right;">
+0.530
+</td>
+<td style="text-align:right;">
+1.137
+</td>
+<td style="text-align:right;">
+18.38
+</td>
+<td style="text-align:right;">
+0.270
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NULL
+</td>
+<td style="text-align:left;">
+intrcpt
+</td>
+<td style="text-align:right;">
+0.188
+</td>
+<td style="text-align:right;">
+0.189
+</td>
+<td style="text-align:right;">
+-0.231
+</td>
+<td style="text-align:right;">
+0.608
+</td>
+<td style="text-align:right;">
+0.995
+</td>
+<td style="text-align:right;">
+10.33
+</td>
+<td style="text-align:right;">
+0.342
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+PEESE (RVE hier)
+</td>
+<td style="text-align:left;">
+FULL
+</td>
+<td style="text-align:left;">
+intrcpt
+</td>
+<td style="text-align:right;">
+0.193
+</td>
+<td style="text-align:right;">
+0.133
+</td>
+<td style="text-align:right;">
+-0.083
+</td>
+<td style="text-align:right;">
+0.469
+</td>
+<td style="text-align:right;">
+1.447
+</td>
+<td style="text-align:right;">
+22.15
+</td>
+<td style="text-align:right;">
+0.162
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;vertical-align: top !important;" rowspan="2">
+PEESE (RVE corr)
+</td>
+<td style="text-align:left;">
+NULL
+</td>
+<td style="text-align:left;">
+intrcpt
+</td>
+<td style="text-align:right;">
+0.227
+</td>
+<td style="text-align:right;">
+0.128
+</td>
+<td style="text-align:right;">
+-0.051
+</td>
+<td style="text-align:right;">
+0.504
+</td>
+<td style="text-align:right;">
+1.772
+</td>
+<td style="text-align:right;">
+12.45
+</td>
+<td style="text-align:right;">
+0.101
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FULL
+</td>
+<td style="text-align:left;">
+intrcpt
+</td>
+<td style="text-align:right;">
+0.342
+</td>
+<td style="text-align:right;">
 0.148
 </td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;font-weight: bold;font-style: italic;color: black !important;">
-0.056
+<td style="text-align:right;">
+0.030
 </td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;font-weight: bold;font-style: italic;color: black !important;">
-0.677
+<td style="text-align:right;">
+0.653
 </td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;font-weight: bold;font-style: italic;color: black !important;">
-2.478
+<td style="text-align:right;">
+2.303
 </td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;font-weight: bold;font-style: italic;color: black !important;">
-18.24
+<td style="text-align:right;">
+18.32
 </td>
-<td style="text-align:right;color: gray !important;background-color: #ABEBC6 !important;font-weight: bold;font-style: italic;color: black !important;">
-0.023
+<td style="text-align:right;">
+0.033
 </td>
-<td style="text-align:left;color: gray !important;background-color: #ABEBC6 !important;font-weight: bold;font-style: italic;color: black !important;">
+<td style="text-align:left;">
 &lt;.05
 </td>
 </tr>
@@ -3115,20 +3423,20 @@ intrcpt
 <td style="text-align:left;">
 trim and fill
 </td>
-<td style="text-align:left;">
+<td style="text-align:left;vertical-align: top !important;" rowspan="2">
 NULL
 </td>
 <td style="text-align:left;">
 intrcpt
 </td>
 <td style="text-align:right;">
-0.494
+0.496
 </td>
 <td style="text-align:right;">
-0.031
+0.029
 </td>
 <td style="text-align:right;">
-0.433
+0.441
 </td>
 <td style="text-align:right;">
 0.558
@@ -3147,22 +3455,19 @@ intrcpt
 p-uniform
 </td>
 <td style="text-align:left;">
-NULL
-</td>
-<td style="text-align:left;">
 intrcpt
 </td>
 <td style="text-align:right;">
-0.706
+0.715
 </td>
 <td style="text-align:right;">
-0.034
+0.035
 </td>
 <td style="text-align:right;">
-0.637
+0.645
 </td>
 <td style="text-align:right;">
-0.772
+0.779
 </td>
 <td style="text-align:right;">
 </td>
@@ -3205,7 +3510,6 @@ and are thus reported as a form of a sensitivity analysis.</li>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -3245,6 +3549,10 @@ gitbook.start({
 "text": null
 },
 "download": ["MetaAnalysis_CrossSectional.pdf", "MetaAnalysis_CrossSectional.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }

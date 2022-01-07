@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 3 Data preparation and cleaning | Meta Analysis of cross-sectional studies</title>
   <meta name="description" content="Meta-analysis of cross-sectional studies of action video game studies on cognitive skills The output format for this example is bookdown::gitbook." />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 3 Data preparation and cleaning | Meta Analysis of cross-sectional studies" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Benoit Bediou" />
 
 
-<meta name="date" content="2021-08-04" />
+<meta name="date" content="2022-01-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +33,9 @@
   
 <link rel="prev" href="intro.html"/>
 <link rel="next" href="effectsizes.html"/>
-<script src="libs/header-attrs-2.9/header-attrs.js"></script>
-<script src="libs/jquery-3.5.1/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -50,12 +51,11 @@
 
 
 
-
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
 <link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
 <script src="libs/datatables-binding-0.18/datatables.js"></script>
 <link href="libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
@@ -172,9 +172,9 @@
 <p><strong>included studies</strong></p>
 <p>Our thorough literature review identified potentially relevant studies based on predefined keywords.<br />
 After screening of eligible studies, the <em>raw</em> data set includes:<br />
-- 77 manuscripts<br />
-- 112 studies<br />
-- 97 independent samples of participants</p>
+- 76 manuscripts<br />
+- 111 studies<br />
+- 96 independent samples of participants</p>
 <em># effect sizes per paper</em><br />
 
 <table class=" lightable-paper lightable-hover" style="font-family: helvetica; width: auto !important; ">
@@ -209,13 +209,13 @@ es_Q3
 104
 </td>
 <td style="text-align:right;">
-176
+173
 </td>
 <td style="text-align:right;">
 1
 </td>
 <td style="text-align:right;">
-8
+6
 </td>
 <td style="text-align:right;">
 1
@@ -262,10 +262,10 @@ effects
 <tbody>
 <tr>
 <td style="text-align:right;">
-35
+36
 </td>
 <td style="text-align:right;">
-60
+59
 </td>
 </tr>
 </tbody>
@@ -275,10 +275,10 @@ effects
 <h2><span class="header-section-number">3.2</span> Filtered dataset (i.e., matched gender)</h2>
 <p>Effect sizes as well subject and study characteristics were then extracted from all studies that were eligible.</p>
 <p>After exclusion of studies with unbalanced gender, the final data set includes:<br />
-- 230 effect sizes<br />
+- 228 effect sizes<br />
 - 74 papers<br />
 - 106 studies<br />
-- 91 independent samples</p>
+- 93 independent samples</p>
 <table class=" lightable-paper lightable-hover" style="font-family: helvetica; width: auto !important; ">
 <thead>
 <tr>
@@ -311,7 +311,7 @@ es_q3
 74
 </td>
 <td style="text-align:right;">
-230
+228
 </td>
 <td style="text-align:right;">
 1
@@ -360,7 +360,7 @@ n
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:left;vertical-align: top !important;" rowspan="9">
 Cognitive_domain
 </td>
 <td style="text-align:left;">
@@ -372,9 +372,6 @@ bottom-up attention
 </tr>
 <tr>
 <td style="text-align:left;">
-Cognitive_domain
-</td>
-<td style="text-align:left;">
 inhibition
 </td>
 <td style="text-align:right;">
@@ -382,9 +379,6 @@ inhibition
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-Cognitive_domain
-</td>
 <td style="text-align:left;">
 motor control
 </td>
@@ -394,9 +388,6 @@ motor control
 </tr>
 <tr>
 <td style="text-align:left;">
-Cognitive_domain
-</td>
-<td style="text-align:left;">
 multi-tasking
 </td>
 <td style="text-align:right;">
@@ -404,9 +395,6 @@ multi-tasking
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-Cognitive_domain
-</td>
 <td style="text-align:left;">
 perception
 </td>
@@ -416,9 +404,6 @@ perception
 </tr>
 <tr>
 <td style="text-align:left;">
-Cognitive_domain
-</td>
-<td style="text-align:left;">
 problem solving
 </td>
 <td style="text-align:right;">
@@ -426,9 +411,6 @@ problem solving
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-Cognitive_domain
-</td>
 <td style="text-align:left;">
 spatial cognition
 </td>
@@ -438,19 +420,13 @@ spatial cognition
 </tr>
 <tr>
 <td style="text-align:left;">
-Cognitive_domain
-</td>
-<td style="text-align:left;">
 top-down attention
 </td>
 <td style="text-align:right;">
-78
+76
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-Cognitive_domain
-</td>
 <td style="text-align:left;">
 verbal cognition
 </td>
@@ -459,7 +435,7 @@ verbal cognition
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:left;vertical-align: top !important;" rowspan="2">
 DV_type
 </td>
 <td style="text-align:left;">
@@ -471,17 +447,14 @@ accuracy
 </tr>
 <tr>
 <td style="text-align:left;">
-DV_type
-</td>
-<td style="text-align:left;">
 speed
 </td>
 <td style="text-align:right;">
-107
+105
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:left;vertical-align: top !important;" rowspan="2">
 Effect
 </td>
 <td style="text-align:left;">
@@ -493,17 +466,14 @@ interaction
 </tr>
 <tr>
 <td style="text-align:left;">
-Effect
-</td>
-<td style="text-align:left;">
 main
 </td>
 <td style="text-align:right;">
-163
+161
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:left;vertical-align: top !important;" rowspan="3">
 Recruitment
 </td>
 <td style="text-align:left;">
@@ -515,19 +485,13 @@ Covert
 </tr>
 <tr>
 <td style="text-align:left;">
-Recruitment
-</td>
-<td style="text-align:left;">
 Overt
 </td>
 <td style="text-align:right;">
-196
+194
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-Recruitment
-</td>
 <td style="text-align:left;">
 Recruitment!?
 </td>
@@ -566,7 +530,7 @@ measures
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:left;vertical-align: top !important;" rowspan="38">
 perception
 </td>
 <td style="text-align:left;">
@@ -578,9 +542,6 @@ Group: point of subjective simultaneity (Gaussian fitting) in ms
 </tr>
 <tr>
 <td style="text-align:left;">
-perception
-</td>
-<td style="text-align:left;">
 Audio-Visual temporal-order judgment
 </td>
 <td style="text-align:left;">
@@ -588,9 +549,6 @@ Group: just noticeable difference (Sigmoid fitting) in ms
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-perception
-</td>
 <td style="text-align:left;">
 Auditory Tone Location discrimination
 </td>
@@ -600,9 +558,6 @@ Main effect : Model fitting : DDM Model Parameters: Integration rate
 </tr>
 <tr>
 <td style="text-align:left;">
-perception
-</td>
-<td style="text-align:left;">
 Auditory Tone Location discrimination - critical duration
 </td>
 <td style="text-align:left;">
@@ -610,9 +565,6 @@ Main effect : Model fitting : Model Parameters: beta/rate at which accuracy grow
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-perception
-</td>
 <td style="text-align:left;">
 Baseline task (BAS)
 </td>
@@ -622,9 +574,6 @@ Main effect : accuracy rate (% correct)
 </tr>
 <tr>
 <td style="text-align:left;">
-perception
-</td>
-<td style="text-align:left;">
 Baseline task (BAS)
 </td>
 <td style="text-align:left;">
@@ -632,9 +581,6 @@ Main effect : reaction time (ms)
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-perception
-</td>
 <td style="text-align:left;">
 Binocular Rivalry - dynamic stim
 </td>
@@ -644,9 +590,6 @@ alternations (passiv dynamic)
 </tr>
 <tr>
 <td style="text-align:left;">
-perception
-</td>
-<td style="text-align:left;">
 Binocular Rivalry - static stim
 </td>
 <td style="text-align:left;">
@@ -654,9 +597,6 @@ alternations (passiv static)
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-perception
-</td>
 <td style="text-align:left;">
 Bissection task
 </td>
@@ -666,9 +606,6 @@ Main effect : accuracy (absolute deviation)
 </tr>
 <tr>
 <td style="text-align:left;">
-perception
-</td>
-<td style="text-align:left;">
 Choice RT - single task
 </td>
 <td style="text-align:left;">
@@ -676,9 +613,6 @@ Group: RT
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-perception
-</td>
 <td style="text-align:left;">
 combiTVA
 </td>
@@ -688,9 +622,6 @@ Main effect : t0 (lower = better)
 </tr>
 <tr>
 <td style="text-align:left;">
-perception
-</td>
-<td style="text-align:left;">
 Compound search - Target discrimination
 </td>
 <td style="text-align:left;">
@@ -698,9 +629,6 @@ Main effect Group: Group x onset presence: manual RT
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-perception
-</td>
 <td style="text-align:left;">
 Compound search - Target discrimination
 </td>
@@ -710,9 +638,6 @@ Main effect Group: Group x Onset presence: Manual RT
 </tr>
 <tr>
 <td style="text-align:left;">
-perception
-</td>
-<td style="text-align:left;">
 Contrast Sensitivity
 </td>
 <td style="text-align:left;">
@@ -720,9 +645,6 @@ Main effect : sensitivity
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-perception
-</td>
 <td style="text-align:left;">
 Contrast Sensitivity - critical duration
 </td>
@@ -732,9 +654,6 @@ Main effect : critical duration
 </tr>
 <tr>
 <td style="text-align:left;">
-perception
-</td>
-<td style="text-align:left;">
 Crowding paradigm - acuity (T-alone discrimination accuracy)
 </td>
 <td style="text-align:left;">
@@ -742,9 +661,6 @@ Main effect Group: Group x eccentricity: T-alone discrimination accuracy
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-perception
-</td>
 <td style="text-align:left;">
 Crowding paradigm - crowding
 </td>
@@ -754,9 +670,6 @@ Main effect Group: Group x eccentricity: log10 distance threshold
 </tr>
 <tr>
 <td style="text-align:left;">
-perception
-</td>
-<td style="text-align:left;">
 Flicker fusion
 </td>
 <td style="text-align:left;">
@@ -764,9 +677,6 @@ Main effect : thresholds (Freq threshold (84% correct) in Hz)
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-perception
-</td>
 <td style="text-align:left;">
 Masked prime visibility - prime discrimination: categorize as larger / smaller than reference frame
 </td>
@@ -776,9 +686,6 @@ Main effect : d’ (prime 20 or 60 ms)
 </tr>
 <tr>
 <td style="text-align:left;">
-perception
-</td>
-<td style="text-align:left;">
 Masked priming - target discrimination: categorize as larger / smaller than reference frame
 </td>
 <td style="text-align:left;">
@@ -786,9 +693,6 @@ Main effect : RT (prime 20 or 60 ms)
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-perception
-</td>
 <td style="text-align:left;">
 Masking (backward colinear)
 </td>
@@ -798,9 +702,6 @@ main effect Group
 </tr>
 <tr>
 <td style="text-align:left;">
-perception
-</td>
-<td style="text-align:left;">
 Masking (backward orthogonal)
 </td>
 <td style="text-align:left;">
@@ -808,9 +709,6 @@ main effect Group
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-perception
-</td>
 <td style="text-align:left;">
 Masking (forward and backward / lateral)
 </td>
@@ -820,9 +718,6 @@ main effect Group
 </tr>
 <tr>
 <td style="text-align:left;">
-perception
-</td>
-<td style="text-align:left;">
 Modified attentional-blink task (local)
 </td>
 <td style="text-align:left;">
@@ -830,9 +725,6 @@ Main effect: Group  T1 accuracy
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-perception
-</td>
 <td style="text-align:left;">
 Modified attentional-blink task (local)
 </td>
@@ -842,9 +734,6 @@ Main effect: Group: T1 identification
 </tr>
 <tr>
 <td style="text-align:left;">
-perception
-</td>
-<td style="text-align:left;">
 Motion Perception (up/down, expansion/contraction, clockwise/anticlockwise)
 </td>
 <td style="text-align:left;">
@@ -852,9 +741,6 @@ Main effect : Motion coherence threshold (level of coherence required to achieve
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-perception
-</td>
 <td style="text-align:left;">
 Motion Perception: radial (contraction)
 </td>
@@ -864,9 +750,6 @@ Main effect (contraction) : Motion coherence threshold (level of coherence requi
 </tr>
 <tr>
 <td style="text-align:left;">
-perception
-</td>
-<td style="text-align:left;">
 Motion Perception: radial (expansion)
 </td>
 <td style="text-align:left;">
@@ -874,9 +757,6 @@ Main effect (expansion) : Motion coherence threshold (level of coherence require
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-perception
-</td>
 <td style="text-align:left;">
 Orientation Identification
 </td>
@@ -886,9 +766,6 @@ Main effect: contrast threshold
 </tr>
 <tr>
 <td style="text-align:left;">
-perception
-</td>
-<td style="text-align:left;">
 Perceptual Discrimination RT
 </td>
 <td style="text-align:left;">
@@ -896,9 +773,6 @@ Main effect of Group: RT
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-perception
-</td>
 <td style="text-align:left;">
 Posner Name Identity
 </td>
@@ -908,9 +782,6 @@ Main effect: Group : RT difference between Name identity and Physical identity (
 </tr>
 <tr>
 <td style="text-align:left;">
-perception
-</td>
-<td style="text-align:left;">
 Simple RT
 </td>
 <td style="text-align:left;">
@@ -918,9 +789,6 @@ Main effect of Group: RT
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-perception
-</td>
 <td style="text-align:left;">
 Temporal Order Judgment
 </td>
@@ -930,9 +798,6 @@ Main effect : Point of Subjective Simultaneity (ms)
 </tr>
 <tr>
 <td style="text-align:left;">
-perception
-</td>
-<td style="text-align:left;">
 TVA whole
 </td>
 <td style="text-align:left;">
@@ -940,9 +805,6 @@ Main effect : threshold (minimum presentation, parameter t0)
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-perception
-</td>
 <td style="text-align:left;">
 UFOV - single&amp;dual task / no distractors / peripheral task
 </td>
@@ -952,9 +814,6 @@ Main effect Group (ANOVA : Group x eccentricity x center task): Peripheral local
 </tr>
 <tr>
 <td style="text-align:left;">
-perception
-</td>
-<td style="text-align:left;">
 Visual Motion Direction discrimination
 </td>
 <td style="text-align:left;">
@@ -962,9 +821,6 @@ Main effect : DDM Model Parameters: Integration rate
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-perception
-</td>
 <td style="text-align:left;">
 Visual Motion Direction discrimination - critical duration
 </td>
@@ -974,9 +830,6 @@ Main effect : Model fitting : Model Parameters: beta/rate at which accuracy grow
 </tr>
 <tr>
 <td style="text-align:left;">
-perception
-</td>
-<td style="text-align:left;">
 Visual search (a la Chisholm)
 </td>
 <td style="text-align:left;">
@@ -984,7 +837,7 @@ Main effect : RT
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:left;vertical-align: top !important;" rowspan="3">
 motor control
 </td>
 <td style="text-align:left;">
@@ -996,9 +849,6 @@ Main effect : mean root mean square (RMS) of the vehicular lateral deviation (in
 </tr>
 <tr>
 <td style="text-align:left;">
-motor control
-</td>
-<td style="text-align:left;">
 Manual motion-tracking task
 </td>
 <td style="text-align:left;">
@@ -1007,9 +857,6 @@ Main effect : mean deviation per cycle
 </tr>
 <tr>
 <td style="text-align:left;">
-motor control
-</td>
-<td style="text-align:left;">
 Visuo-motor control task
 </td>
 <td style="text-align:left;">
@@ -1017,7 +864,7 @@ Main effect : mean RMS target position error (°)
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:left;vertical-align: top !important;" rowspan="9">
 bottom-up attention
 </td>
 <td style="text-align:left;">
@@ -1029,9 +876,6 @@ Alerting effect: RT (nocue - double)
 </tr>
 <tr>
 <td style="text-align:left;">
-bottom-up attention
-</td>
-<td style="text-align:left;">
 ANT: Attentional Network Test
 </td>
 <td style="text-align:left;">
@@ -1039,9 +883,6 @@ alerting RT
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-bottom-up attention
-</td>
 <td style="text-align:left;">
 ANT: Attentional Network Test
 </td>
@@ -1051,9 +892,6 @@ Orienting effect: RT(center - orienting)
 </tr>
 <tr>
 <td style="text-align:left;">
-bottom-up attention
-</td>
-<td style="text-align:left;">
 ANT: Attentional Network Test
 </td>
 <td style="text-align:left;">
@@ -1061,9 +899,6 @@ orienting RT
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-bottom-up attention
-</td>
 <td style="text-align:left;">
 classical Visual search (color)
 </td>
@@ -1073,9 +908,6 @@ Main effect (color task) : RT (AVERAGE ACROSS 3 SET SIZES)
 </tr>
 <tr>
 <td style="text-align:left;">
-bottom-up attention
-</td>
-<td style="text-align:left;">
 classical Visual search (orientation)
 </td>
 <td style="text-align:left;">
@@ -1083,9 +915,6 @@ Main effect (orientation task) : RT (AVERAGE ACROSS 3 SET SIZES)
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-bottom-up attention
-</td>
 <td style="text-align:left;">
 Inattentional Blindness
 </td>
@@ -1095,9 +924,6 @@ Main effect : inattention condition : % inattentional blindness
 </tr>
 <tr>
 <td style="text-align:left;">
-bottom-up attention
-</td>
-<td style="text-align:left;">
 Modified Posner Cueing (exogenous cue)
 </td>
 <td style="text-align:left;">
@@ -1106,9 +932,6 @@ Interaction : group x cue validity x SOA : RT (mean) in ms
 </tr>
 <tr>
 <td style="text-align:left;">
-bottom-up attention
-</td>
-<td style="text-align:left;">
 Posner (exogenous) Cue-Target
 </td>
 <td style="text-align:left;">
@@ -1116,7 +939,7 @@ Interaction: Group x cue validity x SOA: RT
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:left;vertical-align: top !important;" rowspan="74">
 top-down attention
 </td>
 <td style="text-align:left;">
@@ -1128,9 +951,6 @@ Conflict effect (RT inc - RT cong)
 </tr>
 <tr>
 <td style="text-align:left;">
-top-down attention
-</td>
-<td style="text-align:left;">
 ANT: Attentional Network Test
 </td>
 <td style="text-align:left;">
@@ -1138,9 +958,6 @@ conflict RT
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-top-down attention
-</td>
 <td style="text-align:left;">
 Antisaccade
 </td>
@@ -1150,9 +967,6 @@ Main effect : anti_err (proportion of errors)
 </tr>
 <tr>
 <td style="text-align:left;">
-top-down attention
-</td>
-<td style="text-align:left;">
 Attentional Blink
 </td>
 <td style="text-align:left;">
@@ -1160,9 +974,6 @@ Main effect of Group - accuracy
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-top-down attention
-</td>
 <td style="text-align:left;">
 Attentional Blink
 </td>
@@ -1172,9 +983,6 @@ Main effect of Group: T2 accuracy (T1 correct) with lag
 </tr>
 <tr>
 <td style="text-align:left;">
-top-down attention
-</td>
-<td style="text-align:left;">
 Attentional/Oculomotor capture
 </td>
 <td style="text-align:left;">
@@ -1182,9 +990,6 @@ Interaction: Group x awareness: oculomotor capture %
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-top-down attention
-</td>
 <td style="text-align:left;">
 Attentional/Oculomotor capture
 </td>
@@ -1194,9 +999,6 @@ Interaction: Group x onset presence: first-saccade accuracy = % initial saccades
 </tr>
 <tr>
 <td style="text-align:left;">
-top-down attention
-</td>
-<td style="text-align:left;">
 Attentional/Oculomotor capture (Target orientation discrimination with/out distractors)
 </td>
 <td style="text-align:left;">
@@ -1204,9 +1006,6 @@ Interaction: Group x distractor presence: RT
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-top-down attention
-</td>
 <td style="text-align:left;">
 Attentional/Oculomotor capture with schematic emotional stimuli
 </td>
@@ -1216,9 +1015,6 @@ Interaction: Group x onset presence: Saccade accuracy
 </tr>
 <tr>
 <td style="text-align:left;">
-top-down attention
-</td>
-<td style="text-align:left;">
 Auditory target detection task (focused vs divided)
 </td>
 <td style="text-align:left;">
@@ -1226,9 +1022,6 @@ Main effect : group : d prime scores
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-top-down attention
-</td>
 <td style="text-align:left;">
 AX CPT
 </td>
@@ -1238,9 +1031,6 @@ Main effect: efficiency index
 </tr>
 <tr>
 <td style="text-align:left;">
-top-down attention
-</td>
-<td style="text-align:left;">
 Binocular Rivalry - dynamic stim
 </td>
 <td style="text-align:left;">
@@ -1248,9 +1038,6 @@ Interaction: attended duration (task vs passiv dynamic): %-change of median
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-top-down attention
-</td>
 <td style="text-align:left;">
 Binocular Rivalry - dynamic stim
 </td>
@@ -1260,9 +1047,6 @@ Interaction: unattended duration (task vs passiv dynamic): %-change of median
 </tr>
 <tr>
 <td style="text-align:left;">
-top-down attention
-</td>
-<td style="text-align:left;">
 Binocular Rivalry - static stim
 </td>
 <td style="text-align:left;">
@@ -1270,9 +1054,6 @@ Interaction: attended duration (hold vs passiv static) %-change of median
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-top-down attention
-</td>
 <td style="text-align:left;">
 Binocular Rivalry - static stim
 </td>
@@ -1282,9 +1063,6 @@ Interaction: unattended duration (hold vs passiv static): %-change of median
 </tr>
 <tr>
 <td style="text-align:left;">
-top-down attention
-</td>
-<td style="text-align:left;">
 Change detection
 </td>
 <td style="text-align:left;">
@@ -1292,9 +1070,6 @@ Main effect : Arrays_k (bias-corrected measure of capacity : k)
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-top-down attention
-</td>
 <td style="text-align:left;">
 Change detection
 </td>
@@ -1304,9 +1079,6 @@ Main effect : number of detected changes
 </tr>
 <tr>
 <td style="text-align:left;">
-top-down attention
-</td>
-<td style="text-align:left;">
 Change detection
 </td>
 <td style="text-align:left;">
@@ -1314,9 +1086,6 @@ Number of cycles required to find change (change trials)
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-top-down attention
-</td>
 <td style="text-align:left;">
 Change detection (abrupt change in motion)
 </td>
@@ -1326,9 +1095,6 @@ Main effect : sensitivity (d’)
 </tr>
 <tr>
 <td style="text-align:left;">
-top-down attention
-</td>
-<td style="text-align:left;">
 classical Visual search (conjunction)
 </td>
 <td style="text-align:left;">
@@ -1336,9 +1102,6 @@ Main effect (conjunction task) : search slopes (ms/item) - RT fitted on the numb
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-top-down attention
-</td>
 <td style="text-align:left;">
 combiTVA
 </td>
@@ -1348,9 +1111,6 @@ Main effect : alpha (lower = better)
 </tr>
 <tr>
 <td style="text-align:left;">
-top-down attention
-</td>
-<td style="text-align:left;">
 combiTVA
 </td>
 <td style="text-align:left;">
@@ -1358,9 +1118,6 @@ Main effect : C (higher = better)
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-top-down attention
-</td>
 <td style="text-align:left;">
 Compound search
 </td>
@@ -1370,9 +1127,6 @@ Interaction: Group x onset presence: Saccade accuracy
 </tr>
 <tr>
 <td style="text-align:left;">
-top-down attention
-</td>
-<td style="text-align:left;">
 Cued visual search
 </td>
 <td style="text-align:left;">
@@ -1380,9 +1134,6 @@ Main effect : CuedSrch.RT_mean (mean RT for correct responses)
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-top-down attention
-</td>
 <td style="text-align:left;">
 D2 attention
 </td>
@@ -1392,9 +1143,6 @@ Main effect: group (accuracy)
 </tr>
 <tr>
 <td style="text-align:left;">
-top-down attention
-</td>
-<td style="text-align:left;">
 D2 concentration
 </td>
 <td style="text-align:left;">
@@ -1402,9 +1150,6 @@ Main effect: group (accuracy)
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-top-down attention
-</td>
 <td style="text-align:left;">
 D2-Test
 </td>
@@ -1414,9 +1159,6 @@ Main effect : accuracy
 </tr>
 <tr>
 <td style="text-align:left;">
-top-down attention
-</td>
-<td style="text-align:left;">
 Digit detection
 </td>
 <td style="text-align:left;">
@@ -1424,9 +1166,6 @@ Main effect : scores
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-top-down attention
-</td>
 <td style="text-align:left;">
 Distractor Filtering
 </td>
@@ -1436,9 +1175,6 @@ Main effect: RT
 </tr>
 <tr>
 <td style="text-align:left;">
-top-down attention
-</td>
-<td style="text-align:left;">
 Eriksen flanker task
 </td>
 <td style="text-align:left;">
@@ -1446,9 +1182,6 @@ Main effect : RT (within 200-1800 ms range)
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-top-down attention
-</td>
 <td style="text-align:left;">
 Flanker task
 </td>
@@ -1458,9 +1191,6 @@ Group: interference cost (RT incongruent - RT congruent)
 </tr>
 <tr>
 <td style="text-align:left;">
-top-down attention
-</td>
-<td style="text-align:left;">
 Flanker task
 </td>
 <td style="text-align:left;">
@@ -1468,9 +1198,6 @@ Main effect : accuracy (% correct)
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-top-down attention
-</td>
 <td style="text-align:left;">
 Flanker task
 </td>
@@ -1480,9 +1207,6 @@ Main effect : ArrFlnkINC_CON (RT difference between incongruent and congruent tr
 </tr>
 <tr>
 <td style="text-align:left;">
-top-down attention
-</td>
-<td style="text-align:left;">
 Flanker task high load (lower cost = better)
 </td>
 <td style="text-align:left;">
@@ -1490,9 +1214,6 @@ Interaction Group x Compatibility @ load 6 (lower = better): flanker compability
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-top-down attention
-</td>
 <td style="text-align:left;">
 Flanker task low load (higher cost = better)
 </td>
@@ -1502,9 +1223,6 @@ Interaction Group x Compatibility @ load 1 (higher = better): flanker compabilit
 </tr>
 <tr>
 <td style="text-align:left;">
-top-down attention
-</td>
-<td style="text-align:left;">
 MIT task (multiple identity tracking)
 </td>
 <td style="text-align:left;">
@@ -1512,9 +1230,6 @@ Main effect : accuracy (nb items tracked) - specific condition
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-top-down attention
-</td>
 <td style="text-align:left;">
 MIT task (multiple identity tracking)
 </td>
@@ -1524,9 +1239,6 @@ Main effect : accuracy (nb items tracked) - standard condition
 </tr>
 <tr>
 <td style="text-align:left;">
-top-down attention
-</td>
-<td style="text-align:left;">
 Modified attentional-blink task (local)
 </td>
 <td style="text-align:left;">
@@ -1534,9 +1246,6 @@ Main effect: Group : T2 accuracy / T1 correct (dprime)
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-top-down attention
-</td>
 <td style="text-align:left;">
 MOT
 </td>
@@ -1546,9 +1255,6 @@ Main effect : accuracy
 </tr>
 <tr>
 <td style="text-align:left;">
-top-down attention
-</td>
-<td style="text-align:left;">
 MOT
 </td>
 <td style="text-align:left;">
@@ -1556,9 +1262,6 @@ Main effect Group: Group x Number of circles: % correct
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-top-down attention
-</td>
 <td style="text-align:left;">
 MOT
 </td>
@@ -1568,9 +1271,6 @@ Main effect of Group: accuracy 1-5 dots
 </tr>
 <tr>
 <td style="text-align:left;">
-top-down attention
-</td>
-<td style="text-align:left;">
 N2pc task
 </td>
 <td style="text-align:left;">
@@ -1578,9 +1278,6 @@ Main effect : frequent color/response vs infrequent color/response (% correct)
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-top-down attention
-</td>
 <td style="text-align:left;">
 Oculomotor visual search
 </td>
@@ -1590,9 +1287,6 @@ Main effect Group
 </tr>
 <tr>
 <td style="text-align:left;">
-top-down attention
-</td>
-<td style="text-align:left;">
 Perceptual load paradigm
 </td>
 <td style="text-align:left;">
@@ -1600,9 +1294,6 @@ Interaction: Group x Perceptual Load x Distractor Compatibility: filtered RT
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-top-down attention
-</td>
 <td style="text-align:left;">
 Peripheral search alone - reciprocal-transformed RT - peripheral search alone
 </td>
@@ -1612,9 +1303,6 @@ Main effect (peripheral search alone) : reciprocal-transformed RT
 </tr>
 <tr>
 <td style="text-align:left;">
-top-down attention
-</td>
-<td style="text-align:left;">
 Saccadic trajectory deviation task
 </td>
 <td style="text-align:left;">
@@ -1622,9 +1310,6 @@ Main effect : accuracy - percentage of saccades that were erroneously directed t
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-top-down attention
-</td>
 <td style="text-align:left;">
 search task
 </td>
@@ -1634,20 +1319,6 @@ main effect: error
 </tr>
 <tr>
 <td style="text-align:left;">
-top-down attention
-</td>
-<td style="text-align:left;">
-search task
-</td>
-<td style="text-align:left;">
-main effect: RT
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-top-down attention
-</td>
-<td style="text-align:left;">
 search task
 </td>
 <td style="text-align:left;">
@@ -1655,9 +1326,6 @@ search accuracy
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-top-down attention
-</td>
 <td style="text-align:left;">
 search task
 </td>
@@ -1667,9 +1335,6 @@ search time
 </tr>
 <tr>
 <td style="text-align:left;">
-top-down attention
-</td>
-<td style="text-align:left;">
 Successive series
 </td>
 <td style="text-align:left;">
@@ -1677,9 +1342,6 @@ Main effect : scores
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-top-down attention
-</td>
 <td style="text-align:left;">
 SVST - inefficiency index
 </td>
@@ -1689,9 +1351,6 @@ Main effect : SVST - inefficiency index
 </tr>
 <tr>
 <td style="text-align:left;">
-top-down attention
-</td>
-<td style="text-align:left;">
 Target detection (SSVEP)
 </td>
 <td style="text-align:left;">
@@ -1699,9 +1358,6 @@ Main effect : RT
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-top-down attention
-</td>
 <td style="text-align:left;">
 Target detection task (Cued/uncued with/out distractors)
 </td>
@@ -1711,9 +1367,6 @@ Main effect : group (target present trials) : inverse efficiency score
 </tr>
 <tr>
 <td style="text-align:left;">
-top-down attention
-</td>
-<td style="text-align:left;">
 Target detection task (focused vs divided)
 </td>
 <td style="text-align:left;">
@@ -1721,9 +1374,6 @@ Main effect : RT
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-top-down attention
-</td>
 <td style="text-align:left;">
 Target discrimination (Low vs High Load x Central vs Peripheral distractors)
 </td>
@@ -1733,9 +1383,6 @@ Main effect: RT
 </tr>
 <tr>
 <td style="text-align:left;">
-top-down attention
-</td>
-<td style="text-align:left;">
 TOVA sustained
 </td>
 <td style="text-align:left;">
@@ -1744,9 +1391,6 @@ Main effect : (Target Frequency Condition) : sustained attention RT (msec)
 </tr>
 <tr>
 <td style="text-align:left;">
-top-down attention
-</td>
-<td style="text-align:left;">
 TOVA sustained
 </td>
 <td style="text-align:left;">
@@ -1754,9 +1398,6 @@ Main effect of Group: RT
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-top-down attention
-</td>
 <td style="text-align:left;">
 TVA partial
 </td>
@@ -1766,9 +1407,6 @@ Main effect : top-down control (alpha)
 </tr>
 <tr>
 <td style="text-align:left;">
-top-down attention
-</td>
-<td style="text-align:left;">
 TVA whole
 </td>
 <td style="text-align:left;">
@@ -1776,9 +1414,6 @@ Main effect : processing speed (slope, parameter C)
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-top-down attention
-</td>
 <td style="text-align:left;">
 UFOV
 </td>
@@ -1788,9 +1423,6 @@ main effect of group: threshold
 </tr>
 <tr>
 <td style="text-align:left;">
-top-down attention
-</td>
-<td style="text-align:left;">
 UFOV - single task / with distractors / peripheral task
 </td>
 <td style="text-align:left;">
@@ -1798,9 +1430,6 @@ Main effect : proportion of accurate responses
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-top-down attention
-</td>
 <td style="text-align:left;">
 UFOV - single task / with distractors / peripheral task alone
 </td>
@@ -1810,9 +1439,6 @@ Group: percent correct localization accuracy
 </tr>
 <tr>
 <td style="text-align:left;">
-top-down attention
-</td>
-<td style="text-align:left;">
 UFOV - single task / with distractors / peripheral task alone
 </td>
 <td style="text-align:left;">
@@ -1820,9 +1446,6 @@ Main effect Group: Group x Gender x Field of study: % correct responses
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-top-down attention
-</td>
 <td style="text-align:left;">
 UFOV - single&amp;dual task / with distractors / peripheral task
 </td>
@@ -1832,9 +1455,6 @@ Main effect Group (ANOVA :Group x eccentricity x center task) Peripheral localiz
 </tr>
 <tr>
 <td style="text-align:left;">
-top-down attention
-</td>
-<td style="text-align:left;">
 UFOV (FFOV) - single task / with distractor / peripheral task alone
 </td>
 <td style="text-align:left;">
@@ -1842,9 +1462,6 @@ Group: percentage correct (peripheral targets)
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-top-down attention
-</td>
 <td style="text-align:left;">
 VAST
 </td>
@@ -1854,9 +1471,6 @@ Main effect : VAST
 </tr>
 <tr>
 <td style="text-align:left;">
-top-down attention
-</td>
-<td style="text-align:left;">
 Visual search
 </td>
 <td style="text-align:left;">
@@ -1864,9 +1478,6 @@ Main effect : RT
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-top-down attention
-</td>
 <td style="text-align:left;">
 Visual search
 </td>
@@ -1876,9 +1487,6 @@ Main effect : scores
 </tr>
 <tr>
 <td style="text-align:left;">
-top-down attention
-</td>
-<td style="text-align:left;">
 Visual search
 </td>
 <td style="text-align:left;">
@@ -1886,9 +1494,6 @@ Main effect of Group: RT
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-top-down attention
-</td>
 <td style="text-align:left;">
 Visual search
 </td>
@@ -1898,9 +1503,6 @@ Main effect: RT
 </tr>
 <tr>
 <td style="text-align:left;">
-top-down attention
-</td>
-<td style="text-align:left;">
 Visual search (a la Chisholm)
 </td>
 <td style="text-align:left;">
@@ -1908,9 +1510,6 @@ Interaction Group x Distractor presence: RT
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-top-down attention
-</td>
 <td style="text-align:left;">
 Visual search (EXP1A: self paced)
 </td>
@@ -1920,9 +1519,6 @@ Main effect : search rates (ms/items)
 </tr>
 <tr>
 <td style="text-align:left;">
-top-down attention
-</td>
-<td style="text-align:left;">
 Visual search (EXP1B: critical duration)
 </td>
 <td style="text-align:left;">
@@ -1931,9 +1527,6 @@ Main effect : search rates (ms/items)
 </tr>
 <tr>
 <td style="text-align:left;">
-top-down attention
-</td>
-<td style="text-align:left;">
 Visual search (low / high task difficulty - no feature in common between target and distractors or 1 feature in common between distractor and target : either size or color, low / high background difficulty)
 </td>
 <td style="text-align:left;">
@@ -1941,7 +1534,7 @@ Main effect : RT
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:left;vertical-align: top !important;" rowspan="10">
 inhibition
 </td>
 <td style="text-align:left;">
@@ -1953,9 +1546,6 @@ Main effect : SSRT (Stop-signal reaction time on noGo trials)
 </tr>
 <tr>
 <td style="text-align:left;">
-inhibition
-</td>
-<td style="text-align:left;">
 Proactive Interference
 </td>
 <td style="text-align:left;">
@@ -1963,9 +1553,6 @@ Main effect : RT normalized (=RT/proportion correct)
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-inhibition
-</td>
 <td style="text-align:left;">
 SART
 </td>
@@ -1975,9 +1562,6 @@ Main effect : SART.RT_trim_ISD (standard deviation of response time on go trials
 </tr>
 <tr>
 <td style="text-align:left;">
-inhibition
-</td>
-<td style="text-align:left;">
 Spatial stroop
 </td>
 <td style="text-align:left;">
@@ -1985,9 +1569,6 @@ Main effect : SpStrpINC_CON (RT difference between incongruent and congruent tri
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-inhibition
-</td>
 <td style="text-align:left;">
 Stop-change paradigm (Go/Stop-change delay = 0ms / stop-change delay = 300ms)
 </td>
@@ -1997,9 +1578,6 @@ Main effect : Mean stop signal RT (SSRT)
 </tr>
 <tr>
 <td style="text-align:left;">
-inhibition
-</td>
-<td style="text-align:left;">
 Stop-signal task
 </td>
 <td style="text-align:left;">
@@ -2007,9 +1585,6 @@ Mean stop-signal RT
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-inhibition
-</td>
 <td style="text-align:left;">
 Stroop
 </td>
@@ -2019,9 +1594,6 @@ Main effect of Group: Incongruent RT - Congruent RT
 </tr>
 <tr>
 <td style="text-align:left;">
-inhibition
-</td>
-<td style="text-align:left;">
 Target detection task (Cued/uncued with/out distractors)
 </td>
 <td style="text-align:left;">
@@ -2029,9 +1601,6 @@ Main effect : group (catch trials) : false alarm (FA) rates %
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-inhibition
-</td>
 <td style="text-align:left;">
 TOVA impulsive
 </td>
@@ -2041,9 +1610,6 @@ Main effect : (Target Frequency Condition) : impulsivity RT (msec)
 </tr>
 <tr>
 <td style="text-align:left;">
-inhibition
-</td>
-<td style="text-align:left;">
 TOVA impulsive
 </td>
 <td style="text-align:left;">
@@ -2051,7 +1617,7 @@ Main effect of Group: RT
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:left;vertical-align: top !important;" rowspan="28">
 spatial cognition
 </td>
 <td style="text-align:left;">
@@ -2063,9 +1629,6 @@ Main effect : VR task with response &gt; spatial learning strategies (% of parti
 </tr>
 <tr>
 <td style="text-align:left;">
-spatial cognition
-</td>
-<td style="text-align:left;">
 Change detection - Varying the cue-to-memory-array delay (Task 1)
 </td>
 <td style="text-align:left;">
@@ -2073,9 +1636,6 @@ Main effect : ratio of correct responses to the total number of trials
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-spatial cognition
-</td>
 <td style="text-align:left;">
 Change detection - Varying the test-array-to-cue delay (Task 2)
 </td>
@@ -2085,9 +1645,6 @@ Main effect : accuracy
 </tr>
 <tr>
 <td style="text-align:left;">
-spatial cognition
-</td>
-<td style="text-align:left;">
 Change detection - Varying the test-array-to-cue delay (Task 2)
 </td>
 <td style="text-align:left;">
@@ -2095,9 +1652,6 @@ Main effect : ratio of correct responses to the total number of trials
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-spatial cognition
-</td>
 <td style="text-align:left;">
 Color wheel task
 </td>
@@ -2107,9 +1661,6 @@ Main effect : accuracy (average error)
 </tr>
 <tr>
 <td style="text-align:left;">
-spatial cognition
-</td>
-<td style="text-align:left;">
 Corsi block-tapping task (CBTT) single
 </td>
 <td style="text-align:left;">
@@ -2117,9 +1668,6 @@ Main effect : RT single task
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-spatial cognition
-</td>
 <td style="text-align:left;">
 Enumeration
 </td>
@@ -2129,9 +1677,6 @@ Main effect : breakpoint Acc 50ms MASKED
 </tr>
 <tr>
 <td style="text-align:left;">
-spatial cognition
-</td>
-<td style="text-align:left;">
 Enumeration
 </td>
 <td style="text-align:left;">
@@ -2139,9 +1684,6 @@ Main effect : breakpoint RT 100ms MASKED
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-spatial cognition
-</td>
 <td style="text-align:left;">
 Enumeration
 </td>
@@ -2151,9 +1693,6 @@ Main effect : breakpoint RT 50ms UNMASKED
 </tr>
 <tr>
 <td style="text-align:left;">
-spatial cognition
-</td>
-<td style="text-align:left;">
 Enumeration
 </td>
 <td style="text-align:left;">
@@ -2161,9 +1700,6 @@ Main effect Group: Group x Field of view: nb of items subitized
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-spatial cognition
-</td>
 <td style="text-align:left;">
 Enumeration
 </td>
@@ -2173,9 +1709,6 @@ nb of items subitized
 </tr>
 <tr>
 <td style="text-align:left;">
-spatial cognition
-</td>
-<td style="text-align:left;">
 Enumeration (with MASK)
 </td>
 <td style="text-align:left;">
@@ -2183,9 +1716,6 @@ Main effect Group: Group x Field of view: nb of items subitized
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-spatial cognition
-</td>
 <td style="text-align:left;">
 Filter task
 </td>
@@ -2195,9 +1725,6 @@ capacity K
 </tr>
 <tr>
 <td style="text-align:left;">
-spatial cognition
-</td>
-<td style="text-align:left;">
 Interception
 </td>
 <td style="text-align:left;">
@@ -2205,9 +1732,6 @@ hits
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-spatial cognition
-</td>
 <td style="text-align:left;">
 Matrix monitoring
 </td>
@@ -2217,9 +1741,6 @@ Main effect : MatMon.acc (proportion of correct responses)
 </tr>
 <tr>
 <td style="text-align:left;">
-spatial cognition
-</td>
-<td style="text-align:left;">
 Memory Task
 </td>
 <td style="text-align:left;">
@@ -2227,9 +1748,6 @@ Main effect of group: accuracy (%correct)
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-spatial cognition
-</td>
 <td style="text-align:left;">
 Mental Rotation
 </td>
@@ -2239,9 +1757,6 @@ RT
 </tr>
 <tr>
 <td style="text-align:left;">
-spatial cognition
-</td>
-<td style="text-align:left;">
 Mental Rotation
 </td>
 <td style="text-align:left;">
@@ -2249,9 +1764,6 @@ RT/accuracy
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-spatial cognition
-</td>
 <td style="text-align:left;">
 N-Back (single task)
 </td>
@@ -2261,9 +1773,6 @@ Main effect : RT Single task
 </tr>
 <tr>
 <td style="text-align:left;">
-spatial cognition
-</td>
-<td style="text-align:left;">
 Race
 </td>
 <td style="text-align:left;">
@@ -2271,9 +1780,6 @@ RT/accuracy
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-spatial cognition
-</td>
 <td style="text-align:left;">
 Rotation span
 </td>
@@ -2283,9 +1789,6 @@ Main effect : MaxRotSpanTotal (total number of arrows recalled in the correct or
 </tr>
 <tr>
 <td style="text-align:left;">
-spatial cognition
-</td>
-<td style="text-align:left;">
 Symmetry span
 </td>
 <td style="text-align:left;">
@@ -2293,9 +1796,6 @@ Main effect : MaxSspanTotal (locations correctly recalled)
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-spatial cognition
-</td>
 <td style="text-align:left;">
 Visual Short Term Memory (VSTM)
 </td>
@@ -2305,9 +1805,6 @@ Group: percentage correct
 </tr>
 <tr>
 <td style="text-align:left;">
-spatial cognition
-</td>
-<td style="text-align:left;">
 Visual Short Term Memory (VSTM)
 </td>
 <td style="text-align:left;">
@@ -2315,9 +1812,6 @@ Interaction : Group x set size : d prime
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-spatial cognition
-</td>
 <td style="text-align:left;">
 Visual Short Term Memory (VSTM)
 </td>
@@ -2327,9 +1821,6 @@ Main effect of group at Time 1
 </tr>
 <tr>
 <td style="text-align:left;">
-spatial cognition
-</td>
-<td style="text-align:left;">
 Visual Short Term Memory (VSTM) / change detection COMPLEX
 </td>
 <td style="text-align:left;">
@@ -2337,9 +1828,6 @@ Main effect: accuracy
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-spatial cognition
-</td>
 <td style="text-align:left;">
 Visual Short Term Memory (VSTM) / change detection SIMPLE
 </td>
@@ -2349,9 +1837,6 @@ Main effect: accuracy
 </tr>
 <tr>
 <td style="text-align:left;">
-spatial cognition
-</td>
-<td style="text-align:left;">
 Visuospatial task (VST)
 </td>
 <td style="text-align:left;">
@@ -2359,7 +1844,7 @@ Main effect : accuracy rate (% correct)
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:left;vertical-align: top !important;" rowspan="23">
 multi-tasking
 </td>
 <td style="text-align:left;">
@@ -2371,9 +1856,6 @@ dual task cost accuracy
 </tr>
 <tr>
 <td style="text-align:left;">
-multi-tasking
-</td>
-<td style="text-align:left;">
 Computer dual task
 </td>
 <td style="text-align:left;">
@@ -2381,9 +1863,6 @@ Interaction: Group x task (single vs. dual): RT
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-multi-tasking
-</td>
 <td style="text-align:left;">
 Corsi block-tapping task (CBTT) dual task cost
 </td>
@@ -2393,9 +1872,6 @@ Main effect : accuracy Dual task - Single Task
 </tr>
 <tr>
 <td style="text-align:left;">
-multi-tasking
-</td>
-<td style="text-align:left;">
 Distracted driving task
 </td>
 <td style="text-align:left;">
@@ -2403,9 +1879,6 @@ Main effect : D2-D1 cost (untransformed lane deviation values)
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-multi-tasking
-</td>
 <td style="text-align:left;">
 Dual task (visual or auditory)
 </td>
@@ -2415,9 +1888,6 @@ Main effect : dual task (SOA 50) - task 1 : RT
 </tr>
 <tr>
 <td style="text-align:left;">
-multi-tasking
-</td>
-<td style="text-align:left;">
 Dual task (visual or auditory)
 </td>
 <td style="text-align:left;">
@@ -2425,9 +1895,6 @@ Main effect : dual task (SOA 50) - task 2 : RT
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-multi-tasking
-</td>
 <td style="text-align:left;">
 dual visual search - central task
 </td>
@@ -2437,9 +1904,6 @@ Main effect (central component of dual search) : accuracy (arcsine-transformed p
 </tr>
 <tr>
 <td style="text-align:left;">
-multi-tasking
-</td>
-<td style="text-align:left;">
 dual visual search - peripheral task
 </td>
 <td style="text-align:left;">
@@ -2447,9 +1911,6 @@ Main effect (peripheral component of dual search) : reciprocal-transformed RT
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-multi-tasking
-</td>
 <td style="text-align:left;">
 N-Back (dual - single task)
 </td>
@@ -2459,9 +1920,6 @@ Main effect : RT Dual task - Single Task
 </tr>
 <tr>
 <td style="text-align:left;">
-multi-tasking
-</td>
-<td style="text-align:left;">
 Street Crossing - crossing success
 </td>
 <td style="text-align:left;">
@@ -2469,9 +1927,6 @@ dual task cost
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-multi-tasking
-</td>
 <td style="text-align:left;">
 Street Crossing - crossing time
 </td>
@@ -2481,9 +1936,6 @@ dual task cost
 </tr>
 <tr>
 <td style="text-align:left;">
-multi-tasking
-</td>
-<td style="text-align:left;">
 Street Crossing - head turns
 </td>
 <td style="text-align:left;">
@@ -2491,9 +1943,6 @@ dual task cost
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-multi-tasking
-</td>
 <td style="text-align:left;">
 Street Crossing - preparation time
 </td>
@@ -2503,9 +1952,6 @@ dual task cost
 </tr>
 <tr>
 <td style="text-align:left;">
-multi-tasking
-</td>
-<td style="text-align:left;">
 Street Crossing - time to contact
 </td>
 <td style="text-align:left;">
@@ -2513,9 +1959,6 @@ dual task cost
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-multi-tasking
-</td>
 <td style="text-align:left;">
 Task switching
 </td>
@@ -2525,9 +1968,6 @@ Interaction: Group x task switch (reptition vs. alternation): RT
 </tr>
 <tr>
 <td style="text-align:left;">
-multi-tasking
-</td>
-<td style="text-align:left;">
 Task switching
 </td>
 <td style="text-align:left;">
@@ -2535,9 +1975,6 @@ Switch cost: efficiency index
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-multi-tasking
-</td>
 <td style="text-align:left;">
 Task switching (cognitive vs motor) - unpredictable
 </td>
@@ -2547,9 +1984,6 @@ Interaction: Group x trial type: median RT
 </tr>
 <tr>
 <td style="text-align:left;">
-multi-tasking
-</td>
-<td style="text-align:left;">
 Task switching (cognitive) - predictable sequence
 </td>
 <td style="text-align:left;">
@@ -2557,9 +1991,6 @@ Interaction: Group x trial type: median RT
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-multi-tasking
-</td>
 <td style="text-align:left;">
 Task switching (odd/even, prime number or not, larger or smaller than 5)
 </td>
@@ -2569,9 +2000,6 @@ Interaction : group x switch (repeat, 1-switch, 2-switch, alternate) : raw RT da
 </tr>
 <tr>
 <td style="text-align:left;">
-multi-tasking
-</td>
-<td style="text-align:left;">
 Task switching (perceptual) - predictable sequence
 </td>
 <td style="text-align:left;">
@@ -2579,9 +2007,6 @@ Interaction: Group x trial type: median RT
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-multi-tasking
-</td>
 <td style="text-align:left;">
 Task switching (speeded responses to one of six single-character stimuli, under a range of intermixed stimulus, response, cuing and timing conditions)
 </td>
@@ -2591,9 +2016,6 @@ Interaction : group x task switching (repeat vs switch) : raw RT data (within 25
 </tr>
 <tr>
 <td style="text-align:left;">
-multi-tasking
-</td>
-<td style="text-align:left;">
 Trail Making Test (B - A)
 </td>
 <td style="text-align:left;">
@@ -2602,9 +2024,6 @@ Interaction Group x Task: time to complete TMTB - TMTA
 </tr>
 <tr>
 <td style="text-align:left;">
-multi-tasking
-</td>
-<td style="text-align:left;">
 UFOV dual task / no distractors / central task
 </td>
 <td style="text-align:left;">
@@ -2612,7 +2031,7 @@ Main effect Group (ANOVA : Group x eccentricity x center task) : center identifi
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:left;vertical-align: top !important;" rowspan="30">
 verbal cognition
 </td>
 <td style="text-align:left;">
@@ -2624,9 +2043,6 @@ Auditory 2 back - single task 2-back
 </tr>
 <tr>
 <td style="text-align:left;">
-verbal cognition
-</td>
-<td style="text-align:left;">
 combiTVA
 </td>
 <td style="text-align:left;">
@@ -2634,9 +2050,6 @@ Main effect : K (higher = better)
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-verbal cognition
-</td>
 <td style="text-align:left;">
 Continuous counters
 </td>
@@ -2646,9 +2059,6 @@ Main effect : Counters.ACC (proportion of correct final counts)
 </tr>
 <tr>
 <td style="text-align:left;">
-verbal cognition
-</td>
-<td style="text-align:left;">
 Digit symbol coding (Wechsler)
 </td>
 <td style="text-align:left;">
@@ -2656,9 +2066,6 @@ Main effect : accuracy
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-verbal cognition
-</td>
 <td style="text-align:left;">
 Digits forward span
 </td>
@@ -2668,9 +2075,6 @@ Main effect : scores
 </tr>
 <tr>
 <td style="text-align:left;">
-verbal cognition
-</td>
-<td style="text-align:left;">
 DSPAN
 </td>
 <td style="text-align:left;">
@@ -2678,9 +2082,6 @@ main effect of group: score
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-verbal cognition
-</td>
 <td style="text-align:left;">
 Keeping track
 </td>
@@ -2690,9 +2091,6 @@ Main effect : KeepTrack (total number of correctly recalled final exemplars)
 </tr>
 <tr>
 <td style="text-align:left;">
-verbal cognition
-</td>
-<td style="text-align:left;">
 Letter detection task (LDT)
 </td>
 <td style="text-align:left;">
@@ -2700,9 +2098,6 @@ Main effect : accuracy rate (% correct)
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-verbal cognition
-</td>
 <td style="text-align:left;">
 N-Back
 </td>
@@ -2712,9 +2107,6 @@ N-Back
 </tr>
 <tr>
 <td style="text-align:left;">
-verbal cognition
-</td>
-<td style="text-align:left;">
 N-Back
 </td>
 <td style="text-align:left;">
@@ -2722,9 +2114,6 @@ N-Back
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-verbal cognition
-</td>
 <td style="text-align:left;">
 N-Back
 </td>
@@ -2734,9 +2123,6 @@ Main effect of Group: RT
 </tr>
 <tr>
 <td style="text-align:left;">
-verbal cognition
-</td>
-<td style="text-align:left;">
 N-Back
 </td>
 <td style="text-align:left;">
@@ -2744,9 +2130,6 @@ Main effect: efficiency index
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-verbal cognition
-</td>
 <td style="text-align:left;">
 N-Back (excluding the 1 back condition)
 </td>
@@ -2756,9 +2139,6 @@ Main effect : RT (excluding the 1 back condition)
 </tr>
 <tr>
 <td style="text-align:left;">
-verbal cognition
-</td>
-<td style="text-align:left;">
 Nelson Denny
 </td>
 <td style="text-align:left;">
@@ -2766,9 +2146,6 @@ Main effect : Nelson Denny - 10 minutes accuracy score (NCE)
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-verbal cognition
-</td>
 <td style="text-align:left;">
 Nelson Denny
 </td>
@@ -2778,9 +2155,6 @@ Main effect : Nelson Denny - Execution time (seconds)
 </tr>
 <tr>
 <td style="text-align:left;">
-verbal cognition
-</td>
-<td style="text-align:left;">
 Nelson Denny
 </td>
 <td style="text-align:left;">
@@ -2788,9 +2162,6 @@ Main effect : Nelson Denny - Reading rate (NCE)
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-verbal cognition
-</td>
 <td style="text-align:left;">
 Nelson Denny
 </td>
@@ -2800,9 +2171,6 @@ Main effect : Nelson Denny - Total time accuracy score (NCE)
 </tr>
 <tr>
 <td style="text-align:left;">
-verbal cognition
-</td>
-<td style="text-align:left;">
 Number series
 </td>
 <td style="text-align:left;">
@@ -2810,9 +2178,6 @@ Main effect : MaxNumberSeriesTotal (total number of items solved correctly)
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-verbal cognition
-</td>
 <td style="text-align:left;">
 OSPAN
 </td>
@@ -2822,9 +2187,6 @@ Main effect : accuracy
 </tr>
 <tr>
 <td style="text-align:left;">
-verbal cognition
-</td>
-<td style="text-align:left;">
 OSPAN
 </td>
 <td style="text-align:left;">
@@ -2832,9 +2194,6 @@ Main effect : MaxOspanTotal
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-verbal cognition
-</td>
 <td style="text-align:left;">
 OSPAN
 </td>
@@ -2844,9 +2203,6 @@ Main effect : ospan score
 </tr>
 <tr>
 <td style="text-align:left;">
-verbal cognition
-</td>
-<td style="text-align:left;">
 OSPAN
 </td>
 <td style="text-align:left;">
@@ -2854,9 +2210,6 @@ main effect of group: score
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-verbal cognition
-</td>
 <td style="text-align:left;">
 Reading span
 </td>
@@ -2866,9 +2219,6 @@ Main effect : MaxRspanTotal
 </tr>
 <tr>
 <td style="text-align:left;">
-verbal cognition
-</td>
-<td style="text-align:left;">
 Recall after driving
 </td>
 <td style="text-align:left;">
@@ -2876,9 +2226,6 @@ Main effect : % of correctly recalled questions
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-verbal cognition
-</td>
 <td style="text-align:left;">
 Sentence reading test
 </td>
@@ -2888,9 +2235,6 @@ Main effect : number of correct sentences within 3 min
 </tr>
 <tr>
 <td style="text-align:left;">
-verbal cognition
-</td>
-<td style="text-align:left;">
 TOWRE - inefficiency index
 </td>
 <td style="text-align:left;">
@@ -2898,9 +2242,6 @@ Main effect : TOWRE - inefficiency index
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-verbal cognition
-</td>
 <td style="text-align:left;">
 TVA whole
 </td>
@@ -2910,9 +2251,6 @@ Main effect : capacity k (asymptote)
 </tr>
 <tr>
 <td style="text-align:left;">
-verbal cognition
-</td>
-<td style="text-align:left;">
 TVA whole
 </td>
 <td style="text-align:left;">
@@ -2920,9 +2258,6 @@ Main effect : iconic buffer mu
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-verbal cognition
-</td>
 <td style="text-align:left;">
 Verbal Short Term Memory
 </td>
@@ -2932,9 +2267,6 @@ Main effect of group at Time 1 for Memory Span
 </tr>
 <tr>
 <td style="text-align:left;">
-verbal cognition
-</td>
-<td style="text-align:left;">
 Visual Brief Report
 </td>
 <td style="text-align:left;">
@@ -2942,7 +2274,7 @@ Main effect : BRTotalScore (total number of letters correctly reported)
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:left;vertical-align: top !important;" rowspan="8">
 problem solving
 </td>
 <td style="text-align:left;">
@@ -2954,9 +2286,6 @@ Main effect : MaxLetterSetsTotal (total number of items solved correctly)
 </tr>
 <tr>
 <td style="text-align:left;">
-problem solving
-</td>
-<td style="text-align:left;">
 Matrix reasoning (Wechsler)
 </td>
 <td style="text-align:left;">
@@ -2964,9 +2293,6 @@ Main effect : accuracy
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-problem solving
-</td>
 <td style="text-align:left;">
 Paper Folding
 </td>
@@ -2976,9 +2302,6 @@ Main effect : MaxPapFoldTotal (number of problems solved)
 </tr>
 <tr>
 <td style="text-align:left;">
-problem solving
-</td>
-<td style="text-align:left;">
 RAVEN (paper and pencil, no time limit)
 </td>
 <td style="text-align:left;">
@@ -2986,9 +2309,6 @@ Main effect : % corr
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-problem solving
-</td>
 <td style="text-align:left;">
 RAVEN (RAPM)
 </td>
@@ -2998,9 +2318,6 @@ Main effect : MaxRAPMOddTotal (total number of correct solutions)
 </tr>
 <tr>
 <td style="text-align:left;">
-problem solving
-</td>
-<td style="text-align:left;">
 RAVEN (RAPM)
 </td>
 <td style="text-align:left;">
@@ -3009,9 +2326,6 @@ main effect of group: score
 </tr>
 <tr>
 <td style="text-align:left;">
-problem solving
-</td>
-<td style="text-align:left;">
 RAVEN (SPM)
 </td>
 <td style="text-align:left;">
@@ -3019,9 +2333,6 @@ Group: means of SPM
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-problem solving
-</td>
 <td style="text-align:left;">
 RAVEN short version
 </td>
@@ -3046,7 +2357,6 @@ Main effect : accuracy
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -3086,6 +2396,10 @@ gitbook.start({
 "text": null
 },
 "download": ["MetaAnalysis_CrossSectional.pdf", "MetaAnalysis_CrossSectional.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }
