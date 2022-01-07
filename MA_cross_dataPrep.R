@@ -1,3 +1,5 @@
+rm(list = ls())
+
 library(readxl) # for reading excel files
 library(tidyverse) # for data-cleaning
 library(kableExtra) # for making formatted table
@@ -7,7 +9,7 @@ library(clubSandwich) # for RVE with metafor; requires version 0.5.1 or higher
 library(DT) # for datatable and formatRound
 library(DescTools) # for Winsorize
 
-setwd('/Users/bediou/GoogleDrive/Meta-Analysis/DATA/ANALYSIS/2021/')
+setwd('/Users/bediou/GoogleDrive/Meta-Analysis/DATA/ANALYSIS/2021/MA_cross_sectional/')
 
 # load included data
 data <- readxl::read_xlsx('/Users/bediou/Dropbox/Bavelier Lab Team Folder/MA files/ES_cross-sectional_2022_01.xlsx',
@@ -87,10 +89,11 @@ es_data <- data %>% #filter(is.na(keep)) %>% View()
 
 # winsorize
 es_data <- es_data %>% 
-  mutate_at(moderators, droplevels) %>%
   mutate(es_win = Winsorize(es_data$g, na.rm = TRUE), 
          flg_win = ifelse(g!=es_win, 1, 0),
-         g_final = es_win) 
+         g_final = es_win) %>%
+  filter(Cognitive_domain != "motor control") %>%
+  mutate_at(moderators, droplevels) 
 
 es_data_win <- es_data
 save.image(file = "MA_data_cross.RData")

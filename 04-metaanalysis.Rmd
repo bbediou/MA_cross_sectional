@@ -35,6 +35,7 @@ library(combinat)# for permn
 
 # prepare data
 # source('MA_cross_dataPrep.R')
+setwd('/Users/bediou/GoogleDrive/Meta-Analysis/DATA/ANALYSIS/2021/MA_cross_sectional/')
 load("MA_data_cross.RData")
 
 # count studies and effects
@@ -337,19 +338,19 @@ vcomp_mod_multilevel <- data.frame(
   beta = sqrt(mod_mlma$sigma2)
 )
 vcomp_mod_subgroup <- data.frame(
-  term = rownames(CI_mod_subgroup)[1:9],
+  term = rownames(CI_mod_subgroup)[1:8],
   tau = sqrt(mod_SCE$tau2)
 )
 
 # Robust F-test
 Wald_mod_robu <- Wald_test(mod_robu, 
-                          constraints = constrain_equal(1:9), 
+                          constraints = constrain_equal(1:8), 
                           vcov = "CR2")
 Wald_mod_multilevel <- Wald_test(mod_mlma, 
-                          constraints = constrain_equal(1:9), 
+                          constraints = constrain_equal(1:8), 
                           vcov = "CR2")
 Wald_mod_subgroup <- Wald_test(mod_SCE, 
-                              constraints = constrain_equal(1:9), 
+                              constraints = constrain_equal(1:8), 
                               vcov = "CR2")
 mod_Wald_tests <- 
   list(

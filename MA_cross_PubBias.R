@@ -1,3 +1,4 @@
+rm(list = ls())
 ######################################################################################
 # Publication Bias analyses
 ######################################################################################
@@ -15,10 +16,10 @@ library(DT) # for datatable and formatRound
 library(puniform)# p-uniform
 library(weightr)# for 3-PSM
 
-setwd("/Users/bediou/GoogleDrive/Meta-Analysis/DATA/ANALYSIS/2021/MA_cross-sectional/")
-load("MA_data_cross.RData")
-source("/Users/bediou/GoogleDrive/Meta-Analysis/DATA/ANALYSIS/2021/MA_cross-sectional/tidy_functions.R")
-source("/Users/bediou/GoogleDrive/Meta-Analysis/DATA/ANALYSIS/2021/MA_cross-sectional/bootstrapping_functs.R")
+setwd("/Users/bediou/GoogleDrive/Meta-Analysis/DATA/ANALYSIS/2021/MA_cross_sectional/")
+load("/Users/bediou/GoogleDrive/Meta-Analysis/DATA/ANALYSIS/2021/MA_cross_sectional/MA_data_cross.RData")
+source("/Users/bediou/GoogleDrive/Meta-Analysis/DATA/ANALYSIS/2021/MA_cross_sectional/tidy_functions.R")
+source("/Users/bediou/GoogleDrive/Meta-Analysis/DATA/ANALYSIS/2021/MA_cross_sectional/bootstrapping_functs.R")
 
 rho = 0.8
 
@@ -321,29 +322,29 @@ sel4 <- selmodel(mod_uni, type="power",    alternative="two.sided")
 # than a significant result. The other two parameters represent the estimated bias-adjusted 
 # mean effect and the estimated heterogeneity of the effects.   
 # run 3PSM with different step parameters
-# bootstrapped_3psm <- bind_rows(bootstrap_3psm(es_data_win, Paper, .6),
-#                               bootstrap_3psm(es_data_win, Paper, .2),
-#                               bootstrap_3psm(es_data_win, Paper, .1),
-#                               bootstrap_3psm(es_data_win, Paper, .05),
-#                               # bootstrap_3psm(es_data_win, Paper, .025),
-#                               bootstrap_3psm(es_data_win, Paper, .01),
-#                               bootstrap_3psm(es_data_win, Paper, .001))
+bootstrapped_3psm <- bind_rows(bootstrap_3psm(es_data_win, Paper, .6),
+                              bootstrap_3psm(es_data_win, Paper, .2),
+                              bootstrap_3psm(es_data_win, Paper, .1),
+                              bootstrap_3psm(es_data_win, Paper, .05),
+                              # bootstrap_3psm(es_data_win, Paper, .025),
+                              bootstrap_3psm(es_data_win, Paper, .01),
+                              bootstrap_3psm(es_data_win, Paper, .001))
 # save(bootstrapped_3psm, file = 'bootstrapped_3psm.RData')
-# bootstrapped_3psm_cogdom <- bind_rows(bootstrap_3psm_withmoderator(es_data_win, Paper, .6),
-#                                      bootstrap_3psm_withmoderator(es_data_win, Paper, .2),
-#                                      bootstrap_3psm_withmoderator(es_data_win, Paper, .1),
-#                                      bootstrap_3psm_withmoderator(es_data_win, Paper, .05),
-#                                      # bootstrap_3psm_withmoderator(es_data_win, Paper, .025),
-#                                      bootstrap_3psm_withmoderator(es_data_win, Paper, .01),
-#                                      bootstrap_3psm_withmoderator(es_data_win, Paper, .001))
+bootstrapped_3psm_cogdom <- bind_rows(bootstrap_3psm_withmoderator(es_data_win, Paper, .6),
+                                     bootstrap_3psm_withmoderator(es_data_win, Paper, .2),
+                                     bootstrap_3psm_withmoderator(es_data_win, Paper, .1),
+                                     bootstrap_3psm_withmoderator(es_data_win, Paper, .05),
+                                     # bootstrap_3psm_withmoderator(es_data_win, Paper, .025),
+                                     bootstrap_3psm_withmoderator(es_data_win, Paper, .01),
+                                     bootstrap_3psm_withmoderator(es_data_win, Paper, .001))
 # save(bootstrapped_3psm_cogdom, file = 'bootstrapped_3psm_cogdom.RData')
 #
 # load('bootstrapped_3psm.RData')
 # load('bootstrapped_3psm_cogdom.RData')
-# bootstrapped_3psm_merged <- bind_rows(cbind("method" = "3-PSM", "model" = "NULL", bootstrapped_3psm),
-#                                       cbind("method" = "3-PSM", "model" = "FULL", bootstrapped_3psm_cogdom))
-# save(bootstrapped_3psm_merged, file = 'bootstrapped_3psm_merged.RData')
-load('bootstrapped_3psm_merged.RData')
+bootstrapped_3psm_merged <- bind_rows(cbind("method" = "3-PSM", "model" = "NULL", bootstrapped_3psm),
+                                      cbind("method" = "3-PSM", "model" = "FULL", bootstrapped_3psm_cogdom))
+save(bootstrapped_3psm_merged, file = 'bootstrapped_3psm_merged.RData')
+# load('bootstrapped_3psm_merged.RData')
 
 # table(bootstrapped_3psm_merged$model)
 # install.packages("beepr")

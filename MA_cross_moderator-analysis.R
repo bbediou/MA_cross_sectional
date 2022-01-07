@@ -1,9 +1,13 @@
+rm(list = ls())
+
 library(tidyverse) # for data-cleaning
 library(kableExtra) # for making formatted table
 library(robumeta) # for original implementation of RVE
 library(metafor) # for multivariate meta-analytic working models 
 library(clubSandwich) # for RVE with metafor; requires version 0.5.1 or higher
 library(Hmisc)# for %nin%
+
+setwd('/Users/bediou/GoogleDrive/Meta-Analysis/DATA/ANALYSIS/2021/MA_cross_sectional/')
 
 load("MA_data_cross.RData")
 
@@ -138,3 +142,4 @@ Moderator_estimates %>%
   collapse_rows(columns = 1, col_names = "moderator")
 
 save(list = c("Wald_results", "Moderator_estimates"), file= "MA_cross_moderator-effects.RData")
+save.image("MA_cross_moderator_analysis.RData")
